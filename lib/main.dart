@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/bloc/news/news_cubit.dart';
 
 import 'src/ui/home/home_screen.dart';
 
@@ -11,9 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(),
-      home: const HomeScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (BuildContext context) => NewsCubit(dio: Dio())),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(),
+        home: const HomeScreen(),
+      ),
     );
   }
 }

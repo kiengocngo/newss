@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';

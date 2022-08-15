@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'src/ui/home/home_screen.dart';
+import 'package:news_app/src/ui/bottom_navigator/bottom_navigator_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
-      home: const HomeScreen(),
+      home: const BottomNavigationScreen(),
     );
   }
 }

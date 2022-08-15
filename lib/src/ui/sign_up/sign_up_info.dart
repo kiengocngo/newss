@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:news_app/src/components/input_text/password_field.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -25,11 +24,8 @@ class SignUpAvatar extends InheritedWidget {
 }
 
 class SignUpScreen extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _reEnterPasswordController =
-      TextEditingController();
+  final TextEditingController _addresscontroller = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   SignUpScreen({Key? key}) : super(key: key);
 
@@ -53,18 +49,10 @@ class SignUpScreen extends StatelessWidget {
                   prefixIcon: const Icon(Icons.text_fields),
                   controller: _nameController),
               TextInputField(
-                  text: "Enter your email",
+                  text: "Enter your Address",
                   type: TextInputType.name,
                   prefixIcon: const Icon(Icons.email),
-                  controller: _emailController),
-              PassWordField(
-                  hintText: "Enter your password",
-                  prefixIcon: const Icon(Icons.lock),
-                  passwordController: _passwordController),
-              PassWordField(
-                  hintText: "Re Enter your password",
-                  prefixIcon: const Icon(Icons.lock),
-                  passwordController: _reEnterPasswordController),
+                  controller: _addresscontroller),
               TextInputField(
                   text: "Enter your phone number",
                   type: TextInputType.phone,

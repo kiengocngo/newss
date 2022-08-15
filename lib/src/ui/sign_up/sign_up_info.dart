@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+//Inherited Widget de truyen data
 // ignore: must_be_immutable
 class SignUpAvatar extends InheritedWidget {
   // ignore: use_key_in_widget_constructors
@@ -102,21 +103,26 @@ class AvatarPicker extends StatefulWidget {
 
 class _AvatarPickerState extends State<AvatarPicker> {
   _getFromGallery() async {
+    // check Platform
     if (Platform.isAndroid) {
       PermissionStatus permissions = await Permission.storage.request();
       if (permissions.isGranted) {
+        //lay anh tu android gallery
         final imagePicker =
             await ImagePicker().pickImage(source: ImageSource.gallery);
         // ignore: use_build_context_synchronously,
 
         setState(() {
+          // thanh cong
           SignUpAvatar.of(context)!.file = File(imagePicker!.path);
         });
       } else if (permissions.isDenied) {
       } else if (permissions.isPermanentlyDenied) {
+        // user Denied --> xin quyen vao settings
         openAppSettings();
       }
     } else {
+      //lay anh tu Ios gallery
       PermissionStatus permissions = await Permission.photos.request();
       if (permissions.isGranted) {
         final imagePicker =
@@ -124,6 +130,7 @@ class _AvatarPickerState extends State<AvatarPicker> {
         // ignore: use_build_context_synchronously
 
         setState(() {
+          //thanh cong
           SignUpAvatar.of(context)!.file = File(imagePicker!.path);
         });
       } else {

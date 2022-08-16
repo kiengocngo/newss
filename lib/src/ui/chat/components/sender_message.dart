@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 // ignore: must_be_immutable
 class SenderMessage extends StatelessWidget {
   String sendMessage;
- 
+
   SenderMessage({
     Key? key,
     required this.sendMessage,
@@ -18,18 +19,21 @@ class SenderMessage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
-              decoration: BoxDecoration(
-                 borderRadius: const BorderRadius.all(
-            Radius.circular(20.0),
-        ),
-               border: Border.all(color: Colors.blueAccent),
-                color: Colors.blue[300]),
-               constraints: BoxConstraints(maxWidth: size.width*0.8),
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20.0),
+                    ),
+                    border: Border.all(color: Colors.blueAccent),
+                    color: Colors.blue[300]),
+                constraints: BoxConstraints(maxWidth: size.width * 0.8),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(sendMessage),
                 )),
-            const Text("Aug 15,2022",style: TextStyle(color: Colors.grey),),
+            const Text(
+              "Aug 15,2022",
+              style: TextStyle(color: Colors.grey),
+            ),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/src/components/constant.dart';
 
 // ignore: must_be_immutable
 class ReceiverMessage extends StatelessWidget {
@@ -19,19 +20,21 @@ class ReceiverMessage extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            CircleAvatar(
-              radius: 15,
-              // ignore: unnecessary_null_comparison
-              backgroundImage: 1 != 0 ? Image.network(
-                      "https://vi.wikipedia.org/wiki/Lionel_Messi",
-                      fit: BoxFit.cover,
-                    ) 
-                    as ImageProvider: Image.network(
-                      "https://vi.wikipedia.org/wiki/Lionel_Messi",
-                      fit: BoxFit.cover,
-                    ) as ImageProvider
-
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: ClipOval(
+                child: SizedBox.fromSize(
+                  size: Size(15, 15), // Image radius
+                  child: Image.memory(
+                    base64.decode(
+                      Constant.base64Image,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,

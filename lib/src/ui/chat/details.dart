@@ -22,11 +22,14 @@ class DetailsScreen extends StatelessWidget {
         children: [
           SenderMessage(sendMessage: "Hello Im Quoc Anh"),
           SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-          SenderMessage(sendMessage: "Hello Im Quoc Anh,3123sadasdawe131312323123edasdsafgeww42134123213sadase12312dsadasda"),
+          SenderMessage(
+              sendMessage:
+                  "Hello Im Quoc Anh,3123sadasdawe131312323123edasdsafgeww42134123213sadase12312dsadasda"),
           SenderMessage(sendMessage: "Hello Im Quoc Anh"),
           SenderMessage(sendMessage: "Hello Im Quoc Anh"),
           SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-          ReceiverMessage(sendMessage: "Hello", base64Image:Constant.base64Image ),
+          ReceiverMessage(
+              sendMessage: "Hello", base64Image: Constant.base64Image),
         ],
       ),
     );

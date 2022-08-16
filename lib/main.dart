@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/src/ui/chat/details.dart';
+
 void main() {
   runApp(const MyApp());
 }

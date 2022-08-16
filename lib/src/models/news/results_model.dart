@@ -5,7 +5,8 @@ class Results {
   final String? description;
   final String? imageUrl;
   final List<String> category;
-  
+ 
+
   String? pubDate;
   Results(
       {required this.title,
@@ -24,9 +25,12 @@ class Results {
       imageUrl: json['image_url'] != null ? (json['image_url']) : null,
       content: json['content'] != null ? (json['content']) : null,
       link: json['link'],
-      
+
+          
       category: json['category'].cast<String>(),
       pubDate: json['pubDate'],
     );
   }
 }
+
+ 

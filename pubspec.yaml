@@ -37,6 +37,8 @@ dependencies:
   dio: ^4.0.6
   equatable: ^2.0.3
   flutter_bloc: ^8.1.1
+  intl: ^0.17.0
+  cached_network_image: ^3.2.1
 
 dev_dependencies:
   flutter_test:

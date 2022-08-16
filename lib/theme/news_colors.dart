@@ -9,7 +9,8 @@ class NewsColor {
   //background
   static const Color bgHotNews = Color.fromARGB(255, 135, 199, 241);
   //gradient
-
+  //button
+  static const Color button1 = Color.fromARGB(255, 215, 49, 49);
   //line
   static const Color lineGreen = Color.fromARGB(255, 37, 246, 135);
 }

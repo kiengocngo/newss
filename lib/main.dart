@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/bloc/news/news_cubit.dart';
 import 'package:news_app/bloc/news_topics/news_topics_cubit.dart';
+import 'package:news_app/src/routes/app_routes.dart';
 
 import 'package:news_app/src/ui/splash/splash_screen.dart';
 
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(),
         initialRoute: '/splash',
         
-        routes: {
-          '/splash': (context) => const SplashScreen(),
-        },
+        routes: AppRoutes.routes
+         
+        ,
       ),
     );
   }

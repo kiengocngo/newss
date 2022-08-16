@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/src/ui/home/home_screen.dart';
 import 'package:news_app/src/ui/splash/tutorial_screen.dart';
-import 'package:news_app/theme/news_theme_data.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

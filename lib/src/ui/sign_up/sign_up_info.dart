@@ -1,8 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import 'package:news_app/src/components/input_text/text_field.dart';
 
 //Inherited Widget de truyen data
 // ignore: must_be_immutable
@@ -24,11 +26,14 @@ class SignUpAvatar extends InheritedWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addresscontroller = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  SignUpScreen({Key? key}) : super(key: key);
+  SignUpScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

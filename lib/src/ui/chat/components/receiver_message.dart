@@ -26,7 +26,7 @@ class ReceiverMessage extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               child: ClipOval(
                 child: SizedBox.fromSize(
-                  size: Size(15, 15), // Image radius
+                  size: const Size(15, 15), // Image radius
                   child: Image.memory(
                     base64.decode(
                       Constant.base64Image,

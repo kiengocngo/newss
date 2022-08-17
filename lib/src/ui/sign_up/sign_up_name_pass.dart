@@ -130,6 +130,11 @@ class SignUpMailPass extends StatelessWidget {
               ),
             ),
           ),
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/log_in");
+              },
+              child: const Text("Already have an account? Log in")),
         ]),
       ),
     );

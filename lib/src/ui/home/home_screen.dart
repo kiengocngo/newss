@@ -32,16 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: NewsColor.textWhite,
         actions: [
           InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed('/search');
+                Navigator.of(context).pushNamed('/news_topic');
               },
               child: const Padding(
                 padding: EdgeInsets.only(right: 16.0),
                 child: Icon(
-                  CupertinoIcons.search,
+                  CupertinoIcons.app,
                   color: NewsColor.searchIcon,
                 ),
               )),
@@ -92,7 +93,7 @@ Widget _buildNewsItem(BuildContext context) {
       switch (state.status) {
         case NewsStatus.failure:
           return Text(state.error);
-        case NewsStatus.success:
+        case NewsStatus.success :
           if (state.results.isEmpty) {
             return const Text('no data');
           }
@@ -107,7 +108,12 @@ Widget _buildNewsItem(BuildContext context) {
             itemBuilder: (context, index) => NewsItems(
                 results: state.results[index],
                 onTap: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailNewsScreen(results: state.results[index],)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailNewsScreen(
+                                results: state.results[index],
+                              )));
                 }),
           );
         default:

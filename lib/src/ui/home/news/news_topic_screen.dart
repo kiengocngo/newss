@@ -1,139 +1,124 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/bloc/news/news_status.dart';
+import 'package:news_app/bloc/news_topic/news_cubit_entertainment.dart';
+import 'package:news_app/bloc/news_topic/news_cubit_sports.dart';
+import 'package:news_app/bloc/news_topic/news_cubit_technology.dart';
+import 'package:news_app/bloc/news_topic/news_state.dart';
+import 'package:news_app/src/ui/home/news/topic/build_entertainment_screen.dart';
 import 'package:news_app/theme/news_colors.dart';
+import 'package:news_app/theme/news_theme_data.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+import 'topic/build_sports_screen.dart';
+import 'topic/build_technology_screen.dart';
+
+class NewsTopicScreen extends StatefulWidget {
+  const NewsTopicScreen({Key? key}) : super(key: key);
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<NewsTopicScreen> createState() => _NewsTopicScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen>
-    with TickerProviderStateMixin {
-  CrossFadeState crossFadeState = CrossFadeState.showFirst;
-  late TabController tabController;
+class _NewsTopicScreenState extends State<NewsTopicScreen>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        crossFadeState = CrossFadeState.showSecond;
-      });
-    });
-    tabController = TabController(length: 11, vsync: this);
+
+    context.read<NewsCubitSprots>().getNews();
+    context.read<NewsCubitTechnology>().getNews();
+    context.read<NewsCubitEntertainment>().getNews();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.25,
-        backgroundColor: Colors.white,
-      ),
-      body: AnimatedCrossFade(
-        duration: const Duration(seconds: 2),
-        crossFadeState: crossFadeState,
-        firstChild: const Center(
-          child: Icon(
-            Icons.ac_unit,
-            color: Colors.red,
-            size: 50,
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              CupertinoIcons.back,
+              color: NewsColor.searchIcon,
+            ),
+          ),
+          elevation: 0.25,
+          backgroundColor: Colors.white,
+          bottom: TabBar(
+            unselectedLabelColor: NewsColor.bgTextForm,
+            isScrollable: true,
+            indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: Colors.green),
+            tabs: [
+              Text(
+                'Sports',
+                style: NewsThemeData.fromContext(context).textNewsTitle,
+              ),
+              Text(
+                'Technology',
+                style: NewsThemeData.fromContext(context).textNewsTitle,
+              ),
+              Text(
+                'Entertainment',
+                style: NewsThemeData.fromContext(context).textNewsTitle,
+              ),
+            ],
           ),
         ),
-        secondChild: Padding(
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
               const SizedBox(
                 height: 10,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: NewsColor.bgTextForm,
-                ),
-                child: TabBar(
-                  controller: tabController,
-                  indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.green),
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.black,
-                  labelPadding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
-                  isScrollable: true,
-                  tabs: const [
-                    Text('Sports'),
-                    Text('Technology'),
-                    Text('Top'),
-                    Text('World'),
-                    Text('Science'),
-                    Text('Politics'),
-                    Text('Health'),
-                    Text('Food'),
-                    Text('Environment'),
-                    Text('Entertainment'),
-                    Text('Bussinees'),
-                  ],
-                ),
-              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
-                child: TabBarView(controller: tabController, children: [
-                  Container(
-                    child: Center(
-                      child: Text(
-                        tabController.index.toString(),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: MediaQuery.of(context).size.height,
-                  ),
-                  Container(
-                    color: Colors.amber,
-                    height: MediaQuery.of(context).size.height,
-                  ),
-                  Container(
-                    color: Colors.red,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: MediaQuery.of(context).size.height,
-                  ),
-                  Container(
-                    color: Colors.amber,
-                    height: MediaQuery.of(context).size.height,
-                  ),
-                  Container(
-                    color: Colors.red,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: MediaQuery.of(context).size.height,
-                  ),
-                  Container(
-                    color: Colors.amber,
-                    height: MediaQuery.of(context).size.height,
-                  ),
-                  Container(
-                    color: Colors.red,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: MediaQuery.of(context).size.height,
-                  ),
+                child: const TabBarView(children: [
+                  BuildNewsSport(),
+                  BuildTechnology(),
+                  BuildEntertainment(),
                 ]),
               ),
             ],
           ),
         ),
-        firstCurve: Curves.bounceIn,
-        secondCurve: Curves.easeInBack,
       ),
     );
+  }
+
+  buildNewsSports() {
+    return BlocBuilder<NewsCubitSprots, NewsTopicState>(
+        builder: (context, state) {
+      switch (state.status) {
+        case NewsStatus.failure:
+          return Text(state.error);
+        case NewsStatus.success:
+          if (state.results.isEmpty) {
+            return const Text('no data');
+          }
+          return ListView.builder(
+              itemCount: state.results.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: Column(
+                    children: [
+                      Text(state.results[index].title),
+                    ],
+                  ),
+                );
+              });
+        default:
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+      }
+    });
   }
 }

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        initialRoute: '/home',
+        initialRoute: '/splash',
         routes: AppRoutes.routes,
       ),
     );

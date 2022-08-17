@@ -8,6 +8,7 @@ import 'package:news_app/bloc/news_for_you/news_topic_cubit.dart';
 import 'package:news_app/bloc/news_for_you/news_topic_state.dart';
 import 'package:news_app/src/components/news_item/news_items.dart';
 import 'package:news_app/src/components/news_item/news_topic_items.dart';
+import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';
 
@@ -103,8 +104,11 @@ Widget _buildNewsItem(BuildContext context) {
               );
             },
             itemCount: state.results.length,
-            itemBuilder: (context, index) =>
-                NewsItems(results: state.results[index], onTap: () {}),
+            itemBuilder: (context, index) => NewsItems(
+                results: state.results[index],
+                onTap: () {
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailNewsScreen(results: state.results[index],)));
+                }),
           );
         default:
           return const Center(

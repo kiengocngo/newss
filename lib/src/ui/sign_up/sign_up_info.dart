@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:news_app/blocs/info_changes_bloc/info_changes_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
+import 'package:news_app/cubit/image_cubit.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:news_app/src/components/input_text/text_field.dart';
@@ -64,88 +65,85 @@ class SignUpScreen extends StatelessWidget {
                   title: const Text("Sign up"),
                   centerTitle: true,
                 ),
-                body: SignUpAvatar(
-                    file: null,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          // ignore: prefer_const_constructors
-                          AvatarPicker(),
-                          TextInputField(
-                              text: "Enter your name",
-                              type: TextInputType.phone,
-                              prefixIcon: const Icon(Icons.text_fields),
-                              controller: _nameController),
-                          TextInputField(
-                              text: "Enter your Address",
-                              type: TextInputType.name,
-                              prefixIcon: const Icon(Icons.email),
-                              controller: _addressController),
-                          TextInputField(
-                              text: "Enter your phone number",
-                              type: TextInputType.phone,
-                              prefixIcon: const Icon(Icons.phone),
-                              controller: _phoneController),
-                          BlocListener<InfoChangesBloc, InfoChangesState>(
-                            listener: (context, state) {
-                              if (state.changesStage == ChangesStage.success) {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/details',
-                                );
-                              }
-                            },
-                            child: InkWell(
-                              onTap: () {
-                                log("a");
-                                final bytes = SignUpAvatar.of(context)!
-                                    .file!
-                                    .readAsBytesSync();
-                                log("bytes" + "${bytes == null}");
-                                context.read<InfoChangesBloc>().add(
-                                    InfoAddNewUserEvent(
-                                        uid: state.message,
-                                        name: _nameController.text,
-                                        email: args["email"]!,
-                                        password: args["password"]!,
-                                        phoneNumber: _phoneController.text,
-                                        address: _addressController.text,
-                                        base64Image: base64.encode(
-                                            bytes != null ? bytes : [1, 2, 3])));
-                              },
-                              child: Container(
-                                  height: size.height * 0.05,
-                                  width: size.width * 0.4,
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    gradient: LinearGradient(
-                                        colors: [
-                                          Color(0xFF3366FF),
-                                          Color(0xFF00CCFF),
-                                        ],
-                                        begin: FractionalOffset(0.0, 0.0),
-                                        end: FractionalOffset(1.0, 0.0),
-                                        stops: [0.0, 1.0],
-                                        tileMode: TileMode.clamp),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                        child: Text(
-                                      "Submit",
-                                      style: TextStyle(fontSize: 16),
-                                    )),
-                                  )),
-                            ),
-                          ),
-                          TextButton(
-                              onPressed: () {},
-                              child:
-                                  const Text("Already have an account? Log in")),
-                        ],
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      // ignore: prefer_const_constructors
+                      AvatarPicker(),
+                      TextInputField(
+                          text: "Enter your name",
+                          type: TextInputType.phone,
+                          prefixIcon: const Icon(Icons.text_fields),
+                          controller: _nameController),
+                      TextInputField(
+                          text: "Enter your Address",
+                          type: TextInputType.name,
+                          prefixIcon: const Icon(Icons.email),
+                          controller: _addressController),
+                      TextInputField(
+                          text: "Enter your phone number",
+                          type: TextInputType.phone,
+                          prefixIcon: const Icon(Icons.phone),
+                          controller: _phoneController),
+                      BlocListener<InfoChangesBloc, InfoChangesState>(
+                        listener: (context, state) {
+                          if (state.changesStage == ChangesStage.success) {
+                            Navigator.pushNamed(
+                              context,
+                              '/details',
+                            );
+                          }
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            log("a");
+                            final bytes = SignUpAvatar.of(context)!
+                                .file!
+                                .readAsBytesSync();
+                            log("bytes" + "${bytes == null}");
+                            context.read<InfoChangesBloc>().add(
+                                InfoAddNewUserEvent(
+                                    uid: state.message,
+                                    name: _nameController.text,
+                                    email: args["email"]!,
+                                    password: args["password"]!,
+                                    phoneNumber: _phoneController.text,
+                                    address: _addressController.text,
+                                    base64Image: base64.encode(
+                                        bytes != null ? bytes : [1, 2, 3])));
+                          },
+                          child: Container(
+                              height: size.height * 0.05,
+                              width: size.width * 0.4,
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF3366FF),
+                                      Color(0xFF00CCFF),
+                                    ],
+                                    begin: FractionalOffset(0.0, 0.0),
+                                    end: FractionalOffset(1.0, 0.0),
+                                    stops: [0.0, 1.0],
+                                    tileMode: TileMode.clamp),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                    child: Text(
+                                  "Submit",
+                                  style: TextStyle(fontSize: 16),
+                                )),
+                              )),
+                        ),
                       ),
-                    )),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text("Already have an account? Log in")),
+                    ],
+                  ),
+                ),
               );
             }
           default:
@@ -164,7 +162,8 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class AvatarPicker extends StatefulWidget {
-  const AvatarPicker({Key? key}) : super(key: key);
+  File? file;
+  AvatarPicker({Key? key}) : super(key: key);
 
   @override
   State<AvatarPicker> createState() => _AvatarPickerState();
@@ -183,7 +182,8 @@ class _AvatarPickerState extends State<AvatarPicker> {
 
         setState(() {
           // thanh cong
-          SignUpAvatar.of(context)!.file = File(imagePicker!.path);
+          widget.file = File(imagePicker!.path);
+          context.read<ImageCubit>().emit(File(imagePicker!.path));
         });
       } else if (permissions.isDenied) {
         openAppSettings();
@@ -200,8 +200,9 @@ class _AvatarPickerState extends State<AvatarPicker> {
         // ignore: use_build_context_synchronously
 
         setState(() {
+          widget.file = File(imagePicker!.path);
           //thanh cong
-          SignUpAvatar.of(context)!.file = File(imagePicker!.path);
+          context.read<ImageCubit>().emit(File(imagePicker!.path));
         });
       } else {
         openAppSettings();
@@ -216,15 +217,18 @@ class _AvatarPickerState extends State<AvatarPicker> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: Center(
-            child: CircleAvatar(
-              radius: 50, // Image radius
-              backgroundImage: SignUpAvatar.of(context)?.file != null
-                  ? FileImage(
-                      File(SignUpAvatar.of(context)!.file!.path),
-                    ) as ImageProvider
-                  : const AssetImage("assets/images/tom.jpg"),
-            ),
+          child: BlocBuilder<ImageCubit, File?>(
+            builder: (context, state) {
+              return Center(
+                child: CircleAvatar(
+                  radius: 50, // Image radius
+                  backgroundImage: SignUpAvatar.of(context)?.file != null
+                      ? FileImage(context.read<ImageCubit>().state!)
+                          as ImageProvider
+                      : const AssetImage("assets/images/tom.jpg"),
+                ),
+              );
+            },
           ),
         ),
         Padding(

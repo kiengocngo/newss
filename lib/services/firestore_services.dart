@@ -25,4 +25,19 @@ class FireStoreService {
       return false;
     }
   }
+
+  Future<bool> addChatMessage(
+      String sender, String receiver, String message, DateTime time) async {
+    try {
+      await _fireStoreService.collection("Chats").add({
+        "sender": sender,
+        "receiver": receiver,
+        "message": message,
+        "dateTime": time,
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

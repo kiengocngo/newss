@@ -91,7 +91,6 @@ class LoginScreen extends StatelessWidget {
                 },
                 child: InkWell(
                   onTap: () {
-                    print("i tapped");
                     context.read<LogInBloc>().add(LogInSubmitEvent(
                         email: _emailController.text,
                         password: _passwordController.text));

@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/blocs/info_changes_bloc/info_changes_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
 import 'package:news_app/src/routes/app_routes.dart';
-import 'package:news_app/src/ui/sign_up/sign_up_info.dart';
 import 'blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'firebase_options.dart';
 
@@ -22,12 +22,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        
+        BlocProvider<InfoChangesBloc>(
+          create: (context) => InfoChangesBloc()
+          ),
         BlocProvider<SignUpBloc>(
           create: (context) => SignUpBloc(),
         ),
         BlocProvider<LogInBloc>(
           create: (context) => LogInBloc(),
-        )
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(),

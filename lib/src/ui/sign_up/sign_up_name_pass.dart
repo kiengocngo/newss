@@ -72,10 +72,17 @@ class SignUpMailPass extends StatelessWidget {
                       context.read<LogInBloc>().add(LogInSubmitEvent(
                           email: _emailController.text,
                           password: _passwordController.text));
-                      Navigator.pushNamed(context, '/add_info', arguments: {
-                        "email": _emailController.text,
-                        "password": _passwordController.text
-                      });
+                      context.read<LogInBloc>().add(LogInSubmitEvent(
+                          email: _emailController.text,
+                          password: _passwordController.text));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpScreen(args: {
+                              "email": _emailController.text,
+                              "password": _passwordController.text
+                            }),
+                          ));
                     }
                     break;
                   case SignUpStatus.error:

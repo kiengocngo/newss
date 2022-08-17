@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/bloc/news/news_cubit.dart';
@@ -32,6 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: NewsColor.textWhite,
+        actions: [
+          InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed('/search');
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 16.0),
+                child: Icon(
+                  CupertinoIcons.search,
+                  color: NewsColor.searchIcon,
+                ),
+              )),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -64,14 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                '#News - Topics',
-                style: NewsThemeData.fromContext(context).textAppBar,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Expanded(flex: 1, child: Container()),
             ],
           ),
         ),

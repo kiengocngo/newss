@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/src/components/input_text/text_field.dart';
-import 'package:news_app/src/ui/chat/components/recent_conversation.dart';
+
+import 'components/recent_conversation.dart';
 
 class ConversationScreen extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
@@ -8,6 +8,7 @@ class ConversationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -15,19 +16,39 @@ class ConversationScreen extends StatelessWidget {
         bottomOpacity: 0.0,
         elevation: 0.0,
       ),
-      body: Column(
-        children: [
-          TextInputField(
-              text: "Enter name here",
-              type: TextInputType.text,
-              prefixIcon: const Icon(Icons.search),
-              controller: _searchController),
-          RecentConversation(),
-          RecentConversation(),
-          RecentConversation(),
-          RecentConversation(),
-          RecentConversation(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TextFormField(
+              controller: _searchController,
+              textAlignVertical: TextAlignVertical.center,
+              textAlign: TextAlign.start,
+              enableInteractiveSelection: false,
+              obscureText: false,
+              // ignore: prefer_const_constructors
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey,
+                prefixIcon: const Icon(Icons.search),
+                contentPadding: const EdgeInsets.only(left: 4),
+                hintText: "Find a friend",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.7,
+              child: ListView.builder(
+                itemCount: 100,
+                itemBuilder: ((context, index) {
+                  return const RecentConversation();
+                }),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

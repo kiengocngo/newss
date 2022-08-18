@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:news_app/src/components/constant.dart';
+
+import '../../../components/constant.dart';
 
 class RecentConversation extends StatelessWidget {
   const RecentConversation({super.key});
@@ -10,27 +13,47 @@ class RecentConversation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          ClipOval(
-            child: SizedBox.fromSize(
-              size: const Size(50, 50), // Image radius
-              child: Image.memory(
-                base64.decode(
-                  Constant.base64Image,
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, "/details");
+        },
+        child: Row(
+          children: [
+            ClipOval(
+              child: SizedBox.fromSize(
+                size: const Size(50, 50), // Image radius
+                child: Image.memory(
+                  base64.decode(
+                    Constant.base64Image,
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: const Text(
-              "Hello",
-              style: TextStyle(color: Colors.grey, fontSize: 20),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Column(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Name",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )),
+                    Text(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      "Hello, this is a very long text that cant be display in screen, please click into detailssdasdasdasdasdasdasdasdasda",
+                      style: TextStyle(color: Colors.grey, fontSize: 15),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

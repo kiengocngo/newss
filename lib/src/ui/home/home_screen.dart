@@ -9,6 +9,7 @@ import 'package:news_app/bloc/news_for_you/news_topic_state.dart';
 import 'package:news_app/src/components/news_item/news_items.dart';
 import 'package:news_app/src/components/news_item/news_topic_items.dart';
 import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
+import 'package:news_app/src/ui/home/news/news_screen/news_screen.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';
 
@@ -54,9 +55,26 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '#Hot News',
-                style: NewsThemeData.fromContext(context).textAppBar,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '#Hot News',
+                    style: NewsThemeData.fromContext(context).textAppBar,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NewsScreen()));
+                    },
+                    child: Text(
+                      'More',
+                      style: NewsThemeData.fromContext(context).textNewsTitle,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
@@ -93,7 +111,7 @@ Widget _buildNewsItem(BuildContext context) {
       switch (state.status) {
         case NewsStatus.failure:
           return Text(state.error);
-        case NewsStatus.success :
+        case NewsStatus.success:
           if (state.results.isEmpty) {
             return const Text('no data');
           }

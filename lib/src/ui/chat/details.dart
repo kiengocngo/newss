@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../../components/constant.dart';
-import 'components/receiver_message.dart';
-import 'components/sender_message.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
+import 'package:news_app/src/components/constant.dart';
+import 'package:news_app/src/ui/chat/components/receiver_message.dart';
+import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
 // ignore: must_be_immutable
-class DetailsScreen extends StatelessWidget {
-  final TextEditingController _sendController = TextEditingController();
+class DetailsScreen extends StatefulWidget {
+  ScrollController _scrollController = ScrollController();
   String userUid;
   String friendUid;
   DetailsScreen({
@@ -14,6 +15,13 @@ class DetailsScreen extends StatelessWidget {
     required this.userUid,
     required this.friendUid,
   }) : super(key: key);
+
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  final TextEditingController _sendController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +35,27 @@ class DetailsScreen extends StatelessWidget {
           children: [
             SizedBox(
               height: size.height * 0.75,
-              child: ListView(
-                children: [
-                  SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-                  SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-                  SenderMessage(
-                      sendMessage:
-                          "Hello Im Quoc Anh,3123sadasdawe131312323123edasdsafgeww42134123213sadase12312dsadasda"),
-                  SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-                  SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-                  SenderMessage(sendMessage: "Hello Im Quoc Anh"),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                  ReceiverMessage(
-                      sendMessage: "Hello", base64Image: Constant.base64Image),
-                ],
+              child: BlocBuilder<ChatsBloc, ChatsState>(
+                builder: (context, state) {
+                  if (state.chatStatus == ChatStatus.loaded) {
+                    return ListView.builder(
+                      controller: widget._scrollController,
+                      itemCount: state.chats.length,
+                      itemBuilder: (context, index) {
+                        if (index % 2 == 0) {
+                          return SenderMessage(
+                              sendMessage: state.chats[index].message);
+                        } else {
+                          return ReceiverMessage(
+                              sendMessage: state.chats[index].message,
+                              base64Image: Constant.base64Image);
+                        }
+                      },
+                    );
+                  } else {
+                    return Text("Hello World");
+                  }
+                },
               ),
             ),
             Padding(
@@ -72,8 +70,23 @@ class DetailsScreen extends StatelessWidget {
                 // ignore: prefer_const_constructors
                 decoration: InputDecoration(
                   filled: true,
-                  suffixIcon:
-                      IconButton(onPressed: () {}, icon: Icon(Icons.send)),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        //tin moi nhat se duoc add vao conversations
+
+                        context.read<ChatsBloc>().add(
+                              ChatAddGetMessageEvent(
+                                  sender: "1",
+                                  receiver: "2",
+                                  message: _sendController.text,
+                                  timeStamp: DateTime.now()),
+                            );
+                        _sendController.clear();
+                        setState(() {
+                          widget._scrollController.jumpTo(widget._scrollController.position.maxScrollExtent);
+                        });
+                      },
+                      icon: Icon(Icons.send)),
                   fillColor: Colors.grey,
                   contentPadding: const EdgeInsets.only(left: 4),
                   hintText: "type here",

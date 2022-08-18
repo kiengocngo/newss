@@ -1,5 +1,5 @@
 part of 'conversations_bloc.dart';
-
+enum RecentState{init,loading,loaded, error}
 abstract class ConversationsState extends Equatable {
   const ConversationsState();
   

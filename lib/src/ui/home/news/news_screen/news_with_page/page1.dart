@@ -14,10 +14,11 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
+  
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsCubit, NewsState>(
-        builder: (context, state) {
+    return BlocBuilder<NewsCubit, NewsState>(builder: (context, state) {
       switch (state.status) {
         case NewsStatus.failure:
           return Text(state.error);

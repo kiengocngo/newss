@@ -16,13 +16,35 @@ class NewsScreen extends StatefulWidget {
 class _NewsScreenState extends State<NewsScreen> {
   late PageController _controller;
   List<dynamic> listPage = [
-    const Page1(),
-    const Page2(),
-    const Page3(),
-    const Page4(),
-    const Page5(),
-    const Page6(),
-    const Page7(),
+    const Center(
+      child: Text('1'),
+    ),
+    const Center(
+      child: Text('2'),
+    ),
+    const Center(
+      child: Text('3'),
+    ),
+    const Center(
+      child: Text('4'),
+    ),
+    const Center(
+      child: Text('5'),
+    ),
+    const Center(
+      child: Text('6'),
+    ),
+    const Center(
+      child: Text('7'),
+    ),
+
+    // const Page1(),
+    // const Page2(),
+    // const Page3(),
+    // const Page4(),
+    // const Page5(),
+    // const Page6(),
+    // const Page7(),
   ];
   final Duration _duration = const Duration(seconds: 2);
   final Curve curve = Curves.ease;
@@ -30,13 +52,13 @@ class _NewsScreenState extends State<NewsScreen> {
   void initState() {
     super.initState();
     _controller = PageController(initialPage: 0);
-    context.read<Page1Cubit>().getNews();
-    context.read<NewsCubit>().getNews();
-    context.read<Page2Cubit>().getNews();
-    context.read<Page3Cubit>().getNews();
-    context.read<Page4Cubit>().getNews();
-    context.read<Page5Cubit>().getNews();
-    context.read<Page6Cubit>().getNews();
+    // context.read<Page1Cubit>().getNews();
+    // context.read<NewsCubit>().getNews();
+    // context.read<Page2Cubit>().getNews();
+    // context.read<Page3Cubit>().getNews();
+    // context.read<Page4Cubit>().getNews();
+    // context.read<Page5Cubit>().getNews();
+    // context.read<Page6Cubit>().getNews();
   }
 
   @override
@@ -53,14 +75,6 @@ class _NewsScreenState extends State<NewsScreen> {
               Expanded(
                 flex: 9,
                 child: PageView.builder(
-                    onPageChanged: (index) {
-                      if (index + 1 == 7) {
-                        _controller.nextPage(duration: _duration, curve: curve);
-                      } else if (index == 0) {
-                        _controller.previousPage(
-                            duration: _duration, curve: curve);
-                      }
-                    },
                     controller: _controller,
                     itemCount: 7,
                     itemBuilder: (context, index) {
@@ -141,7 +155,7 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 }
 
-class BuildButonNumber extends StatelessWidget {
+class BuildButonNumber extends StatefulWidget {
   final int page;
 
   final VoidCallback onTap;
@@ -149,19 +163,30 @@ class BuildButonNumber extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<BuildButonNumber> createState() => _BuildButonNumberState();
+}
+
+class _BuildButonNumberState extends State<BuildButonNumber> {
+  int currentPage = 1;
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        widget.onTap;
+        setState(() {
+          currentPage ++;
+        });
+      },
       child: Container(
         height: 25,
         width: 25,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white, width: 0.5),
-          color: NewsColor.bgHotNews,
+          color: (currentPage != widget.page) ? Colors.grey : NewsColor.bgHotNews,
         ),
         child: Center(
           child: Text(
-            page.toString(),
+            widget.page.toString(),
             style: NewsThemeData.fromContext(context).textHotNews,
           ),
         ),

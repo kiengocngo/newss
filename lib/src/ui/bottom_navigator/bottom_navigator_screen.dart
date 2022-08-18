@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/ui/home/home_screen.dart';
+import 'package:news_app/src/ui/notifications_screen/notification_screen.dart';
 import 'package:news_app/src/ui/settings/settings_screen.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
@@ -29,38 +31,36 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             // ignore: prefer_const_constructors
             Text('Favourite'),
             // ignore: prefer_const_constructors
-            Text(
-              'Index 3: Notification',
-            ),
+            NotificationScreen(),
             // ignore: prefer_const_constructors
             SettingsScreen(),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
               color: Colors.green,
             ),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.chat_bubble_outline_rounded,
               color: Colors.green,
             ),
             label: 'Chat',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.favorite_rounded,
               color: Colors.green,
             ),
             label: 'Favourite',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.notification_important_rounded,
               color: Colors.green,
@@ -68,11 +68,11 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.settings,
               color: Colors.green,
             ),
-            label: 'Settings',
+            label: tr('Settings'),
           ),
         ],
         currentIndex: _selectedIndex,

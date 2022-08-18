@@ -1,4 +1,4 @@
-import 'package:news_app/src/models/my_user.dart';
+import '../models/my_user.dart';
 
 class Constant {
   static MyUser defaultUser = MyUser(

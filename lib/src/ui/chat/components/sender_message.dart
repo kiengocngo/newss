@@ -12,7 +12,7 @@ class SenderMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
       child: Align(
         alignment: Alignment.centerRight,
         child: Column(
@@ -23,12 +23,18 @@ class SenderMessage extends StatelessWidget {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(20.0),
                     ),
-                    border: Border.all(color: Colors.blueAccent),
+                    gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Colors.purple, Colors.blue]),
                     color: Colors.blue[300]),
                 constraints: BoxConstraints(maxWidth: size.width * 0.8),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(sendMessage),
+                  child: Text(
+                    sendMessage,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 )),
             const Text(
               "Aug 15,2022",

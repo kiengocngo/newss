@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:news_app/src/components/constant.dart';
+
+import '../../../components/constant.dart';
 
 // ignore: must_be_immutable
 class ReceiverMessage extends StatelessWidget {
@@ -16,7 +17,7 @@ class ReceiverMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Row(
@@ -40,16 +41,19 @@ class ReceiverMessage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(20.0),
                         ),
-                        border: Border.all(color: Colors.blueAccent),
-                        color: Colors.blue[300]),
+                        color: Colors.grey),
                     constraints: BoxConstraints(maxWidth: size.width * 0.8),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(sendMessage),
+                      child: Text(
+                        sendMessage,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14),
+                      ),
                     )),
               ],
             ),

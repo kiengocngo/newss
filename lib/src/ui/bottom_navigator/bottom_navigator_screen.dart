@@ -11,24 +11,30 @@ class BottomNavigationScreen extends StatefulWidget {
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    Text(
-      'Index 2: Chat',
-    ),
-    Text('Favourite'),
-    Text(
-      'Index 3: Notification',
-    ),
-    SettingsScreen(),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: IndexedStack(
           index: _selectedIndex,
-          children: _widgetOptions,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            // ignore: prefer_const_constructors
+            HomeScreen(),
+            // ignore: prefer_const_constructors
+            Text(
+              'Index 2: Chat',
+            ),
+            // ignore: prefer_const_constructors
+            Text('Favourite'),
+            // ignore: prefer_const_constructors
+            Text(
+              'Index 3: Notification',
+            ),
+            // ignore: prefer_const_constructors
+            SettingsScreen(),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

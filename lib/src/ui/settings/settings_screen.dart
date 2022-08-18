@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/src/ui/language_settings/language_settings_screen.dart';
 import 'package:news_app/src/ui/profile_settings/profile_settings_screen.dart';
 
 import '../password_change/password_change_screen.dart';
+
+enum Language { english, vietnammese }
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -12,13 +14,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  Language? _character = Language.english;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Settings',
-            style: TextStyle(),
+          title: Text(
+            tr('Settings'),
+            style: const TextStyle(),
           ),
           backgroundColor: Colors.blue,
         ),
@@ -62,9 +66,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Column(
                         children: [
                           ListTile(
-                            title: const Text(
-                              'PROFILE SETTINGS',
-                              style: TextStyle(
+                            title: Text(
+                              tr('PROFILE SETTINGS'),
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w500),
                             ),
                             trailing: const Icon(Icons.keyboard_arrow_right),
@@ -83,18 +87,61 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: Colors.grey.shade400,
                           ),
                           ListTile(
-                            title: const Text(
-                              'LANGUAGE SETTINGS',
-                              style: TextStyle(
+                            title: Text(
+                              tr('LANGUAGE SETTINGS'),
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w500),
                             ),
                             trailing: const Icon(Icons.keyboard_arrow_right),
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LanguageScreen()));
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(tr('Change Language')),
+                                      actions: [
+                                        Column(
+                                          children: [
+                                            ListTile(
+                                              title: const Text('English'),
+                                              leading: Radio<Language>(
+                                                value: Language.english,
+                                                groupValue: _character,
+                                                onChanged: (Language? value) {
+                                                  setState(() {
+                                                    _character = value;
+                                                  });
+                                                  context.setLocale(
+                                                      const Locale('en'));
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ),
+                                            ListTile(
+                                              title: const Text('Vietnammese'),
+                                              leading: Radio<Language>(
+                                                value: Language.vietnammese,
+                                                groupValue: _character,
+                                                onChanged: (Language? value) {
+                                                  setState(() {
+                                                    _character = value;
+                                                  });
+                                                  context.setLocale(
+                                                      const Locale('vi'));
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  });
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const LanguageScreen()));
                             },
                           ),
                           Container(
@@ -104,9 +151,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: Colors.grey.shade400,
                           ),
                           ListTile(
-                            title: const Text(
-                              'CHANGE PASSWORD',
-                              style: TextStyle(
+                            title: Text(
+                              tr('CHANGE PASSWORD'),
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w500),
                             ),
                             trailing: const Icon(Icons.keyboard_arrow_right),

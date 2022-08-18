@@ -23,10 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ImageCubit>(create: (context)=>ImageCubit()),
-        BlocProvider<InfoChangesBloc>(
-          create: (context) => InfoChangesBloc()
-          ),
+        BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
+        BlocProvider<InfoChangesBloc>(create: (context) => InfoChangesBloc()),
         BlocProvider<SignUpBloc>(
           create: (context) => SignUpBloc(),
         ),

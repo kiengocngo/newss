@@ -6,6 +6,7 @@ class TextInputField extends StatelessWidget {
   TextInputType type;
   Icon prefixIcon;
   TextEditingController controller;
+
   TextInputField({
     Key? key,
     required this.text,
@@ -32,6 +33,8 @@ class TextInputField extends StatelessWidget {
           enableInteractiveSelection: false,
           obscureText: false,
           decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.grey,
             prefixIcon: prefixIcon,
             contentPadding: const EdgeInsets.only(left: 4),
             hintText: text,

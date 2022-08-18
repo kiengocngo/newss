@@ -12,6 +12,11 @@ class ConversationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "Chat",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.black,
         bottomOpacity: 0.0,
         elevation: 0.0,

@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/services/firebase_services/firestore_services.dart';
 
 import '../../../components/constant.dart';
 
@@ -15,6 +16,7 @@ class RecentConversation extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
+          FireStoreService().getUserByName("weqwe");
           Navigator.pushNamed(context, "/details");
         },
         child: Row(

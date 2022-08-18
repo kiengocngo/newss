@@ -60,7 +60,7 @@ class DioClient {
   Future<BaseModel> fetchNewsWithSport() async {
     try {
       final response = await _dio
-          .get('/news', queryParameters: {"category": "entertainment"});
+          .get('/news', queryParameters: {"category": "sports"});
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);
@@ -73,7 +73,7 @@ class DioClient {
   Future<BaseModel> fetchNewsTechnology() async {
     try {
       final response = await _dio
-          .get('/news', queryParameters: {"category": "entertainment"});
+          .get('/news', queryParameters: {"category": "technology"});
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);

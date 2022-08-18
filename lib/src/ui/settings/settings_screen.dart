@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/src/ui/language_settings/language_settings_screen.dart';
-import 'package:news_app/src/ui/password_settings/password_settings_screen.dart';
 import 'package:news_app/src/ui/profile_settings/profile_settings_screen.dart';
+
+import '../password_change/password_change_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

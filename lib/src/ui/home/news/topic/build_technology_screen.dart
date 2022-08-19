@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/bloc/news/news_status.dart';
-import 'package:news_app/bloc/news_topic/news_cubit_technology.dart';
-import 'package:news_app/bloc/news_topic/news_state.dart';
+import 'package:news_app/bloc/news_topic/technology/new_technology_state.dart';
+import 'package:news_app/bloc/news_topic/technology/news_technology_cubit.dart';
 import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
 import 'package:news_app/src/ui/home/news/topic/topic_items.dart';
 
@@ -10,21 +10,30 @@ class BuildTechnology extends StatefulWidget {
   const BuildTechnology({Key? key}) : super(key: key);
 
   @override
-  State<BuildTechnology> createState() => _BuildNewsTechnologyState();
+  State<BuildTechnology> createState() => _BuildTechnologyState();
 }
 
-class _BuildNewsTechnologyState extends State<BuildTechnology> {
+class _BuildTechnologyState extends State<BuildTechnology>
+    with AutomaticKeepAliveClientMixin {
   @override
+  bool get wantKeepAlive => true;
+  @override
+  void initState() {
+    context.read<NewsTechnologyCubit>().getNews();
+    super.initState();
+  }
+
+  @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsCubitTechnology, NewsTopicState>(
+    return BlocBuilder<NewsTechnologyCubit, NewsTechnologyState>(
         builder: (context, state) {
       switch (state.status) {
         case NewsStatus.failure:
-          return Text(state.error);
+          return Center(
+            child: Text(state.error),
+          );
         case NewsStatus.success:
-          if (state.results.isEmpty) {
-            return const Text('no data');
-          }
           return ListView.builder(
               itemCount: state.results.length,
               itemBuilder: (context, index) {
@@ -34,7 +43,7 @@ class _BuildNewsTechnologyState extends State<BuildTechnology> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DetailNewsScreen(
+                              builder: (contex) => DetailNewsScreen(
                                     results: state.results[index],
                                   )));
                     });

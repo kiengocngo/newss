@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/bloc/news/news_status.dart';
-import 'package:news_app/bloc/news_topic/news_state.dart';
+import 'package:news_app/bloc/news_topic/entertainment/news_entertainment_state.dart';
 import 'package:news_app/dio/config_dio.dart';
 
-class NewsCubitTechnology extends Cubit<NewsTopicState> {
-  NewsCubitTechnology({required this.dio})
-      : super(const NewsTopicState(error: ''));
-  final Dio dio;
+class NewsEntertainmentCubit extends Cubit<NewsEntertainmentState> {
+  NewsEntertainmentCubit({required this.dio})
+      : super(const NewsEntertainmentState(error: ''));
 
+  final Dio dio;
   Future<void> getNews() async {
-    final base = await DioClient().fetchNewsTechnology();
+    final base = await DioClient().fetchNewsWithTopics('entertainment');
 
     if (state.status == NewsStatus.initial ||
         state.status == NewsStatus.success) {

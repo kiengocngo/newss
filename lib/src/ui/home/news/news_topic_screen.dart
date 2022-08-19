@@ -1,15 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news/news_status.dart';
-import 'package:news_app/bloc/news_topic/news_cubit_entertainment.dart';
-import 'package:news_app/bloc/news_topic/news_cubit_sports.dart';
-import 'package:news_app/bloc/news_topic/news_cubit_technology.dart';
-import 'package:news_app/bloc/news_topic/news_state.dart';
 import 'package:news_app/src/ui/home/news/topic/build_entertainment_screen.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';
-
 import 'topic/build_sports_screen.dart';
 import 'topic/build_technology_screen.dart';
 
@@ -21,14 +14,12 @@ class NewsTopicScreen extends StatefulWidget {
 }
 
 class _NewsTopicScreenState extends State<NewsTopicScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
+  late TabController tabController;
   @override
   void initState() {
+    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
     super.initState();
-
-    context.read<NewsCubitSprots>().getNews();
-    context.read<NewsCubitTechnology>().getNews();
-    context.read<NewsCubitEntertainment>().getNews();
   }
 
   @override
@@ -50,8 +41,9 @@ class _NewsTopicScreenState extends State<NewsTopicScreen>
           ),
           elevation: 0.25,
           backgroundColor: Colors.white,
-          bottom: TabBar(
+          title: TabBar(
             unselectedLabelColor: NewsColor.bgTextForm,
+            controller: tabController,
             isScrollable: true,
             indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), color: Colors.green),
@@ -80,45 +72,19 @@ class _NewsTopicScreenState extends State<NewsTopicScreen>
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
-                child: const TabBarView(children: [
-                  BuildNewsSport(),
-                  BuildTechnology(),
-                  BuildEntertainment(),
-                ]),
+                child: TabBarView(
+                  controller: tabController,
+                  children: const [
+                    BuildNewsSport(),
+                    BuildTechnology(),
+                    BuildEntertainment(),
+                  ],
+                ),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  buildNewsSports() {
-    return BlocBuilder<NewsCubitSprots, NewsTopicState>(
-        builder: (context, state) {
-      switch (state.status) {
-        case NewsStatus.failure:
-          return Text(state.error);
-        case NewsStatus.success:
-          if (state.results.isEmpty) {
-            return const Text('no data');
-          }
-          return ListView.builder(
-              itemCount: state.results.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Column(
-                    children: [
-                      Text(state.results[index].title),
-                    ],
-                  ),
-                );
-              });
-        default:
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-      }
-    });
   }
 }

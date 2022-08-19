@@ -7,5 +7,5 @@ class Endpoints {
 
   static const int connectionTimeout = 3000;
 
-  static const String apiKey = 'pub_10324f2ae31e1f66c8ab3d419e068c3ec0d72';
+  static const String apiKey = 'pub_10319ff40e41ff3e7d4196dbd594bd55682eb';
 }

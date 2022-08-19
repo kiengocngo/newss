@@ -19,3 +19,4 @@ class FireStoreResponse {
     return database.snapshots();
   }
 }
+

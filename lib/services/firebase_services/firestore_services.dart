@@ -12,6 +12,17 @@ class FireStoreService {
     log(data.docs[0].data()["name"]);
   }
 
+  addNewChat(String sender, String receiver, String message) async {
+    await _instance.collection("Chats").add(
+      {
+        "senderId": sender,
+        "receiverId": receiver,
+        "message": message,
+        "dateTime": DateTime.now(),
+      },
+    );
+  }
+
   getChats(String sender, String receiver) async {
     var data = await _instance
         .collection("Chats")

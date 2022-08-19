@@ -17,13 +17,16 @@ class ChatAddGetMessageEvent extends ChatsEvent {
   String sender;
   String receiver;
   String message;
-  DateTime timeStamp;
+
   ChatAddGetMessageEvent({
-  required  this.sender ,
-  required  this.receiver,
-   required this.message ,
-   required  this.timeStamp,
+    required this.sender,
+    required this.receiver,
+    required this.message,
   });
-    @override
-  List<Object> get props => [sender,receiver,message,timeStamp];
+  @override
+  List<Object> get props => [
+        sender,
+        receiver,
+        message,
+      ];
 }

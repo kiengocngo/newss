@@ -42,6 +42,7 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   cloud_firestore: ^3.4.4
+  bloc_concurrency: ^0.2.0
 
 dev_dependencies:
   flutter_test:

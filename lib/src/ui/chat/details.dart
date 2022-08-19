@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
+import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/ui/chat/components/receiver_message.dart';
 import 'package:news_app/src/ui/chat/components/sender_message.dart';
@@ -36,7 +39,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
             SizedBox(
               height: size.height * 0.75,
               child: BlocBuilder<ChatsBloc, ChatsState>(
+                buildWhen: (previous, current) => previous!=current,
                 builder: (context, state) {
+                  
                   if (state.chatStatus == ChatStatus.loaded) {
                     return ListView.builder(
                       controller: widget._scrollController,
@@ -53,7 +58,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       },
                     );
                   } else {
-                    return Text("Hello World");
+                    return Text(state.chats.toString());
                   }
                 },
               ),
@@ -72,18 +77,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   filled: true,
                   suffixIcon: IconButton(
                       onPressed: () {
+                        FireStoreResponse().getChats("1", "2");
                         //tin moi nhat se duoc add vao conversations
 
                         context.read<ChatsBloc>().add(
                               ChatAddGetMessageEvent(
-                                  sender: "1",
-                                  receiver: "2",
-                                  message: _sendController.text,
-                                  timeStamp: DateTime.now()),
+                                sender: "2",
+                                receiver: "1",
+                                message: _sendController.text,
+                              ),
                             );
+
                         _sendController.clear();
                         setState(() {
-                          widget._scrollController.jumpTo(widget._scrollController.position.maxScrollExtent);
+                          widget._scrollController.jumpTo(widget
+                              ._scrollController.position.maxScrollExtent);
                         });
                       },
                       icon: Icon(Icons.send)),

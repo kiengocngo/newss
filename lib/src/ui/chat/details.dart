@@ -10,7 +10,7 @@ import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
 // ignore: must_be_immutable
 class DetailsScreen extends StatefulWidget {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   String userUid;
   String friendUid;
   DetailsScreen({
@@ -39,9 +39,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
             SizedBox(
               height: size.height * 0.75,
               child: BlocBuilder<ChatsBloc, ChatsState>(
-                buildWhen: (previous, current) => previous!=current,
+                buildWhen: (previous, current) {
+                  return previous!=current;
+                },
                 builder: (context, state) {
-                  
                   if (state.chatStatus == ChatStatus.loaded) {
                     return ListView.builder(
                       controller: widget._scrollController,
@@ -77,7 +78,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   filled: true,
                   suffixIcon: IconButton(
                       onPressed: () {
-                        FireStoreResponse().getChats("1", "2");
                         //tin moi nhat se duoc add vao conversations
 
                         context.read<ChatsBloc>().add(
@@ -94,7 +94,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ._scrollController.position.maxScrollExtent);
                         });
                       },
-                      icon: Icon(Icons.send)),
+                      icon: const Icon(Icons.send)),
                   fillColor: Colors.grey,
                   contentPadding: const EdgeInsets.only(left: 4),
                   hintText: "type here",

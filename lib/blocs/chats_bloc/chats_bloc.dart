@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,9 +13,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   FireStoreService fireStoreService = FireStoreService();
   var streamData = FireStoreResponse().getChats("1", "2");
   ChatsBloc() : super(ChatsState.init()) {
-    on<ChatsEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<ChatsEvent>((event, emit) {});
 
     on<ChatInitEvent>(
       (event, emit) async {
@@ -31,11 +27,11 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
                 message: data.docs[i].data()["message"]));
           }
           state.chats = tmp;
-          print(state.chats);
-          emit(ChatsState.loaded(state.chats));
+          //  log(tmp.toString());
         }));
+        emit(ChatsState.loaded(state.chats));
       },
-      transformer: sequential(),
+      transformer: restartable(),
     );
 
     on<ChatAddGetMessageEvent>(

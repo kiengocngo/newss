@@ -24,18 +24,8 @@ class FireStoreService {
   }
 
   getChats(String sender, String receiver) async {
-    var data = await _instance
-        .collection("Chats")
-        .where("sender", isEqualTo: sender)
-        .where("receiver", isEqualTo: receiver)
-        .orderBy("dateTime", descending: true)
-        .get();
   }
 
   getConversations(String userId) async {
-    var data = await _instance
-        .collection("Conversations")
-        .where("receiver", isNotEqualTo: userId)
-        .get();
   }
 }

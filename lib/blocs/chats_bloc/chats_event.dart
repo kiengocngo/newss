@@ -13,6 +13,7 @@ class ChatInitEvent extends ChatsEvent {
   List<Object> get props => [];
 }
 
+// ignore: must_be_immutable
 class ChatAddGetMessageEvent extends ChatsEvent {
   String sender;
   String receiver;

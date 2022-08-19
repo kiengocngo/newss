@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
-import 'package:news_app/services/firebase_services/firestore_services.dart';
 
 import '../../../components/constant.dart';
 

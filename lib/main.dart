@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        initialRoute: '/news_screen',
+        initialRoute: '/splash',
         routes: AppRoutes.routes,
       ),
     );

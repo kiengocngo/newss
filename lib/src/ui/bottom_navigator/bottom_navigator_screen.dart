@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/ui/home/home_screen.dart';
@@ -23,7 +24,9 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             // ignore: prefer_const_constructors
-            HomeScreen(),
+            HomeScreen(
+              indexNoti: 4,
+            ),
             // ignore: prefer_const_constructors
             Text(
               'Index 2: Chat',
@@ -39,10 +42,17 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            icon: Icon(
+          BottomNavigationBarItem(
+            icon: Badge(
+              position: BadgePosition.topEnd(),
+              badgeColor: const Color.fromARGB(255, 235, 161, 156),
+              badgeContent: Text('4'),
+              animationDuration: Duration(seconds: 1),
+              animationType: BadgeAnimationType.fade,
+              child: const Icon(
               Icons.home,
               color: Colors.green,
+              ),
             ),
             label: 'Home',
           ),
@@ -68,6 +78,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
+            
             icon: const Icon(
               Icons.settings,
               color: Colors.green,

@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,6 +43,17 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAludmmAWRIuA2Uves3MV8r6cPk7rSnTuE',
+    appId: '1:664224390267:web:64bcb87f3fdfb8f45bd6de',
+    messagingSenderId: '664224390267',
+    projectId: 'news-f660a',
+    authDomain: 'news-f660a.firebaseapp.com',
+    databaseURL: 'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'news-f660a.appspot.com',
+    measurementId: 'G-3HJE4HQ10K',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAb-EKt9wljb9dTMYLbL-H2KuDzrKRvAj8',
     appId: '1:664224390267:android:d4ac20eeb4e9489e5bd6de',
@@ -60,12 +65,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDhoT4h5Spi2AzsxBsL17S-tnx8U7EZIYM',
-    appId: '1:664224390267:ios:015aa7a68553261e5bd6de',
+    appId: '1:664224390267:ios:0413efd0d7fa0c1f5bd6de',
     messagingSenderId: '664224390267',
     projectId: 'news-f660a',
     databaseURL: 'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'news-f660a.appspot.com',
-    iosClientId: '664224390267-5hb075d1pqm4j3k8joghbob4sji7gj5c.apps.googleusercontent.com',
-    iosBundleId: 'com.example.newsApp',
+    iosClientId: '664224390267-sennbr5tkv2o1uj613tfe8nir4c67in4.apps.googleusercontent.com',
+    iosBundleId: 'com.example.newss',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDhoT4h5Spi2AzsxBsL17S-tnx8U7EZIYM',
+    appId: '1:664224390267:ios:0413efd0d7fa0c1f5bd6de',
+    messagingSenderId: '664224390267',
+    projectId: 'news-f660a',
+    databaseURL: 'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'news-f660a.appspot.com',
+    iosClientId: '664224390267-sennbr5tkv2o1uj613tfe8nir4c67in4.apps.googleusercontent.com',
+    iosBundleId: 'com.example.newss',
   );
 }

@@ -1,11 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final int indexNoti;
+  const HomeScreen({Key? key, required this.indexNoti}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

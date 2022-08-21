@@ -36,10 +36,6 @@ class SenderMessage extends StatelessWidget {
                     style: const TextStyle(color: Colors.white),
                   ),
                 )),
-            const Text(
-              "Aug 15,2022",
-              style: TextStyle(color: Colors.grey),
-            ),
           ],
         ),
       ),

@@ -23,9 +23,45 @@ class FireStoreService {
     );
   }
 
-  getChats(String sender, String receiver) async {
+  fixConversation(String uid, String message) async {
+    await _instance
+        .collection("Conversations")
+        .doc(uid)
+        .update({"message": message, "dateTime": Timestamp.now()});
   }
 
-  getConversations(String userId) async {
+  addNewConversations(
+      String senderId,
+      String receiverId,
+      String senderName,
+      String receiverName,
+      String senderImage,
+      String receiverImage,
+      String message,
+      Timestamp timestamp) async {
+    await _instance.collection("Conversations").add({
+      "senderId": senderId,
+      "receiverId": receiverId,
+      "senderName": senderName,
+      "receiverName": receiverName,
+      "senderImage": senderImage,
+      "receiverImage": receiverImage,
+      "message": message,
+      "dateTime": Timestamp.now()
+    });
+  }
+
+  getChats(String sender, String receiver) async {}
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getConversations(
+      String senderId, String receiverId) async {
+    var database = _instance.collection("Conversations");
+    database
+        .where("senderId", isEqualTo: senderId)
+        .where("receiverId", isEqualTo: receiverId);
+    database
+        .where("senderId", isEqualTo: receiverId)
+        .where("receiverId", isEqualTo: senderId);
+    return await database.get();
   }
 }

@@ -4,12 +4,21 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 
 import '../../../components/constant.dart';
 
 class RecentConversation extends StatelessWidget {
-  const RecentConversation({super.key});
+  String userImage;
+  String message;
+  String conversationsUserName;
+  RecentConversation({
+    Key? key,
+    required this.userImage,
+    required this.message,
+    required this.conversationsUserName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +30,7 @@ class RecentConversation extends StatelessWidget {
         },
         child: InkWell(
           onTap: () {
-         context.read<ChatsBloc>().add(ChatInitEvent());
+            context.read<ChatsBloc>().add(ChatInitEvent());
             Navigator.pushNamed(context, "/details");
           },
           child: Row(

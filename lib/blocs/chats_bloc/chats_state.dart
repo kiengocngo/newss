@@ -22,7 +22,7 @@ class ChatsState extends Equatable {
           chatStatus: ChatStatus.loading,
           chats: [],
         );
-        ChatsState.error()
+  ChatsState.error()
       : this(
           chatStatus: ChatStatus.error,
           chats: [],

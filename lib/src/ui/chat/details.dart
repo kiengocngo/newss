@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
+import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/ui/chat/components/receiver_message.dart';
@@ -40,17 +43,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: size.height * 0.75,
               child: BlocBuilder<ChatsBloc, ChatsState>(
                 buildWhen: (previous, current) {
-                  return previous!=current;
+                  return previous != current;
                 },
                 builder: (context, state) {
                   if (state.chatStatus == ChatStatus.loaded) {
                     return ListView.builder(
+                      reverse: false,
                       controller: widget._scrollController,
                       itemCount: state.chats.length,
                       itemBuilder: (context, index) {
-                        if (index % 2 == 0) {
-                          return SenderMessage(
-                              sendMessage: state.chats[index].message);
+                        if (state.chats[index].senderId == "1") {
+                          {
+                            if (index == 0) {
+                              return Column(
+                                children: [
+                                  SenderMessage(
+                                      sendMessage: state.chats[index].message),
+                                  const Text(
+                                    "19/8/2022",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return SenderMessage(
+                                  sendMessage: state.chats[index].message);
+                            }
+                          }
                         } else {
                           return ReceiverMessage(
                               sendMessage: state.chats[index].message,
@@ -80,10 +99,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       onPressed: () {
                         //tin moi nhat se duoc add vao conversations
 
+                        context.read<ConversationsBloc>().add(
+                            ConversationsAddNewMessage(
+                                senderId: "1",
+                                receiverId: "2",
+                                senderName: "qa1",
+                                receiverName: "qa2",
+                                senderImage: Constant.base64Image,
+                                receiverImage: Constant.base64Image,
+                                message: _sendController.text,
+                                timestamp: Timestamp.now()));
                         context.read<ChatsBloc>().add(
                               ChatAddGetMessageEvent(
-                                sender: "2",
-                                receiver: "1",
+                                sender: "1",
+                                receiver: "2",
                                 message: _sendController.text,
                               ),
                             );

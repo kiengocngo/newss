@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,26 +11,25 @@ part 'chats_state.dart';
 
 class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   FireStoreService fireStoreService = FireStoreService();
-  var streamData = FireStoreResponse().getChats("1", "2");
   ChatsBloc() : super(ChatsState.init()) {
     on<ChatsEvent>((event, emit) {});
     on<ChatInitEvent>(
       (event, emit) async {
-        await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(streamData,
-            onData: ((data) {
+        await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
+            FireStoreResponse().getChats("1", "2"), onData: ((data) {
           List<Chat> tmp = [];
           for (int i = 0; i < data.docs.length; i++) {
             tmp.add(Chat(
                 senderId: data.docs[i].data()["senderId"],
                 receiverId: data.docs[i].data()["receiverId"],
+                timeStamp: data.docs[i].data()["dateTime"],
                 message: data.docs[i].data()["message"]));
           }
           print(tmp.length);
-         emit(ChatsState.loaded(tmp));
+          emit(ChatsState.loaded(tmp));
 
           //  log(tmp.toString());
         }));
-      
       },
       transformer: concurrent(),
     );
@@ -43,7 +41,9 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         state.chats.add(Chat(
             senderId: event.sender,
             receiverId: event.receiver,
+            timeStamp: Timestamp.now(),
             message: event.message));
+
         emit(ChatsState.loaded(state.chats));
       },
     );

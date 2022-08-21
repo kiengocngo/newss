@@ -7,7 +7,8 @@ class FireStoreResponse {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getChats(
       String firstUser, secondUser) {
-    final database = _instance.collection("Chats");
+    final CollectionReference<Map<String, dynamic>> database =
+        _instance.collection("Chats");
 
     database
         .where("senderId", isEqualTo: firstUser)
@@ -16,7 +17,15 @@ class FireStoreResponse {
         .where("senderId", isEqualTo: secondUser)
         .where("receiverId", isEqualTo: firstUser);
 
-    return database.snapshots();
+    return database.orderBy("dateTime", descending: false).snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getConversations(
+      String currentUser) {
+    final CollectionReference<Map<String, dynamic>> database =
+        _instance.collection("Conversations");
+    database..where("senderId", isEqualTo: currentUser);
+    database.where("receiverId", isEqualTo: currentUser);
+    return database.orderBy("dateTime", descending: false).snapshots();
   }
 }
-

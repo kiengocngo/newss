@@ -54,7 +54,8 @@ class DefaultFirebaseOptions {
     appId: '1:664224390267:android:d4ac20eeb4e9489e5bd6de',
     messagingSenderId: '664224390267',
     projectId: 'news-f660a',
-    databaseURL: 'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'news-f660a.appspot.com',
   );
 
@@ -63,9 +64,11 @@ class DefaultFirebaseOptions {
     appId: '1:664224390267:ios:015aa7a68553261e5bd6de',
     messagingSenderId: '664224390267',
     projectId: 'news-f660a',
-    databaseURL: 'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'news-f660a.appspot.com',
-    iosClientId: '664224390267-5hb075d1pqm4j3k8joghbob4sji7gj5c.apps.googleusercontent.com',
+    iosClientId:
+        '664224390267-5hb075d1pqm4j3k8joghbob4sji7gj5c.apps.googleusercontent.com',
     iosBundleId: 'com.example.newsApp',
   );
 }

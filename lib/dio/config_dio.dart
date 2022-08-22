@@ -57,32 +57,6 @@ class DioClient {
     }
   }
 
-  Future<BaseModel> fetchNewsWithSport() async {
-    try {
-      final response =
-          await _dio.get('/news', queryParameters: {"category": "sports"});
-      var news = News.fromJson(response.data);
-      List<Results>? listResults = news.results;
-      return BaseModel(data: listResults);
-    } on DioError catch (err) {
-      final errorMesage = DioException.fromDioError(err).toString();
-      return BaseModel(data: null, error: errorMesage);
-    }
-  }
-
-  Future<BaseModel> fetchNewsTechnology() async {
-    try {
-      final response =
-          await _dio.get('/news', queryParameters: {"category": "technology"});
-      var news = News.fromJson(response.data);
-      List<Results>? listResults = news.results;
-      return BaseModel(data: listResults);
-    } on DioError catch (err) {
-      final errorMesage = DioException.fromDioError(err).toString();
-      return BaseModel(data: null, error: errorMesage);
-    }
-  }
-
   Future<BaseModel> fetchNewsWithTopics(String topic) async {
     try {
       final response =

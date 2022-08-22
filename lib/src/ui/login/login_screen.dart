@@ -71,25 +71,17 @@ class LoginScreen extends StatelessWidget {
                   listener: (context, state) {
                     switch (state.logInStatus) {
                       case LogInStatus.loading:
-                        {
-                          log("loading");
-                        }
+                        log("loading");
                         break;
                       case LogInStatus.loaded:
-                        {
-                          log("loaded");
-                          Navigator.pushNamed(context, '/home');
-                        }
+                        log("loaded");
+                        Navigator.pushNamed(context, '/home');
                         break;
                       case LogInStatus.error:
-                        {
-                          log("error");
-                        }
+                        log("error");
                         break;
                       default:
-                        {
-                          log("default");
-                        }
+                        log("default");
                         break;
                     }
                   },

@@ -64,51 +64,42 @@ class SignUpMailPass extends StatelessWidget {
                 listener: (context, state) {
                   switch (state.signUpStatus) {
                     case SignUpStatus.loading:
-                      {
-                        log("loading");
-                      }
+                      log("loading");
                       break;
                     case SignUpStatus.loaded:
-                      {
-                        log("loaded");
-                        context.read<LogInBloc>().add(LogInSubmitEvent(
-                            email: _emailController.text,
-                            password: _passwordController.text));
-
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignUpScreen(args: {
-                                "email": _emailController.text,
-                                "password": _passwordController.text
-                              }),
-                            ));
-                      }
+                      log("loaded");
+                      context.read<LogInBloc>().add(LogInSubmitEvent(
+                          email: _emailController.text,
+                          password: _passwordController.text));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpScreen(args: {
+                              "email": _emailController.text,
+                              "password": _passwordController.text
+                            }),
+                          ));
                       break;
                     case SignUpStatus.error:
-                      {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text("please check our password"),
-                                content: const Text(
-                                    "the password and the reenter password are not the same"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(context, 'Cancel'),
-                                    child: const Text('Cancel'),
-                                  ),
-                                ],
-                              );
-                            });
-                      }
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("please check our password"),
+                              content: const Text(
+                                  "the password and the reenter password are not the same"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                              ],
+                            );
+                          });
                       break;
                     default:
-                      {
-                        context.read<SignUpBloc>().add(SignUpEventInit());
-                      }
+                      context.read<SignUpBloc>().add(SignUpEventInit());
                       break;
                   }
                 },
@@ -156,4 +147,3 @@ class SignUpMailPass extends StatelessWidget {
     );
   }
 }
-

@@ -30,110 +30,105 @@ class SignUpScreen extends StatelessWidget {
       builder: (context, state) {
         switch (state.logInStatus) {
           case LogInStatus.loading:
-            {
-              return const Scaffold(
-                body: Center(
-                  child: Text("Loading"),
-                ),
-              );
-            }
-          case LogInStatus.loaded:
-            {
-              return Scaffold(
-                appBar: AppBar(
-                  title: const Text("Sign up"),
-                  centerTitle: true,
-                ),
-                body: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        // ignore: prefer_const_constructors
-                        AvatarPicker(),
-                        TextInputField(
-                            text: "Enter your name",
-                            type: TextInputType.phone,
-                            prefixIcon: const Icon(Icons.text_fields),
-                            controller: _nameController),
-                        TextInputField(
-                            text: "Enter your Address",
-                            type: TextInputType.name,
-                            prefixIcon: const Icon(Icons.email),
-                            controller: _addressController),
-                        TextInputField(
-                            text: "Enter your phone number",
-                            type: TextInputType.phone,
-                            prefixIcon: const Icon(Icons.phone),
-                            controller: _phoneController),
-                        BlocListener<InfoChangesBloc, InfoChangesState>(
-                          listener: (context, state) {
-                            if (state.changesStage == ChangesStage.success) {
-                              Navigator.pushNamed(
-                                context,
-                                '/home',
-                              );
-                            }
-                          },
-                          child: InkWell(
-                            onTap: () {
-                              final bytes = context
-                                  .read<ImageCubit>()
-                                  .state!
-                                  .readAsBytesSync();
+            return const Scaffold(
+              body: Center(
+                child: Text("Loading"),
+              ),
+            );
 
-                              context.read<InfoChangesBloc>().add(
-                                  InfoAddNewUserEvent(
-                                      myUser: MyUser(
-                                          uid: state.message,
-                                          name: _nameController.text,
-                                          email: args["email"]!,
-                                          password: args["password"]!,
-                                          phoneNumber: _phoneController.text,
-                                          address: _addressController.text,
-                                          base64Image: base64.encode(bytes))));
-                            },
-                            child: Container(
-                                height: size.height * 0.05,
-                                width: size.width * 0.4,
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFF3366FF),
-                                        Color(0xFF00CCFF),
-                                      ],
-                                      begin: FractionalOffset(0.0, 0.0),
-                                      end: FractionalOffset(1.0, 0.0),
-                                      stops: [0.0, 1.0],
-                                      tileMode: TileMode.clamp),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                      child: Text(
-                                    "Submit",
-                                    style: TextStyle(fontSize: 16),
-                                  )),
+          case LogInStatus.loaded:
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text("Sign up"),
+                centerTitle: true,
+              ),
+              body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      // ignore: prefer_const_constructors
+                      AvatarPicker(),
+                      TextInputField(
+                          text: "Enter your name",
+                          type: TextInputType.phone,
+                          prefixIcon: const Icon(Icons.text_fields),
+                          controller: _nameController),
+                      TextInputField(
+                          text: "Enter your Address",
+                          type: TextInputType.name,
+                          prefixIcon: const Icon(Icons.email),
+                          controller: _addressController),
+                      TextInputField(
+                          text: "Enter your phone number",
+                          type: TextInputType.phone,
+                          prefixIcon: const Icon(Icons.phone),
+                          controller: _phoneController),
+                      BlocListener<InfoChangesBloc, InfoChangesState>(
+                        listener: (context, state) {
+                          if (state.changesStage == ChangesStage.success) {
+                            Navigator.pushNamed(
+                              context,
+                              '/home',
+                            );
+                          }
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            final bytes = context
+                                .read<ImageCubit>()
+                                .state!
+                                .readAsBytesSync();
+
+                            context.read<InfoChangesBloc>().add(
+                                InfoAddNewUserEvent(
+                                    myUser: MyUser(
+                                        uid: state.message,
+                                        name: _nameController.text,
+                                        email: args["email"]!,
+                                        password: args["password"]!,
+                                        phoneNumber: _phoneController.text,
+                                        address: _addressController.text,
+                                        base64Image: base64.encode(bytes))));
+                          },
+                          child: Container(
+                              height: size.height * 0.05,
+                              width: size.width * 0.4,
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF3366FF),
+                                      Color(0xFF00CCFF),
+                                    ],
+                                    begin: FractionalOffset(0.0, 0.0),
+                                    end: FractionalOffset(1.0, 0.0),
+                                    stops: [0.0, 1.0],
+                                    tileMode: TileMode.clamp),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                    child: Text(
+                                  "Submit",
+                                  style: TextStyle(fontSize: 16),
                                 )),
-                          ),
+                              )),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            }
+              ),
+            );
           default:
-            {
-              return const Scaffold(
-                body: Icon(
-                  Icons.error,
-                  size: 150,
-                ),
-              );
-            }
+            return const Scaffold(
+              body: Icon(
+                Icons.error,
+                size: 150,
+              ),
+            );
         }
       },
     );

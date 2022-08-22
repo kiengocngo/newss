@@ -10,8 +10,8 @@ class InfoChangesBloc extends Bloc<InfoChangesEvent, InfoChangesState> {
   InfoChangesBloc() : super(InfoChangesState.init()) {
     on<InfoAddNewUserEvent>((event, emit) async {
       emit(InfoChangesState.loading());
-      bool status = await _instance.addNewUser(event.myUser);
-      if (status == true) {
+      String status = await _instance.addNewUser(event.myUser);
+      if (status == "Success") {
         emit(InfoChangesState.success(event.myUser));
       } else {
         emit(InfoChangesState.error());

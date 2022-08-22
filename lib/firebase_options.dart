@@ -4,22 +4,15 @@ import 'package:flutter/foundation.dart'
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
-    } else {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.android:
-          return android;
-        case TargetPlatform.iOS:
-          return ios;
-        default:
-          throw UnsupportedError(
-            'DefaultFirebaseOptions are not supported for this platform.',
-          );
-      }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      default:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions are not supported for this platform.',
+        );
     }
   }
 

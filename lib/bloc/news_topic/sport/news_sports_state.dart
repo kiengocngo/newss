@@ -8,7 +8,7 @@ class NewsSportsState extends Equatable {
   final List<Results> results;
 
   const NewsSportsState({
-    this.status = NewsStatus.loading,
+    this.status = NewsStatus.initial,
     this.results = const <Results>[],
     required this.error,
   });

@@ -89,6 +89,7 @@ class SignUpScreen extends StatelessWidget {
                                         password: args["password"]!,
                                         phoneNumber: _phoneController.text,
                                         address: _addressController.text,
+                                        friends: [],
                                         base64Image: base64.encode(bytes))));
                           },
                           child: Container(

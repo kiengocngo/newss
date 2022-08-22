@@ -7,6 +7,7 @@ import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
 import 'package:news_app/cubit/image_cubit.dart';
 
 import 'package:news_app/src/components/input_text/text_field.dart';
+import 'package:news_app/src/models/my_user.dart';
 
 import 'components/avatar_picker.dart';
 
@@ -70,7 +71,7 @@ class SignUpScreen extends StatelessWidget {
                             if (state.changesStage == ChangesStage.success) {
                               Navigator.pushNamed(
                                 context,
-                                '/conversations',
+                                '/home',
                               );
                             }
                           },
@@ -83,13 +84,14 @@ class SignUpScreen extends StatelessWidget {
 
                               context.read<InfoChangesBloc>().add(
                                   InfoAddNewUserEvent(
-                                      uid: state.message,
-                                      name: _nameController.text,
-                                      email: args["email"]!,
-                                      password: args["password"]!,
-                                      phoneNumber: _phoneController.text,
-                                      address: _addressController.text,
-                                      base64Image: base64.encode(bytes)));
+                                      myUser: MyUser(
+                                          uid: state.message,
+                                          name: _nameController.text,
+                                          email: args["email"]!,
+                                          password: args["password"]!,
+                                          phoneNumber: _phoneController.text,
+                                          address: _addressController.text,
+                                          base64Image: base64.encode(bytes))));
                             },
                             child: Container(
                                 height: size.height * 0.05,

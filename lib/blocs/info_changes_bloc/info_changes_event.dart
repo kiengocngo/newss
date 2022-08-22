@@ -23,26 +23,14 @@ class InfoGetCurrentUser extends InfoChangesEvent {
 
 class InfoAddNewUserEvent extends InfoChangesEvent {
   // se doi thanh model User
-  final String uid;
-  final String name;
-  final String email;
-  final String password;
-  final String phoneNumber;
-  final String address;
-  final String base64Image;
+  final MyUser myUser;
   const InfoAddNewUserEvent({
-    required this.uid,
-    required this.name,
-    required this.email,
-    required this.password,
-    required this.phoneNumber,
-    required this.address,
-    required this.base64Image,
+    required this.myUser,
   });
 
   @override
   List<Object> get props =>
-      [uid, name, email, password, phoneNumber, address, base64Image];
+      [myUser];
 }
 
 class ChangeUserInfoEvent extends InfoChangesEvent {

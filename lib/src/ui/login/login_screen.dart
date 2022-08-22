@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                       case LogInStatus.loaded:
                         {
                           log("loaded");
-                          Navigator.pushNamed(context, '/conversations');
+                          Navigator.pushNamed(context, '/home');
                         }
                         break;
                       case LogInStatus.error:

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/src/ui/chat/conversation.dart';
-import 'package:news_app/src/ui/chat/details.dart';
+import 'package:news_app/src/ui/home/home_screen.dart';
 import 'package:news_app/src/ui/login/login_screen.dart';
 import 'package:news_app/src/ui/sign_up/sign_up_info.dart';
 import 'package:news_app/src/ui/sign_up/sign_up_name_pass.dart';
@@ -12,7 +11,7 @@ class AppRoutes {
           args: const {},
         ),
     '/log_in': (context) => LoginScreen(),
-    '/conversations': (context) => const ConversationScreen(),
-    '/details': (context) => DetailsScreen(userUid: "", friendUid: ""),
+    '/home':(context) => HomeScreen(),
+
   };
 }

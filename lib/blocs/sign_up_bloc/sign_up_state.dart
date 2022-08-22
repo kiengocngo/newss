@@ -14,7 +14,7 @@ class SignUpState extends Equatable {
   SignUpState.init()
       : this(
           signUpStatus: SignUpStatus.init,
-          message: "init",
+          message: "",
         );
 
   SignUpState.loading()

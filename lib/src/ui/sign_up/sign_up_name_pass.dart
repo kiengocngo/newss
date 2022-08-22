@@ -74,9 +74,7 @@ class SignUpMailPass extends StatelessWidget {
                         context.read<LogInBloc>().add(LogInSubmitEvent(
                             email: _emailController.text,
                             password: _passwordController.text));
-                        context.read<LogInBloc>().add(LogInSubmitEvent(
-                            email: _emailController.text,
-                            password: _passwordController.text));
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -89,7 +87,22 @@ class SignUpMailPass extends StatelessWidget {
                       break;
                     case SignUpStatus.error:
                       {
-                        //show Dialog
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("please check our password"),
+                                content: const Text(
+                                    "the password and the reenter password are not the same"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Cancel'),
+                                    child: const Text('Cancel'),
+                                  ),
+                                ],
+                              );
+                            });
                       }
                       break;
                     default:

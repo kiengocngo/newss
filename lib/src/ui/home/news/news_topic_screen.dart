@@ -50,7 +50,7 @@ class _NewsTopicScreenState extends State<NewsTopicScreen>
           ),
           elevation: 0.25,
           backgroundColor: Colors.white,
-          bottom: TabBar(
+          title: TabBar(
             unselectedLabelColor: NewsColor.bgTextForm,
             isScrollable: true,
             indicator: BoxDecoration(
@@ -79,7 +79,7 @@ class _NewsTopicScreenState extends State<NewsTopicScreen>
                 height: 10,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: MediaQuery.of(context).size.height * 0.8,
                 child: const TabBarView(children: [
                   BuildNewsSport(),
                   BuildTechnology(),

@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: _buildNewsItem1(context),
               ),
               const SizedBox(
@@ -153,16 +153,20 @@ Widget _buildNewsItem1(BuildContext context) {
           if (state.results.isEmpty) {
             return const Text('no data');
           }
-          return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 10,
-                );
-              },
+          return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 6, mainAxisSpacing: 6),
               itemCount: state.results.length,
-              itemBuilder: (context, index) =>
-                  NewsTopicItems(results: state.results[index], onTap: () {}));
+              itemBuilder: (context, index) => NewsTopicItems(
+                  results: state.results[index],
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => DetailNewsScreen(
+                                  results: state.results[index],
+                                )));
+                  }));
         default:
           return const Center(
             child: CircularProgressIndicator(),

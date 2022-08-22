@@ -38,7 +38,7 @@ class MyUser {
   }
   toJson() {
     return {
-      "uid": this.uid,
+      "uid": uid,
       "name": name,
       "email": email,
       "password": password,

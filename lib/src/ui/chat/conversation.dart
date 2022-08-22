@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'package:news_app/src/components/constant.dart';
+=======
+import 'package:flutter_bloc/flutter_bloc.dart';
+>>>>>>> Stashed changes
 
+import '../../../blocs/conversations_bloc/conversations_bloc.dart';
 import 'components/recent_conversation.dart';
 
 class ConversationScreen extends StatelessWidget {
@@ -45,6 +50,7 @@ class ConversationScreen extends StatelessWidget {
                   ),
                 ),
               ),
+<<<<<<< Updated upstream
               SizedBox(
                 height: size.height * 0.7,
                 child: ListView.builder(
@@ -60,6 +66,23 @@ class ConversationScreen extends StatelessWidget {
               ),
             ],
           ),
+=======
+            ),
+            BlocBuilder<ConversationsBloc, ConversationsState>(
+              builder: (context, conState) {
+                return SizedBox(
+                  height: size.height * 0.7,
+                  child: ListView.builder(
+                    itemCount: conState,
+                    itemBuilder: ((context, index) {
+                      return const RecentConversation();
+                    }),
+                  ),
+                );
+              },
+            ),
+          ],
+>>>>>>> Stashed changes
         ),
       ),
     );

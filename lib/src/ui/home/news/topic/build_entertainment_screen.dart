@@ -29,6 +29,8 @@ class _BuildEntertainmentState extends State<BuildEntertainment>
     return BlocBuilder<NewsEntertainmentCubit, NewsEntertainmentState>(
         builder: (context, state) {
       switch (state.status) {
+        case NewsStatus.initial:
+          return const CircularProgressIndicator();
         case NewsStatus.failure:
           return Center(
             child: Text(state.error),

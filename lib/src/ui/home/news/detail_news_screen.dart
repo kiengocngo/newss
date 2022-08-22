@@ -68,7 +68,7 @@ class _DetailNewsScreenState extends State<DetailNewsScreen>
           child: Container(
             decoration: BoxDecoration(color: containerColorAnimation.value),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

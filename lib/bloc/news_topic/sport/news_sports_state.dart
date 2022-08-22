@@ -2,26 +2,32 @@ import 'package:equatable/equatable.dart';
 import 'package:news_app/bloc/news/news_status.dart';
 import 'package:news_app/src/models/news/results_model.dart';
 
-class NewsTopicsState extends Equatable {
+class NewsSportsState extends Equatable {
   final NewsStatus status;
   final String error;
   final List<Results> results;
-  const NewsTopicsState(
-      {this.status = NewsStatus.initial,
-      this.results = const <Results>[],
-      required this.error});
 
-  NewsTopicsState copyWith({
+  const NewsSportsState({
+    this.status = NewsStatus.initial,
+    this.results = const <Results>[],
+    required this.error,
+  });
+
+  NewsSportsState copyWith({
     NewsStatus? status,
     String? error,
     List<Results>? results,
   }) {
-    return NewsTopicsState(
+    return NewsSportsState(
         status: status ?? this.status,
         results: results ?? this.results,
         error: error ?? this.error);
   }
 
   @override
-  List<Object?> get props => [status, results, error];
+  List<Object?> get props => [
+        status,
+        results,
+        error,
+      ];
 }

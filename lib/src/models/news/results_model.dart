@@ -5,7 +5,6 @@ class Results {
   final String? description;
   final String? imageUrl;
   final List<String> category;
- 
 
   String? pubDate;
   Results(
@@ -15,7 +14,6 @@ class Results {
       required this.content,
       required this.link,
       required this.category,
-      
       this.pubDate});
 
   factory Results.fromJson(Map<String, dynamic> json) {
@@ -25,12 +23,8 @@ class Results {
       imageUrl: json['image_url'] != null ? (json['image_url']) : null,
       content: json['content'] != null ? (json['content']) : null,
       link: json['link'],
-
-          
       category: json['category'].cast<String>(),
       pubDate: json['pubDate'],
     );
   }
 }
-
- 

@@ -6,8 +6,7 @@ abstract class SignUpEvent extends Equatable {
 }
 
 class SignUpEventInit extends SignUpEvent {
-  @override
-  List<Object?> get props => [];
+  SignUpEventInit();
 }
 
 class SignUpSubmitEvent extends SignUpEvent {

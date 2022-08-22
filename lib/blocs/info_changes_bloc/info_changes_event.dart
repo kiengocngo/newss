@@ -2,12 +2,12 @@ part of 'info_changes_bloc.dart';
 
 abstract class InfoChangesEvent extends Equatable {
   const InfoChangesEvent();
+  @override
+  List<Object> get props => [];
 }
 
 class InfoChangesInitEvent extends InfoChangesEvent {
   const InfoChangesInitEvent();
-  @override
-  List<Object> get props => [];
 }
 
 class InfoGetCurrentUser extends InfoChangesEvent {

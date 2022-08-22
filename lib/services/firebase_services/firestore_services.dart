@@ -51,6 +51,10 @@ class FireStoreService {
     });
   }
 
+  getAllUser() async{
+    return _instance.collection("Users").get();
+  }
+
   getChats(String sender, String receiver) async {}
 
   Future<QuerySnapshot<Map<String, dynamic>>> getConversations(

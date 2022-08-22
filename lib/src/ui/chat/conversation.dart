@@ -11,6 +11,7 @@ class ConversationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ConversationsBloc>().add(ConversationSubmit(currentUser: "1"));
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -52,12 +53,12 @@ class ConversationScreen extends StatelessWidget {
                   return SizedBox(
                     height: size.height * 0.7,
                     child: ListView.builder(
-                      itemCount: 100,
+                      itemCount: state.conversations.length,
                       itemBuilder: ((context, index) {
                         return RecentConversation(
-                          conversationsUserName: '2',
-                          userImage: Constant.base64Image,
-                          message: "Hello",
+                          conversationsUserName: state.conversations[index].receiverId,
+                          userImage: state.conversations[index].receiverBase64Image,
+                          message: state.conversations[index].message,
                         );
                       }),
                     ),

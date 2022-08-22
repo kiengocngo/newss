@@ -40,7 +40,7 @@ class RecentConversation extends StatelessWidget {
                   size: const Size(50, 50), // Image radius
                   child: Image.memory(
                     base64.decode(
-                      Constant.base64Image,
+                      userImage,
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -50,18 +50,19 @@ class RecentConversation extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      const Align(
+                      Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            "Name",
+                            conversationsUserName,
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           )),
                       Text(
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        "Hello, this is a very long text that cant be display in screen, please click into detailssdasdasdasdasdasdasdasdasda",
+                        message,
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ],

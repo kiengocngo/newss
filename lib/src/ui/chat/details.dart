@@ -1,12 +1,10 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
-import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/ui/chat/components/receiver_message.dart';
 import 'package:news_app/src/ui/chat/components/sender_message.dart';
@@ -47,6 +45,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 },
                 builder: (context, state) {
                   if (state.chatStatus == ChatStatus.loaded) {
+                    bool showDate = true;
                     return ListView.builder(
                       reverse: false,
                       controller: widget._scrollController,
@@ -54,26 +53,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       itemBuilder: (context, index) {
                         if (state.chats[index].senderId == "1") {
                           {
-                            if (index == 0) {
-                              return Column(
-                                children: [
-                                  SenderMessage(
-                                      sendMessage: state.chats[index].message),
-                                  const Text(
-                                    "19/8/2022",
-                                    style: TextStyle(color: Colors.white),
+                            return Column(
+                              children: [
+                                SenderMessage(
+                                    sendMessage: state.chats[index].message),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    DateFormat.yMd().add_jm().format(
+                                        state.chats[index].timeStamp.toDate()),
+                                    style: const TextStyle(color: Colors.white),
                                   ),
-                                ],
-                              );
-                            } else {
-                              return SenderMessage(
-                                  sendMessage: state.chats[index].message);
-                            }
+                                ),
+                              ],
+                            );
                           }
                         } else {
-                          return ReceiverMessage(
-                              sendMessage: state.chats[index].message,
-                              base64Image: Constant.base64Image);
+                          return Column(
+                            
+                            children: [
+                              Text(
+                                DateFormat.yMd().add_jm().format(
+                                    state.chats[index].timeStamp.toDate()),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              ReceiverMessage(
+                                  sendMessage: state.chats[index].message,
+                                  base64Image: Constant.base64Image),
+                            ],
+                          );
                         }
                       },
                     );
@@ -111,8 +119,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 timestamp: Timestamp.now()));
                         context.read<ChatsBloc>().add(
                               ChatAddGetMessageEvent(
-                                sender: "1",
-                                receiver: "2",
+                                sender: "2",
+                                receiver: "1",
                                 message: _sendController.text,
                               ),
                             );

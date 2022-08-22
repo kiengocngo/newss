@@ -30,7 +30,7 @@ class ReceiverMessage extends StatelessWidget {
                   size: const Size(15, 15), // Image radius
                   child: Image.memory(
                     base64.decode(
-                      Constant.base64Image,
+                      base64Image,
                     ),
                     fit: BoxFit.cover,
                   ),

@@ -119,8 +119,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 timestamp: Timestamp.now()));
                         context.read<ChatsBloc>().add(
                               ChatAddGetMessageEvent(
-                                sender: "2",
-                                receiver: "1",
+                                sender: "1",
+                                receiver: "2",
                                 message: _sendController.text,
                               ),
                             );

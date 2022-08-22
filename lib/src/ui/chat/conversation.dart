@@ -60,8 +60,10 @@ class ConversationScreen extends StatelessWidget {
                                   state.conversations[index].senderId
                               ? state.conversations[index].receiverName
                               : state.conversations[index].senderName,
-                          userImage:
-                              state.conversations[index].receiverBase64Image,
+                          userImage: state.currentUser ==
+                                  state.conversations[index].senderId ?
+                              state.conversations[index].receiverBase64Image:
+                              state.conversations[index].senderBase64Image,
                           message: state.conversations[index].message,
                         );
                       }),

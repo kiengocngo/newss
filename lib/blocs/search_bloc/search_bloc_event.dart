@@ -12,8 +12,6 @@ abstract class SearchBlocSubmit extends SearchBlocEvent {
   SearchBlocSubmit({
     required this.name,
   });
-   @override
+  @override
   List<Object> get props => [name];
-
-
 }

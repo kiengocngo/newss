@@ -6,15 +6,8 @@ import 'package:news_app/bloc/news/news_status.dart';
 import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
 import 'package:news_app/src/ui/home/news/topic/topic_items.dart';
 
-class Page1 extends StatefulWidget {
+class Page1 extends StatelessWidget {
   const Page1({Key? key}) : super(key: key);
-
-  @override
-  State<Page1> createState() => _Page1State();
-}
-
-class _Page1State extends State<Page1> {
-  
 
   @override
   Widget build(BuildContext context) {

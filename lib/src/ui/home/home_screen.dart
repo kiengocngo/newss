@@ -33,19 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: NewsColor.textWhite,
-        actions: [
-          InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed('/search');
-              },
-              child: const Padding(
-                padding: EdgeInsets.only(right: 16.0),
-                child: Icon(
-                  CupertinoIcons.search,
-                  color: NewsColor.searchIcon,
-                ),
-              )),
-        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -107,7 +94,12 @@ Widget _buildNewsItem(BuildContext context) {
             itemBuilder: (context, index) => NewsItems(
                 results: state.results[index],
                 onTap: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailNewsScreen(results: state.results[index],)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailNewsScreen(
+                                results: state.results[index],
+                              )));
                 }),
           );
         default:

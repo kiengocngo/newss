@@ -13,7 +13,8 @@ class BuildEntertainment extends StatefulWidget {
   State<BuildEntertainment> createState() => _BuildEntertainmentState();
 }
 
-class _BuildEntertainmentState extends State<BuildEntertainment> with AutomaticKeepAliveClientMixin{
+class _BuildEntertainmentState extends State<BuildEntertainment>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
   @override

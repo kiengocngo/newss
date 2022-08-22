@@ -93,7 +93,7 @@ Widget _buildNewsItem(BuildContext context) {
       switch (state.status) {
         case NewsStatus.failure:
           return Text(state.error);
-        case NewsStatus.success :
+        case NewsStatus.success:
           if (state.results.isEmpty) {
             return const Text('no data');
           }

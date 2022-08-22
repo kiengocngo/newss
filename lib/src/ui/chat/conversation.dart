@@ -56,8 +56,12 @@ class ConversationScreen extends StatelessWidget {
                       itemCount: state.conversations.length,
                       itemBuilder: ((context, index) {
                         return RecentConversation(
-                          conversationsUserName: state.conversations[index].receiverId,
-                          userImage: state.conversations[index].receiverBase64Image,
+                          conversationsUserName: state.currentUser ==
+                                  state.conversations[index].senderId
+                              ? state.conversations[index].receiverName
+                              : state.conversations[index].senderName,
+                          userImage:
+                              state.conversations[index].receiverBase64Image,
                           message: state.conversations[index].message,
                         );
                       }),

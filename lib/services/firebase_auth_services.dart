@@ -1,18 +1,18 @@
+import 'dart:html';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news_app/src/models/auth_response.dart';
 
 class FirebaseAuthServices {
   final FirebaseAuth _instance = FirebaseAuth.instance;
-  Future<String> signUp(String email, String password) async {
+  Future<SignUpResponse> signUp(String email, String password) async {
     try {
-      await _instance.createUserWithEmailAndPassword(
+     UserCredential userCredential = await _instance.createUserWithEmailAndPassword(
           email: email, password: password);
-      return "Success";
+      return SignUpResponse(isSuccess: true,uid: userCredential.user!.uid);
     } on FirebaseAuthException catch (e) {
-      return e.code;
-    } catch (e) {
-      return e.toString();
-    }
+       return SignUpResponse(isSuccess:false,uid: e.code); 
+    } 
   }
 
   Future<AuthResponse> signIn(String email, String password) async {

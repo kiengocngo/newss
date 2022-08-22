@@ -23,7 +23,7 @@ class FireStoreService {
         "dateTime": time,
       });
       return "Success";
-    } on FirebaseException catch (e)  {
+    } on FirebaseException catch (e) {
       return e.code;
     }
   }

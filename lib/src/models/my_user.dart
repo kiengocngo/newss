@@ -16,6 +16,16 @@ class MyUser {
     required this.base64Image,
   });
 
+  factory MyUser.defaultUser() {
+    return MyUser(
+        uid: "uid",
+        name: "name",
+        email: "email",
+        password: "password",
+        phoneNumber: "phoneNumber",
+        address: "address",
+        base64Image: "base64Image");
+  }
   factory MyUser.fromJson(Map<String, dynamic> json) {
     return MyUser(
         uid: json["uid"],

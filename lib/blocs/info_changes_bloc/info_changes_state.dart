@@ -12,38 +12,11 @@ class InfoChangesState extends Equatable {
   });
 
   InfoChangesState.init()
-      : this(
-            changesStage: ChangesStage.init,
-            myUser: MyUser(
-                uid: "",
-                name: "",
-                email: "",
-                password: "",
-                phoneNumber: "",
-                address: "",
-                base64Image: ""));
+      : this(changesStage: ChangesStage.init, myUser: MyUser.defaultUser());
   InfoChangesState.loading()
-      : this(
-            changesStage: ChangesStage.loading,
-            myUser: MyUser(
-                uid: "",
-                name: "",
-                email: "",
-                password: "",
-                phoneNumber: "",
-                address: "",
-                base64Image: ""));
+      : this(changesStage: ChangesStage.loading, myUser: MyUser.defaultUser());
   InfoChangesState.error()
-      : this(
-            changesStage: ChangesStage.error,
-            myUser: MyUser(
-                uid: "",
-                name: "",
-                email: "",
-                password: "",
-                phoneNumber: "",
-                address: "",
-                base64Image: ""));
+      : this(changesStage: ChangesStage.error, myUser: MyUser.defaultUser());
   InfoChangesState.success(MyUser user)
       : this(changesStage: ChangesStage.success, myUser: user);
   @override

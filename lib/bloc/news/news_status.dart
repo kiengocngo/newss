@@ -1,1 +1,1 @@
-enum NewsStatus { initial, loading, success, failure }
+enum NewsStatus { initial, success, failure }

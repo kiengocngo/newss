@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        initialRoute: '/news_topic',
+        initialRoute: '/home',
         routes: AppRoutes.routes,
       ),
     );

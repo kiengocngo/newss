@@ -13,14 +13,13 @@ class NewsTopicsCubit extends Cubit<NewsTopicsState> {
 
   Future<void> getNews() async {
     final base = await DioClient().fetchNewsForYou();
-    if (state.status == NewsStatus.initial ||
-        state.status == NewsStatus.success) {
-      return emit(
-          state.copyWith(status: NewsStatus.success, results: base.data));
+    if (base.data != null) {
+      emit(state.copyWith(status: NewsStatus.success, results: base.data));
+    } else {
+      emit(state.copyWith(
+        status: NewsStatus.failure,
+        error: base.error,
+      ));
     }
-    return emit(state.copyWith(
-      status: NewsStatus.failure,
-      error: base.error,
-    ));
   }
 }

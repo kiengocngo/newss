@@ -6,10 +6,6 @@ abstract class InfoChangesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class InfoChangesInitEvent extends InfoChangesEvent {
-  const InfoChangesInitEvent();
-}
-
 class InfoGetCurrentUser extends InfoChangesEvent {
   final String uid;
   const InfoGetCurrentUser({

@@ -9,7 +9,7 @@ class Page3Cubit extends Cubit<NewsState> {
   final Dio dio;
 
   Future<void> getNews() async {
-    final base = await DioClient().fetchNewsPage2();
+    final base = await DioClient().fetchNewsPage(3);
 
     if (state.status == NewsStatus.initial) {
       return emit(

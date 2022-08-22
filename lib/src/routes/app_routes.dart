@@ -11,7 +11,6 @@ class AppRoutes {
           args: const {},
         ),
     '/log_in': (context) => LoginScreen(),
-    '/home':(context) => HomeScreen(),
-
+    '/home': (context) => HomeScreen(),
   };
 }

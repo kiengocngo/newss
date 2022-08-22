@@ -27,12 +27,14 @@ class MyUser {
         base64Image: json["base64Image"]);
   }
   toJson() {
-    return {"uid":this.uid,
-    "name": name,
-    "email":email,
-    "password":password,
-    "phoneNumber":phoneNumber,
-    "address":address,
-    "base64Image":base64Image};
+    return {
+      "uid": this.uid,
+      "name": name,
+      "email": email,
+      "password": password,
+      "phoneNumber": phoneNumber,
+      "address": address,
+      "base64Image": base64Image
+    };
   }
 }

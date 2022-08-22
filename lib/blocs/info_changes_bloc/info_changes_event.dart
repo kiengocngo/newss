@@ -29,8 +29,7 @@ class InfoAddNewUserEvent extends InfoChangesEvent {
   });
 
   @override
-  List<Object> get props =>
-      [myUser];
+  List<Object> get props => [myUser];
 }
 
 class ChangeUserInfoEvent extends InfoChangesEvent {

@@ -7,12 +7,12 @@ class FirebaseAuthServices {
   final FirebaseAuth _instance = FirebaseAuth.instance;
   Future<SignUpResponse> signUp(String email, String password) async {
     try {
-     UserCredential userCredential = await _instance.createUserWithEmailAndPassword(
-          email: email, password: password);
-      return SignUpResponse(isSuccess: true,uid: userCredential.user!.uid);
+      UserCredential userCredential = await _instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      return SignUpResponse(isSuccess: true, uid: userCredential.user!.uid);
     } on FirebaseAuthException catch (e) {
-       return SignUpResponse(isSuccess:false,uid: e.code); 
-    } 
+      return SignUpResponse(isSuccess: false, uid: e.code);
+    }
   }
 
   Future<AuthResponse> signIn(String email, String password) async {

@@ -20,7 +20,7 @@ class UpdateResponse {
   bool isSuccess;
   String message;
   UpdateResponse({
-   required this.isSuccess ,
-   required this.message,
+    required this.isSuccess,
+    required this.message,
   });
 }

@@ -9,8 +9,6 @@ abstract class LogInEvent extends Equatable {
 
 class LogInEventInit extends LogInEvent {
   const LogInEventInit();
-  @override
-  List<Object> get props => [];
 }
 
 class LogInSubmitEvent extends LogInEvent {
@@ -27,6 +25,4 @@ class LogInSubmitEvent extends LogInEvent {
 
 class LogInSignOutEvent extends LogInEvent {
   const LogInSignOutEvent();
-  @override
-  List<Object> get props => [];
 }

@@ -10,7 +10,6 @@ part 'info_changes_state.dart';
 class InfoChangesBloc extends Bloc<InfoChangesEvent, InfoChangesState> {
   final FireStoreService _instance = FireStoreService();
   InfoChangesBloc() : super(InfoChangesState.init()) {
-    on<InfoChangesEvent>((event, emit) {});
     on<InfoAddNewUserEvent>((event, emit) async {
       emit(InfoChangesState.loading());
       bool status = await _instance.addNewUser(event.myUser);

@@ -6,12 +6,6 @@ import 'package:news_app/services/firebase_auth_services.dart';
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final FirebaseAuthServices _authServices = FirebaseAuthServices();
   SignUpBloc() : super(SignUpState.init()) {
-    on<SignUpEvent>((event, emit) {
-      emit(SignUpState.init());
-    });
-    on<SignUpEventInit>((event, emit) {
-      emit(SignUpState.init());
-    });
     on<SignUpSubmitEvent>((event, emit) async {
       emit(SignUpState.loading());
       if (event.password != event.reEnterPassword) {

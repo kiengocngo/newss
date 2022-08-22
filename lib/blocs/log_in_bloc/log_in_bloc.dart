@@ -9,7 +9,6 @@ part 'log_in_state.dart';
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final FirebaseAuthServices _firebaseAuthServices = FirebaseAuthServices();
   LogInBloc() : super(LogInState.init()) {
-    on<LogInEvent>((event, emit) {});
     on<LogInSubmitEvent>((event, emit) async {
       emit(LogInState.loading());
       AuthResponse result =

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class HobbiesScreen extends StatelessWidget {
   const HobbiesScreen({Key? key}) : super(key: key);
 

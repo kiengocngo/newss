@@ -17,5 +17,4 @@ class NewsColor {
   static const Color lineGreen = Color.fromARGB(255, 37, 246, 135);
   //icon
   static const Color searchIcon = Color.fromARGB(255, 66, 64, 64);
-
 }

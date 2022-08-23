@@ -91,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                                         address: _addressController.text,
                                         friends: [],
                                         base64Image: base64.encode(bytes))));
-                                        Navigator.pushNamed(context, "home");
+                            Navigator.pushNamed(context, "home");
                           },
                           child: Container(
                               height: size.height * 0.05,

@@ -42,7 +42,6 @@ class DioClient {
     }
   }
 
-<<<<<<< HEAD
   Future<BaseModel> fetchNewsForYou() async {
     try {
       final response = await _dio
@@ -60,12 +59,20 @@ class DioClient {
     try {
       final response =
           await _dio.get('/news', queryParameters: {"category": category});
-=======
+      var news = News.fromJson(response.data);
+      List<Results>? listResults = news.results;
+      return BaseModel(data: listResults);
+    } on DioError catch (err) {
+      final errorMesage = DioException.fromDioError(err).toString();
+      return BaseModel(data: null, error: errorMesage);
+    }
+  }
+
   Future<BaseModel> fetchNewsWithTopics(String topic) async {
     try {
       final response =
           await _dio.get('/news', queryParameters: {"category": topic});
->>>>>>> main
+
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);

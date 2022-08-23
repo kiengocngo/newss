@@ -17,9 +17,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       SignUpResponse result =
           await _authServices.signUp(event.email, event.password);
       if (result.isSuccess == true) {
-        emit(SignUpState.loaded(result));
+        emit(SignUpState.loaded(result.uid));
       } else {
-        emit(SignUpState.error(result));
+        emit(SignUpState.error(result.uid));
       }
     });
   }

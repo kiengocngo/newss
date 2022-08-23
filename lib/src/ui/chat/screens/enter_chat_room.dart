@@ -10,7 +10,7 @@ class EnterChatRoom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Enter uid"),
+        title: const Text("Enter uid"),
         centerTitle: true,
       ),
       body: Center(
@@ -19,7 +19,7 @@ class EnterChatRoom extends StatelessWidget {
             TextInputField(
                 text: "Enter user uid",
                 type: TextInputType.text,
-                prefixIcon: Icon(Icons.text_fields),
+                prefixIcon: const Icon(Icons.text_fields),
                 controller: _controller),
             ElevatedButton(
                 onPressed: () {

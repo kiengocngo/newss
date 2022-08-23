@@ -14,6 +14,7 @@ class FriendSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -67,12 +68,18 @@ class FriendSearch extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: state.users.length,
                         itemBuilder: (context, index) {
-                          return UserInfo(userName: state.users[index].name, userImage: state.users[index].base64Image,);
+                          return UserInfo(
+                            userName: state.users[index].name,
+                            userImage: state.users[index].base64Image,
+                          );
                         },
                       ),
                     );
                   default:
-                    return const Text("error");
+                    return const Text(
+                      "error",
+                      style: TextStyle(color: Colors.white),
+                    );
                 }
               },
             ),

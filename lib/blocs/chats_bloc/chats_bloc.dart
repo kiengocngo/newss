@@ -29,7 +29,6 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
                   message: data.docs[i].data()["message"]));
             }
           }
-          print(tmp.length);
           emit(ChatsState.loaded(tmp));
 
           //  log(tmp.toString());

@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../../../components/constant.dart';
-
 // ignore: must_be_immutable
 class ReceiverMessage extends StatelessWidget {
   String sendMessage;

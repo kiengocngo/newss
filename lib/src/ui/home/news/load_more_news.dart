@@ -28,12 +28,7 @@ class _LoadMoreNewsState extends State<LoadMoreNews> {
     });
   }
 
-  Future refresh() async {
-    const Duration(seconds: 3);
-    setState(() {
-      _newsList();
-    });
-  }
+  Future refresh() async {}
 
   @override
   void initState() {

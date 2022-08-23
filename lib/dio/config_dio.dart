@@ -3,7 +3,6 @@ import 'package:news_app/dio/dio_exception.dart';
 import 'package:news_app/src/models/base_model.dart';
 import 'package:news_app/src/models/news/news_model.dart';
 import 'package:news_app/src/models/news/results_model.dart';
-
 import 'end_point.dart';
 
 class DioClient {
@@ -31,15 +30,15 @@ class DioClient {
     }
   }
 
-  Future<BaseModel> fetchNewsPage(int page) async {
+  Future<List<Results>> fetchNewsPage(int page) async {
     try {
       final response = await _dio.get('/news', queryParameters: {'page': page});
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
-      return BaseModel(data: listResults);
+      return listResults;
     } on DioError catch (err) {
       final errorMesage = DioException.fromDioError(err).toString();
-      return BaseModel(data: null, error: errorMesage);
+      throw errorMesage;
     }
   }
 

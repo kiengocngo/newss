@@ -6,7 +6,6 @@ import 'package:news_app/src/loaduri/load_url.dart';
 import 'package:news_app/src/components/news_item/topic_items.dart';
 import 'package:news_app/bloc/news_topic/technology/new_technology_state.dart';
 import 'package:news_app/bloc/news_topic/technology/news_technology_cubit.dart';
-import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
 
 class BuildTechnology extends StatefulWidget {
   const BuildTechnology({Key? key}) : super(key: key);

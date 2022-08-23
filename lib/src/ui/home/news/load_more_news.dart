@@ -28,6 +28,13 @@ class _LoadMoreNewsState extends State<LoadMoreNews> {
     });
   }
 
+  Future refresh() async {
+    const Duration(seconds: 3);
+    setState(() {
+      _newsList();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +59,10 @@ class _LoadMoreNewsState extends State<LoadMoreNews> {
           ),
         ),
       ),
-      body: _newsList(),
+      body: RefreshIndicator(
+        onRefresh: refresh,
+        child: _newsList(),
+      ),
     );
   }
 

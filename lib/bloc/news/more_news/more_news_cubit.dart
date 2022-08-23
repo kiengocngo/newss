@@ -6,7 +6,7 @@ import 'more_news_state.dart';
 class MoreNewsCubit extends Cubit<MoreNewsState> {
   MoreNewsCubit(this.dioClient) : super(NewsInitial());
   final DioClient dioClient;
-  int page = 1;
+  int page = 0;
 
   void loadPost() {
     if (state is NewsLoading) return;
@@ -15,11 +15,13 @@ class MoreNewsCubit extends Cubit<MoreNewsState> {
     if (currentState is NewsLoaded) {
       oloNews = currentState.results;
     }
-    emit(NewsLoading(oloNews, isFirstFetch: page == 1));
+    emit(NewsLoading(oloNews, isFirstFetch: page == 0));
     dioClient.fetchNewsPage(page).then((newNews) {
       page++;
       final results = (state as NewsLoading).oldNews;
-      results.addAll(newNews);
+      if (results.length <= 40) {
+        results.addAll(newNews);
+      }
       emit(NewsLoaded(results));
     });
   }

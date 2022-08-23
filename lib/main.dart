@@ -10,6 +10,7 @@ import 'package:news_app/bloc/news_topic/technology/news_technology_cubit.dart';
 import 'package:news_app/blocs/info_changes_bloc/info_changes_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
 import 'package:news_app/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:news_app/cubit/image_cubit.dart';
 import 'package:news_app/firebase_options.dart';
 import 'package:news_app/src/routes/app_routes.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<LogInBloc>(create: (context) => LogInBloc()),
         BlocProvider<SignUpBloc>(create: (context) => SignUpBloc()),
+         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
         BlocProvider<InfoChangesBloc>(create: (context) => InfoChangesBloc()),
         BlocProvider(create: (BuildContext context) => NewsCubit(dio: Dio())),
         BlocProvider(

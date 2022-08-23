@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<LogInBloc>(create: (context) => LogInBloc()),
         BlocProvider<SignUpBloc>(create: (context) => SignUpBloc()),
-         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
+        BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
         BlocProvider<InfoChangesBloc>(create: (context) => InfoChangesBloc()),
         BlocProvider(create: (BuildContext context) => NewsCubit(dio: Dio())),
         BlocProvider(
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(),
-        initialRoute: '/sign_up',
+        initialRoute: '/splash',
         routes: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
       ),

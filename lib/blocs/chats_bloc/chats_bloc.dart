@@ -16,14 +16,18 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
     on<ChatInitEvent>(
       (event, emit) async {
         await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
-            FireStoreResponse().getChats("1", "2"), onData: ((data) {
+            FireStoreResponse().getChats(event.senderId, event.receiverId),
+            onData: ((data) {
           List<Chat> tmp = [];
           for (int i = 0; i < data.docs.length; i++) {
-            tmp.add(Chat(
-                senderId: data.docs[i].data()["senderId"],
-                receiverId: data.docs[i].data()["receiverId"],
-                timeStamp: data.docs[i].data()["dateTime"],
-                message: data.docs[i].data()["message"]));
+            if ([event.senderId, event.receiverId]
+                .contains(data.docs[i].data()["receiverId"])) {
+              tmp.add(Chat(
+                  senderId: data.docs[i].data()["senderId"],
+                  receiverId: data.docs[i].data()["receiverId"],
+                  timeStamp: data.docs[i].data()["dateTime"],
+                  message: data.docs[i].data()["message"]));
+            }
           }
           print(tmp.length);
           emit(ChatsState.loaded(tmp));

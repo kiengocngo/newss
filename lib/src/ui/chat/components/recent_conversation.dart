@@ -7,15 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 
-import '../../../components/constant.dart';
-
 class RecentConversation extends StatelessWidget {
   String userImage;
+  String senderId;
+  String receiverId;
   String message;
   String conversationsUserName;
   RecentConversation({
     Key? key,
     required this.userImage,
+    required this.senderId,
+    required this.receiverId,
     required this.message,
     required this.conversationsUserName,
   }) : super(key: key);
@@ -25,12 +27,12 @@ class RecentConversation extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: BlocListener<ChatsBloc, ChatsState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         child: InkWell(
           onTap: () {
-            context.read<ChatsBloc>().add(ChatInitEvent());
+            context
+                .read<ChatsBloc>()
+                .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
             Navigator.pushNamed(context, "/details");
           },
           child: Row(

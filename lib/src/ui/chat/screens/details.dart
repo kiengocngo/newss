@@ -45,7 +45,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 },
                 builder: (context, state) {
                   if (state.chatStatus == ChatStatus.loaded) {
-                    bool showDate = true;
                     return ListView.builder(
                       reverse: false,
                       controller: widget._scrollController,

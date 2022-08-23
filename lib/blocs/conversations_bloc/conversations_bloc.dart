@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/models/recent_conversation.dart';
@@ -17,9 +16,7 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
       (event, emit) async {
         var data =
             await service.getConversations(event.senderId, event.receiverId);
-        print(data.docs.length);
         if (data.docs.isEmpty) {
-          print("go 2 add");
           service.addNewConversations(
               event.senderId,
               event.receiverId,
@@ -30,7 +27,6 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
               event.message,
               event.timestamp);
         } else {
-          print("go 2 fix");
           service.fixConversation(data.docs[0].id, event.message);
         }
         state.conversations.add(RecentConversation(
@@ -52,7 +48,10 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
           List<RecentConversation> tmp = [];
           for (int i = 0; i < data.docs.length; i++) {
             //add model from json
-            tmp.add(RecentConversation.fromJson(data.docs[i].data()));
+            if (data.docs[i].data()["senderId"] == event.currentUser ||
+                data.docs[i].data()["receiverId"] == event.currentUser) {
+              tmp.add(RecentConversation.fromJson(data.docs[i].data()));
+            }
           }
           emit(ConversationsState.loaded(event.currentUser, tmp));
         },

@@ -45,6 +45,7 @@ dependencies:
   bloc_concurrency: ^0.2.0
   date_format: ^2.0.6
   intl: ^0.17.0
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:

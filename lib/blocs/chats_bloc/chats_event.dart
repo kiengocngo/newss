@@ -8,9 +8,14 @@ abstract class ChatsEvent extends Equatable {
 }
 
 class ChatInitEvent extends ChatsEvent {
-  const ChatInitEvent();
+  final String senderId;
+  final String receiverId;
+  const ChatInitEvent({
+    required this.senderId,
+    required this.receiverId,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [senderId, receiverId];
 }
 
 // ignore: must_be_immutable

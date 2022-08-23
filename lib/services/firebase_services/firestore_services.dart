@@ -1,15 +1,25 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:news_app/src/models/auth_response.dart';
+import 'package:news_app/src/models/my_user.dart';
 
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 
   getUserByName(String name) async {
-    var data = await _instance
-        .collection("Users")
-        .where("name", isEqualTo: name)
-        .get();
-    log(data.docs[0].data()["name"]);
+    try {
+      var data = await _instance
+          .collection("Users")
+          .where("name", isEqualTo: name)
+          .get();
+      List<MyUser> tmp = [];
+      data.docs.forEach(
+        (element) => tmp.add(MyUser.fromJson(element.data())),
+      );
+      return SearchResponse(isSuccess: true, data: tmp);
+    } catch (e) {
+      return SearchResponse(isSuccess: false, data: []);
+    }
   }
 
   addNewChat(String sender, String receiver, String message) async {
@@ -51,14 +61,16 @@ class FireStoreService {
     });
   }
 
-  getAllUser() async{
+  getAllUser() async {
     return _instance.collection("Users").get();
   }
 
   getChats(String sender, String receiver) async {}
 
   Future<QuerySnapshot<Map<String, dynamic>>> getConversations(
-      String senderId, String receiverId) async {
+      // check lai query
+      String senderId,
+      String receiverId) async {
     var database = _instance.collection("Conversations");
     database
         .where("senderId", isEqualTo: senderId)

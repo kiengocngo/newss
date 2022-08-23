@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
+import 'package:news_app/blocs/friend_search_bloc/friend_search_bloc.dart';
 import 'package:news_app/firebase_options.dart';
 import 'package:news_app/src/routes/app_routes.dart';
 
@@ -21,13 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<FriendSearchBloc>(create: (context) => FriendSearchBloc()),
         BlocProvider<ChatsBloc>(create: (context) => ChatsBloc()),
         BlocProvider<ConversationsBloc>(
             create: (context) => ConversationsBloc()),
       ],
       child: MaterialApp(
         theme: ThemeData(),
-        initialRoute: '/conversations',
+        initialRoute: '/enter_chat_room',
         routes: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
       ),

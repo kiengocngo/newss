@@ -15,4 +15,15 @@ class MyUser {
     required this.address,
     required this.base64Image,
   });
+
+  factory MyUser.fromJson(Map<String, dynamic> json) {
+    return MyUser(
+        uid: json["uid"],
+        name: json["name"],
+        email: json["email"],
+        password: "no",
+        phoneNumber: json["phoneNumber"],
+        address: json["address"],
+        base64Image: json["base64Image"]);
+  }
 }

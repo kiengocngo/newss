@@ -1,6 +1,6 @@
 part of 'friend_request_bloc.dart';
 
-abstract class FriendRequestEvent extends Equatable {
+class FriendRequestEvent extends Equatable {
   const FriendRequestEvent();
 
   @override
@@ -8,12 +8,21 @@ abstract class FriendRequestEvent extends Equatable {
 }
 
 class FriendRequestEventSubmit extends FriendRequestEvent {
-  String firstUid;
-  String secondUid;
-  FriendRequestEventSubmit({
-   required this.firstUid ,
-   required this.secondUid ,
+  final String firstUid;
+  final String secondUid;
+  const FriendRequestEventSubmit({
+    required this.firstUid,
+    required this.secondUid,
   });
-    @override
-  List<Object> get props => [firstUid,secondUid];
+  @override
+  List<Object> get props => [firstUid, secondUid];
 }
+class FriendRequestEventInit extends FriendRequestEvent {
+  final String firstUid;
+  final String secondUid;
+  const FriendRequestEventInit({
+    required this.firstUid,
+    required this.secondUid,
+  });
+  @override
+  List<Object> get props => [firstUid, secondUid];}

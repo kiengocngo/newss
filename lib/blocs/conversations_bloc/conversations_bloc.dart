@@ -16,7 +16,14 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
       (event, emit) async {
         var data =
             await service.getConversations(event.senderId, event.receiverId);
-        if (data.docs.isEmpty) {
+        List<QueryDocumentSnapshot<Map<String, dynamic>>> tmp = [];
+        for (int i = 0; i < data.docs.length; i++) {
+          if ([event.senderId, event.receiverId]
+              .contains(data.docs[i].data()["receiverId"])) {
+            tmp.add(data.docs[i]);
+          }
+        }
+        if (tmp.isEmpty) {
           service.addNewConversations(
               event.senderId,
               event.receiverId,
@@ -27,7 +34,7 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
               event.message,
               event.timestamp);
         } else {
-          service.fixConversation(data.docs[0].id, event.message);
+          service.fixConversation(tmp[0].id, event.message);
         }
         state.conversations.add(RecentConversation(
             senderId: event.senderId,

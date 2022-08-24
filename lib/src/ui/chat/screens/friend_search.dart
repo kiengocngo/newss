@@ -69,6 +69,8 @@ class FriendSearch extends StatelessWidget {
                         itemCount: state.users.length,
                         itemBuilder: (context, index) {
                           return UserInfo(
+                            userUid: "cZRLuMBnsdRkfPBOaIcKfI8sZBi1",
+                            detailUserUid:state.users[index].uid ,
                             userName: state.users[index].name,
                             userImage: state.users[index].base64Image,
                           );

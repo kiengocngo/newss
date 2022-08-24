@@ -27,7 +27,7 @@ class EnterChatRoom extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const ConversationScreen(
-                              uid: '6Is7Y6uNqIU2TuFd8bGC36fgtTg1',
+                              uid: '0L2W03YyfVLauXtTJWLQ',
                             )),
                   );
                 },

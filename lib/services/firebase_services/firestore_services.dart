@@ -6,7 +6,7 @@ import 'package:news_app/src/models/my_user.dart';
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 
-  getUserByUid(String uid) async {
+ Future<SearchResponse> getUserByUid(String uid) async {
     try {
       var data = await _instance
           .collection("Users")
@@ -22,7 +22,7 @@ class FireStoreService {
   }
 
   fixUserInfo(String uid, String field, dynamic data) {
-    _instance.collection("Users").doc(uid).set({field: data});
+    _instance.collection("Users").doc(uid).update({field: data});
   }
 
   getUserByName(String name) async {
@@ -91,12 +91,6 @@ class FireStoreService {
       String senderId,
       String receiverId) async {
     var database = _instance.collection("Conversations");
-    database
-        .where("senderId", isEqualTo: senderId)
-        .where("receiverId", isEqualTo: receiverId);
-    database
-        .where("senderId", isEqualTo: receiverId)
-        .where("receiverId", isEqualTo: senderId);
-    return await database.get();
+    return await database. where("senderId",whereIn: [senderId,receiverId]).get();
   }
 }

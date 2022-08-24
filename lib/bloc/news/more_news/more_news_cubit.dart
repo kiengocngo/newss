@@ -7,22 +7,23 @@ class MoreNewsCubit extends Cubit<MoreNewsState> {
   MoreNewsCubit(this.dioClient) : super(NewsInitial());
   final DioClient dioClient;
   int page = 0;
+  List<Results> list = [];
 
   void loadPost() {
     if (state is NewsLoading) return;
     final currentState = state;
-    var oloNews = <Results>[];
+
     if (currentState is NewsLoaded) {
-      oloNews = currentState.results;
+      list = currentState.results;
     }
-    emit(NewsLoading(oloNews, isFirstFetch: page == 0));
+    emit(NewsLoading(list, isFirstFetch: page == 0));
     dioClient.fetchNewsPage(page).then((newNews) {
-      page++;
-      final results = (state as NewsLoading).oldNews;
-      if (results.length <= 40) {
+      if (page < 4) {
+        page++;
+        final results = (state as NewsLoading).oldNews;
         results.addAll(newNews);
+        emit(NewsLoaded(results));
       }
-      emit(NewsLoaded(results));
     });
   }
 }

@@ -10,7 +10,13 @@ class NewsLoaded extends MoreNewsState {
 }
 
 class NewsLoading extends MoreNewsState {
-  final List<Results> oldNews;
   final bool isFirstFetch;
+  final List<Results> oldNews;
   NewsLoading(this.oldNews, {this.isFirstFetch = false});
+}
+
+class EndNews extends MoreNewsState {
+  final List<Results> endList;
+  final String noti;
+  EndNews(this.noti, this.endList);
 }

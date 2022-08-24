@@ -20,15 +20,18 @@ class _LoadMoreNewsState extends State<LoadMoreNews> {
   final _scrollController = ScrollController();
   void setupScrollController() {
     _scrollController.addListener(() {
-      if (_scrollController.position.atEdge) {
-        if (_scrollController.position.pixels != 0) {
-          context.read<MoreNewsCubit>().loadPost();
-        }
+      final position = _scrollController.position;
+      if (position.atEdge && position.pixels != 0) {
+        context.read<MoreNewsCubit>().loadPost();
       }
     });
   }
 
-  Future refresh() async {}
+  List<Results> list = [];
+  Future refresh() async {
+    list.clear();
+    context.read<MoreNewsCubit>().loadPost();
+  }
 
   @override
   void initState() {
@@ -69,25 +72,31 @@ class _LoadMoreNewsState extends State<LoadMoreNews> {
       List<Results> results = [];
       bool isLoading = false;
       if (state is NewsLoading) {
-        results = state.oldNews;
+        list = state.oldNews;
+
         isLoading = true;
       } else if (state is NewsLoaded) {
-        results = state.results;
+        list = state.results;
       }
 
       return Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
           controller: _scrollController,
-          itemCount: results.length + (isLoading ? 1 : 0),
+          itemCount: list.length + (isLoading ? 1 : 0),
           itemBuilder: (context, int index) {
-            return (index >= results.length)
+            return (index >= list.length)
                 ? const BottomLoader()
-                : TopicItems(
-                    results: results[index],
-                    onTap: () {
-                      LoadUrl().loadUrl(results[index].link);
-                    },
+                : Column(
+                    children: [
+                      Text(list.length.toString()),
+                      TopicItems(
+                        results: list[index],
+                        onTap: () {
+                          LoadUrl().loadUrl(list[index].link);
+                        },
+                      ),
+                    ],
                   );
           },
         ),

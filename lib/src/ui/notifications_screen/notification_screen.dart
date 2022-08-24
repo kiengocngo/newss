@@ -1,9 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/components/noti_item/noti_items.dart';
 import 'package:news_app/src/models/notifications_model/notifications_model.dart';
+import 'package:news_app/src/ui/home/home_screen.dart';
 import 'package:news_app/src/ui/notifications_screen/notifications_services.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -14,6 +14,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  late final LocalNotificationService service;
   List<PushNotifications> list = [
     PushNotifications(
       routeName: '',
@@ -28,15 +29,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       routeName: '',
       title: 'Thong bao B',
       body: 'Noi dung thong bao B',
-      //type: 'A',
-      time: DateTime.now(),
-      image:
-          'https://thumbs.dreamstime.com/z/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg',
-    ),
-    PushNotifications(
-      routeName: '',
-      title: 'Thong bao C',
-      body: 'Noi dung thong bao C',
       //type: 'A',
       time: DateTime.now(),
       image:
@@ -63,7 +55,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
               image: message.data['image'],
               title: message.notification!.title!,
               body: message.notification!.body!,
-              //type: message.data['type'],
               time: message.sentTime!,
               routeName: message.data['routePage']);
           Navigator.of(context).pushNamed(routeFromMessage);
@@ -80,12 +71,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
             image: message.data['image'],
             title: message.notification!.title!,
             body: message.notification!.body!,
-            //type: message.data['type'],
             time: message.sentTime!,
             routeName: message.data['routePage']);
-        final routeMessage = message.data['routePage'];
-        Navigator.pushNamed(context, routeMessage);
-        LocalNotificationService.display(message);
+        var routeName = message.data['routePage'];
+        service.displayNotifications(1, message.notification!.title!,
+            message.notification!.body!, routeName);
 
         setState(() {
           pushNotificationsInfo = notification;
@@ -98,7 +88,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
             image: message.data['image'],
             title: message.notification!.title!,
             body: message.notification!.body!,
-            //type: message.data['type'],
             time: message.sentTime!,
             routeName: message.data['routePage']);
         final routeMessage = message.data['routePage'];
@@ -115,9 +104,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   void initState() {
+    service = LocalNotificationService();
+    service.intialize();
     super.initState();
     registerNotification();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    listenToNotification();
   }
 
   @override
@@ -142,21 +133,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       });
                 }),
           ),
+          ElevatedButton(
+              onPressed: () {
+                service.showNotification(id: 0, title: 'Title', body: 'body');
+              },
+              child: Text('Click'))
         ],
       ),
     ));
   }
-}
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print("Handling a background message: ${message.notification!.title}");
-  PushNotifications notification = PushNotifications(
-    image: message.data[''],
-    title: message.notification!.title!,
-    body: message.notification!.body!,
-    //type: message.data['type'],
-    time: message.sentTime!,
-    routeName: message.data['routePage'],
-  );
+  void listenToNotification() =>
+      service.onNotificationClick.stream.listen(onNoticationListener);
+  void onNoticationListener(String? payload) {
+    if (payload != null && payload.isNotEmpty) {
+      print(payload);
+      if (payload == 'settings') {
+        Navigator.pushNamed(context, 'settings');
+      } else if (payload == 'home') {
+        Navigator.pushNamed(context, 'home');
+      }
+    }
+  }
 }

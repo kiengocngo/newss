@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/ui/bottom_navigator/bottom_navigator_screen.dart';
-import 'package:news_app/src/ui/notifications_screen/notifications_services.dart';
+import 'package:news_app/src/ui/home/home_screen.dart';
 import 'package:news_app/src/ui/settings/settings_screen.dart';
 
 void main() async {
@@ -28,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
+        'home': (context) => const HomeScreen(),
         'settings': ((context) => const SettingsScreen()),
       },
       debugShowCheckedModeBanner: false,

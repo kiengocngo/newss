@@ -25,7 +25,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
           children: [
             // ignore: prefer_const_constructors
             HomeScreen(
-              indexNoti: 4,
+              
             ),
             // ignore: prefer_const_constructors
             Text(
@@ -42,17 +42,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Badge(
-              position: BadgePosition.topEnd(),
-              badgeColor: const Color.fromARGB(255, 235, 161, 156),
-              badgeContent: Text('4'),
-              animationDuration: Duration(seconds: 1),
-              animationType: BadgeAnimationType.fade,
-              child: const Icon(
+          const BottomNavigationBarItem(
+            icon: Icon(
               Icons.home,
               color: Colors.green,
-              ),
             ),
             label: 'Home',
           ),
@@ -70,15 +63,21 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             ),
             label: 'Favourite',
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notification_important_rounded,
-              color: Colors.green,
+          BottomNavigationBarItem(
+            icon: Badge(
+              position: BadgePosition.topEnd(),
+              badgeColor: const Color.fromARGB(255, 235, 161, 156),
+              badgeContent: const Text('4'),
+              animationDuration: const Duration(seconds: 1),
+              animationType: BadgeAnimationType.fade,
+              child: const Icon(
+                Icons.notification_important_rounded,
+                color: Colors.green,
+              ),
             ),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            
             icon: const Icon(
               Icons.settings,
               color: Colors.green,

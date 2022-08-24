@@ -2,6 +2,7 @@ part of 'friend_search_bloc.dart';
 
 enum SearchStatus { init, loading, loaded, error }
 
+// ignore: must_be_immutable
 class FriendSearchState extends Equatable {
   SearchStatus searchStatus;
   List<MyUser> users;

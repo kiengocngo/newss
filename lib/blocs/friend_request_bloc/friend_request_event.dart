@@ -17,6 +17,7 @@ class FriendRequestEventSubmit extends FriendRequestEvent {
   @override
   List<Object> get props => [firstUid, secondUid];
 }
+
 class FriendRequestEventInit extends FriendRequestEvent {
   final String firstUid;
   final String secondUid;
@@ -25,4 +26,5 @@ class FriendRequestEventInit extends FriendRequestEvent {
     required this.secondUid,
   });
   @override
-  List<Object> get props => [firstUid, secondUid];}
+  List<Object> get props => [firstUid, secondUid];
+}

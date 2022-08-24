@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -6,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
+import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/ui/chat/screens/user_details.dart';
 
-import '../../../components/constant.dart';
-
+// ignore: must_be_immutable
 class UserInfo extends StatelessWidget {
   String userName;
   String userImage;
@@ -26,22 +28,21 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        log(userUid);
+      onTap: () async {
         context.read<FriendRequestBloc>().add(FriendRequestEventInit(
             firstUid: userUid, secondUid: detailUserUid));
+        final tmp = await FireStoreService().getUserByUid(userUid);
+        log("this is data when run${tmp.data[0].uid}");
         Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => UserDetails(
                     currentUserUid: userUid,
+                    image: tmp.data[0].base64Image,
+                    currentUserName: tmp.data[0].name,
                     detailsUserUid: detailUserUid,
-                    userName: userName,
-                    image: userImage,
-                    currentUserList: [],
-                    userNameFriends: [],
-                    senderName: 'adsadá',
-                    userImage: Constant.base64Image,
+                    detailsUserImage: userImage,
+                    detailsUserName: userName,
                   )),
         );
       },
@@ -61,7 +62,7 @@ class UserInfo extends StatelessWidget {
           BlocBuilder<FriendRequestBloc, FriendRequestState>(
             builder: (context, state) {
               return Text(
-                detailUserUid,
+                userName,
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               );
             },

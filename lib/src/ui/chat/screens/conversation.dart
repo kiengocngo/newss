@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:news_app/src/components/constant.dart';
+import 'package:news_app/src/ui/chat/screens/friend_search.dart';
 import '../../../../blocs/conversations_bloc/conversations_bloc.dart';
 import '../components/recent_conversation.dart';
 
@@ -13,7 +13,7 @@ class ConversationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ConversationsBloc>().add(ConversationSubmit(currentUser: "cZRLuMBnsdRkfPBOaIcKfI8sZBi1"));
+    context.read<ConversationsBloc>().add(ConversationSubmit(currentUser: uid));
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -36,7 +36,11 @@ class ConversationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "/friends_search");
+                    log("this is uid:   $uid");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FriendSearch(uid: uid)));
                   },
                   child: Container(
                     height: size.height * 0.08,
@@ -71,7 +75,7 @@ class ConversationScreen extends StatelessWidget {
                       itemCount: state.conversations.length,
                       itemBuilder: ((context, index) {
                         return RecentConversation(
-                          senderId: "cZRLuMBnsdRkfPBOaIcKfI8sZBi1",
+                          senderId: uid,
                           receiverId: state.currentUser ==
                                   state.conversations[index].senderId
                               ? state.conversations[index].receiverId

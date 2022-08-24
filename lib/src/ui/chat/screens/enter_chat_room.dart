@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/screens/conversation.dart';
 
+Map<String, String> userMap = {
+  "1": "cZRLuMBnsdRkfPBOaIcKfI8sZBi1",
+  "2": "wRfJLxGkvUSooyVfzRDGI8TQDsy2",
+  "3": "6Is7Y6uNqIU2TuFd8bGC36fgtTg1",
+};
+
 class EnterChatRoom extends StatelessWidget {
   final _controller = TextEditingController();
   EnterChatRoom({super.key});
@@ -26,8 +32,8 @@ class EnterChatRoom extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ConversationScreen(
-                              uid: '0L2W03YyfVLauXtTJWLQ',
+                        builder: (context) => ConversationScreen(
+                              uid: userMap[_controller.text] ?? "no user",
                             )),
                   );
                 },

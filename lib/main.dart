@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<ChatsBloc>(create: (context) => ChatsBloc()),
         BlocProvider<ConversationsBloc>(
             create: (context) => ConversationsBloc()),
-             BlocProvider<FriendRequestBloc>(
+        BlocProvider<FriendRequestBloc>(
             create: (context) => FriendRequestBloc()),
       ],
       child: MaterialApp(

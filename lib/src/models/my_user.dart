@@ -17,14 +17,11 @@ class MyUser {
     required this.phoneNumber,
     required this.address,
     required this.base64Image,
-
-    required this.friends ,
-
+    required this.friends,
   });
 
   factory MyUser.fromJson(Map<String, dynamic> json) {
     return MyUser(
-      
         uid: json["uid"],
         name: json["name"],
         email: json["email"],

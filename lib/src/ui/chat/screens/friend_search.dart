@@ -1,14 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:news_app/blocs/friend_search_bloc/friend_search_bloc.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/components/user_info.dart';
 
+// ignore: must_be_immutable
 class FriendSearch extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
-  FriendSearch({Key? key}) : super(key: key);
+  String uid;
+  FriendSearch({
+    Key? key,
+    required this.uid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +42,11 @@ class FriendSearch extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            BlocListener<FriendSearchBloc, FriendSearchState>(
-              listener: (context, state) {
-                // TODO: implement listener
-              },
-              child: TextInputField(
-                  text: "Enter name here",
-                  type: TextInputType.text,
-                  prefixIcon: const Icon(Icons.search),
-                  controller: _searchController),
-            ),
+            TextInputField(
+                text: "Enter name here",
+                type: TextInputType.text,
+                prefixIcon: const Icon(Icons.search),
+                controller: _searchController),
             ElevatedButton(
                 onPressed: () {
                   context
@@ -68,11 +71,12 @@ class FriendSearch extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: state.users.length,
                         itemBuilder: (context, index) {
+                          log("uid in friend search $uid");
                           return UserInfo(
-                            userUid: "6Is7Y6uNqIU2TuFd8bGC36fgtTg1",
-                            detailUserUid:state.users[index].uid ,
+                            userUid: uid,
                             userName: state.users[index].name,
                             userImage: state.users[index].base64Image,
+                            detailUserUid: state.users[index].uid,
                           );
                         },
                       ),

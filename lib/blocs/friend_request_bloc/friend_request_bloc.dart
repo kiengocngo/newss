@@ -35,8 +35,7 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
           await FireStoreService().getUserByUid(event.firstUid);
       SearchResponse secondUser =
           await FireStoreService().getUserByUid(event.secondUid);
-      log("first user data ${firstUser.data}");
-      log("second user data ${secondUser.data}");
+      log("1 ${firstUser.data[0].uid}  ${secondUser.data[0].uid}");
       if (!firstUser.data[0].friends.contains(event.secondUid) &&
           !secondUser.data[0].friends.contains(event.firstUid)) {
         emit(FriendRequestState.noRequest());

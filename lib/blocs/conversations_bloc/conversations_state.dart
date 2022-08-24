@@ -2,6 +2,7 @@ part of 'conversations_bloc.dart';
 
 enum RecentStatus { init, loading, loaded, error }
 
+// ignore: must_be_immutable
 class ConversationsState extends Equatable {
   String currentUser;
   List<RecentConversation> conversations;

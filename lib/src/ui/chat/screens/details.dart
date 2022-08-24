@@ -1,11 +1,10 @@
-
 import 'dart:developer';
-
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/src/components/constant.dart';
@@ -17,10 +16,18 @@ class DetailsScreen extends StatefulWidget {
   final ScrollController _scrollController = ScrollController();
   String userUid;
   String friendUid;
+  String userName;
+  String friendName;
+  String userImage;
+  String friendImage;
   DetailsScreen({
     Key? key,
     required this.userUid,
     required this.friendUid,
+    required this.userName,
+    required this.friendName,
+    required this.userImage,
+    required this.friendImage,
   }) : super(key: key);
 
   @override
@@ -114,10 +121,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ConversationsAddNewMessage(
                                 senderId: widget.userUid,
                                 receiverId: widget.friendUid,
-                                senderName: "qa1",
-                                receiverName: "qa2",
-                                senderImage: Constant.base64Image,
-                                receiverImage: Constant.base64Image,
+                                senderName: widget.userName,
+                                receiverName: widget.friendName,
+                                senderImage: widget.userImage,
+                                receiverImage: widget.friendImage,
                                 message: _sendController.text,
                                 timestamp: Timestamp.now()));
                         context.read<ChatsBloc>().add(

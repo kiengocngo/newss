@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/auth_response.dart';
 import 'package:news_app/src/models/my_user.dart';
@@ -6,7 +5,7 @@ import 'package:news_app/src/models/my_user.dart';
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 
- Future<SearchResponse> getUserByUid(String uid) async {
+  Future<SearchResponse> getUserByUid(String uid) async {
     try {
       var data = await _instance
           .collection("Users")
@@ -32,6 +31,7 @@ class FireStoreService {
           .where("name", isEqualTo: name)
           .get();
       List<MyUser> tmp = [];
+      // ignore: avoid_function_literals_in_foreach_calls
       data.docs.forEach(
         (element) => tmp.add(MyUser.fromJson(element.data())),
       );
@@ -91,6 +91,7 @@ class FireStoreService {
       String senderId,
       String receiverId) async {
     var database = _instance.collection("Conversations");
-    return await database. where("senderId",whereIn: [senderId,receiverId]).get();
+    return await database
+        .where("senderId", whereIn: [senderId, receiverId]).get();
   }
 }

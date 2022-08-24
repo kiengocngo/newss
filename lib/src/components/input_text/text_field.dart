@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
 class TextInputField extends StatelessWidget {
@@ -21,7 +20,7 @@ class TextInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         keyboardType: type,
         controller: controller,
         textAlignVertical: TextAlignVertical.center,

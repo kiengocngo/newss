@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,25 +8,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
 
+// ignore: must_be_immutable
 class UserDetails extends StatelessWidget {
   String image;
-  String senderName;
+  String currentUserName;
   String currentUserUid;
   String detailsUserUid;
-  String userName;
-  String userImage;
-  List<String> currentUserList;
-  List<String> userNameFriends;
+  String detailsUserName;
+  String detailsUserImage;
+
   UserDetails({
     Key? key,
     required this.image,
-  required  this.senderName ,
+    required this.currentUserName,
     required this.currentUserUid,
     required this.detailsUserUid,
-    required this.userName,
-  required  this.userImage ,
-    required this.currentUserList,
-    required this.userNameFriends,
+    required this.detailsUserName,
+    required this.detailsUserImage,
   }) : super(key: key);
 
   @override
@@ -43,7 +42,7 @@ class UserDetails extends StatelessWidget {
                 size: const Size(50, 50), // Image radius
                 child: Image.memory(
                   base64.decode(
-                    image,
+                    detailsUserImage,
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -53,45 +52,45 @@ class UserDetails extends StatelessWidget {
               builder: (context, state) {
                 switch (state.status) {
                   case FriendState.noRequest:
-                    return InkWell(
-                      onTap: () {
-                        context.read<FriendRequestBloc>().add(
-                            FriendRequestEventSubmit(
-                                firstUid: currentUserUid,
-                                secondUid: detailsUserUid));
-                      },
-                      child: Text("Add"),
-                    );
+                    return ElevatedButton(
+                        onPressed: () {
+                          log(currentUserUid);
+                          log(detailsUserUid);
+                          context.read<FriendRequestBloc>().add(
+                              FriendRequestEventSubmit(
+                                  firstUid: currentUserUid,
+                                  secondUid: detailsUserUid));
+                        },
+                        child: const Text("Add"));
                   case FriendState.firstRequest:
-                    return Text("Request has sended");
+                    return const Text("Request has sended");
 
                   case FriendState.seccondRequest:
-                    return InkWell(
-                      onTap: () {
+                    return ElevatedButton(
+                      onPressed: () {
                         context.read<FriendRequestBloc>().add(
                             FriendRequestEventSubmit(
                                 firstUid: currentUserUid,
                                 secondUid: detailsUserUid));
-                                context.read<ConversationsBloc>().add(
-                          ConversationsAddNewMessage(
-                              senderId: currentUserUid,
-                              receiverId: detailsUserUid,
-                              senderName: senderName,
-                              receiverName: userName,
-                              senderImage: userImage,
-                              receiverImage: image,
-                              message: "You guys are friends, have a a chat",
-                              timestamp: Timestamp.now()));
+                        context.read<ConversationsBloc>().add(
+                            ConversationsAddNewMessage(
+                                senderId: currentUserUid,
+                                receiverId: detailsUserUid,
+                                senderName: currentUserName,
+                                receiverName: detailsUserName,
+                                senderImage: image,
+                                receiverImage: detailsUserImage,
+                                message: "You guys are friends, have a chat",
+                                timestamp: Timestamp.now()));
                       },
-                      child: Text("Accept ?"),
+                      child: const Text("Accept ?"),
                     );
                   case FriendState.accept:
                     {
-                      
-                      return Text("you guys are friend");
+                      return const Text("you guys are friend");
                     }
                   default:
-                    return Icon(Icons.error);
+                    return const Icon(Icons.error);
                 }
               },
             )

@@ -8,6 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 import 'package:news_app/src/ui/chat/screens/details.dart';
 
+import '../../../../services/firebase_services/firestore_services.dart';
+
+// ignore: must_be_immutable
 class RecentConversation extends StatelessWidget {
   String userImage;
   String senderId;
@@ -30,16 +33,24 @@ class RecentConversation extends StatelessWidget {
       child: BlocListener<ChatsBloc, ChatsState>(
         listener: (context, state) {},
         child: InkWell(
-          onTap: () {
+          onTap: () async {
+            var tmp = await FireStoreService().getUserByUid(senderId);
+
+            // ignore: use_build_context_synchronously
             context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
+            // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => DetailsScreen(
                         userUid: senderId,
                         friendUid: receiverId,
+                        userName: tmp.data[0].name,
+                        friendName: conversationsUserName,
+                        friendImage: userImage,
+                        userImage: tmp.data[0].base64Image,
                       )),
             );
           },

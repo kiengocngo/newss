@@ -6,11 +6,20 @@ import 'package:news_app/src/ui/chat/screens/friend_search.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
-    '/conversations': (context) => ConversationScreen(
+    '/conversations': (context) => const ConversationScreen(
           uid: "",
         ),
-    '/details': (context) => DetailsScreen(userUid: "", friendUid: ""),
-    "/friends_search": (context) => FriendSearch(),
+    '/details': (context) => DetailsScreen(
+          userUid: "",
+          friendUid: "",
+          friendImage: '',
+          friendName: '',
+          userImage: '',
+          userName: '',
+        ),
+    "/friends_search": (context) => FriendSearch(
+          uid: "",
+        ),
     "/enter_chat_room": (context) => EnterChatRoom(),
   };
 }

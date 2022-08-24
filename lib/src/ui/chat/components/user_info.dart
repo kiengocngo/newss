@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/src/ui/chat/screens/user_details.dart';
+
 class UserInfo extends StatelessWidget {
   String userName;
   String userImage;
@@ -12,21 +14,40 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ClipOval(
-          child: SizedBox.fromSize(
-            size: const Size(50, 50), // Image radius
-            child: Image.memory(
-              base64.decode(
-                userImage,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => UserDetails(
+                    currentUserUid: "0L2W03YyfVLauXtTJWLQ",
+                    detailsUserUid: "",
+                    userName: userName,
+                    image: userImage,
+                    currentUserList: [],
+                    userNameFriends: [],
+                  )),
+        );
+      },
+      child: Row(
+        children: [
+          ClipOval(
+            child: SizedBox.fromSize(
+              size: const Size(50, 50), // Image radius
+              child: Image.memory(
+                base64.decode(
+                  userImage,
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
             ),
           ),
-        ),
-        Text(userName),
-      ],
+          Text(
+            userName,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ],
+      ),
     );
   }
 }

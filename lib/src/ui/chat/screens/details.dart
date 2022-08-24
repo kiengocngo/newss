@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +49,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       controller: widget._scrollController,
                       itemCount: state.chats.length,
                       itemBuilder: (context, index) {
-                        if (state.chats[index].senderId == "1") {
+                        if (state.chats[index].senderId == widget.userUid) {
                           {
                             return Column(
                               children: [
@@ -69,7 +68,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           }
                         } else {
                           return Column(
-                            
                             children: [
                               Text(
                                 DateFormat.yMd().add_jm().format(

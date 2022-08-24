@@ -1,19 +1,19 @@
 part of 'friend_request_bloc.dart';
 
-enum FriendState { noRequest, firstRequest, seccondRequest, accept }
+enum FriendState { noRequest, firstRequest, seccondRequest, accept, error }
 
+// ignore: must_be_immutable
 class FriendRequestState extends Equatable {
-  List<String> firstList;
-  List<String> secondList;
   FriendState status;
   FriendRequestState({
-    required this.firstList,
-    required this.secondList,
     required this.status,
   });
-  FriendRequestState.init()
-      : this(firstList: [], secondList: [], status: FriendState.noRequest);
-
+  FriendRequestState.init() : this(status: FriendState.noRequest);
+  FriendRequestState.error() : this(status: FriendState.error);
+  FriendRequestState.noRequest() : this(status: FriendState.noRequest);
+  FriendRequestState.firstRequest() : this(status: FriendState.firstRequest);
+  FriendRequestState.secondRequest() : this(status: FriendState.seccondRequest);
+  FriendRequestState.accept() : this(status: FriendState.accept);
   @override
-  List<Object> get props => [firstList, secondList, status];
+  List<Object> get props => [status];
 }

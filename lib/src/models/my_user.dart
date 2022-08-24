@@ -6,6 +6,7 @@ class MyUser {
   String phoneNumber;
   String address;
   String base64Image;
+  List<String> friends;
   MyUser({
     required this.uid,
     required this.name,
@@ -14,10 +15,12 @@ class MyUser {
     required this.phoneNumber,
     required this.address,
     required this.base64Image,
+    required this.friends ,
   });
 
   factory MyUser.fromJson(Map<String, dynamic> json) {
     return MyUser(
+      friends: json["friends"],
         uid: json["uid"],
         name: json["name"],
         email: json["email"],

@@ -6,3 +6,14 @@ abstract class FriendRequestEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FriendRequestEventSubmit extends FriendRequestEvent {
+  String firstUid;
+  String secondUid;
+  FriendRequestEventSubmit({
+   required this.firstUid ,
+   required this.secondUid ,
+  });
+    @override
+  List<Object> get props => [firstUid,secondUid];
+}

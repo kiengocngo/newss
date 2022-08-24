@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
 
 class UserDetails extends StatelessWidget {
   String image;
@@ -38,20 +40,39 @@ class UserDetails extends StatelessWidget {
                 ),
               ),
             ),
-            if (currentUserList.contains(detailsUserUid) == true &&
-                userNameFriends.contains(currentUserUid) == true)
-              Icon(Icons.done,color: Colors.green,)
-            else if (currentUserList.contains(detailsUserUid) == false &&
-                userNameFriends.contains(currentUserUid) == true)
-              Icon(Icons.circle)
-            else if(currentUserList.contains(detailsUserUid)== true && userNameFriends.contains(currentUserUid) ==false)
-             ElevatedButton(child: const Text("Accept Request"),onPressed: () {
-               
-             },)
-             else
-               ElevatedButton(child: const Text("Add Friend"),onPressed: () {
-               
-             },)
+            BlocBuilder<FriendRequestBloc, FriendRequestState>(
+              builder: (context, state) {
+                switch (state.status) {
+                  case FriendState.noRequest:
+                    return InkWell(
+                      onTap: () {
+                        context.read<FriendRequestBloc>().add(
+                            FriendRequestEventSubmit(
+                                firstUid: currentUserUid,
+                                secondUid: detailsUserUid));
+                      },
+                      child: Text("Add"),
+                    );
+                  case FriendState.firstRequest:
+                    return Text("Request has sended");
+
+                  case FriendState.seccondRequest:
+                    return InkWell(
+                      onTap: () {
+                        context.read<FriendRequestBloc>().add(
+                            FriendRequestEventSubmit(
+                                firstUid: currentUserUid,
+                                secondUid: detailsUserUid));
+                      },
+                      child: Text("Accept ?"),
+                    );
+                  case FriendState.accept:
+                    return Text("you guys are friend");
+                  default:
+                    return Icon(Icons.error);
+                }
+              },
+            )
           ]),
         ),
       ),

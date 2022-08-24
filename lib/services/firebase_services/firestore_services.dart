@@ -6,6 +6,25 @@ import 'package:news_app/src/models/my_user.dart';
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 
+  getUserByUid(String uid) async {
+    try {
+      var data = await _instance
+          .collection("Users")
+          .where("uid", isEqualTo: uid)
+          .get();
+      List<MyUser> tmp = [];
+      tmp.add(MyUser.fromJson(data.docs[0].data()));
+      tmp[0].uid = data.docs[0].id;
+      return SearchResponse(isSuccess: true, data: tmp);
+    } catch (e) {
+      return SearchResponse(isSuccess: false, data: []);
+    }
+  }
+
+  fixUserInfo(String uid, String field, dynamic data) {
+    _instance.collection("Users").doc(uid).set({field: data});
+  }
+
   getUserByName(String name) async {
     try {
       var data = await _instance

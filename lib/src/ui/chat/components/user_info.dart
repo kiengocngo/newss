@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
 import 'package:news_app/src/ui/chat/screens/user_details.dart';
 
 class UserInfo extends StatelessWidget {
@@ -42,9 +44,13 @@ class UserInfo extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            userName,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
+          BlocBuilder<FriendRequestBloc, FriendRequestState>(
+            builder: (context, state) {
+              return Text(
+                userName,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+              );
+            },
           ),
         ],
       ),

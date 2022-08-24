@@ -40,14 +40,18 @@ class UserDetails extends StatelessWidget {
             ),
             if (currentUserList.contains(detailsUserUid) == true &&
                 userNameFriends.contains(currentUserUid) == true)
-              Icon(Icons.done)
+              Icon(Icons.done,color: Colors.green,)
             else if (currentUserList.contains(detailsUserUid) == false &&
                 userNameFriends.contains(currentUserUid) == true)
               Icon(Icons.circle)
             else if(currentUserList.contains(detailsUserUid)== true && userNameFriends.contains(currentUserUid) ==false)
-             Text("Wating")
+             ElevatedButton(child: const Text("Accept Request"),onPressed: () {
+               
+             },)
              else
-              Text("Add friend")
+               ElevatedButton(child: const Text("Add Friend"),onPressed: () {
+               
+             },)
           ]),
         ),
       ),

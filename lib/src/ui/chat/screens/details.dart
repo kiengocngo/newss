@@ -1,3 +1,7 @@
+
+import 'dart:developer';
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +32,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log(widget.userUid);
+    log(widget.friendUid);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -49,7 +55,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       controller: widget._scrollController,
                       itemCount: state.chats.length,
                       itemBuilder: (context, index) {
-                        if (state.chats[index].senderId == "1") {
+                        if (state.chats[index].senderId == widget.userUid) {
                           {
                             return Column(
                               children: [
@@ -106,8 +112,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                         context.read<ConversationsBloc>().add(
                             ConversationsAddNewMessage(
-                                senderId: "1",
-                                receiverId: "2",
+                                senderId: widget.userUid,
+                                receiverId: widget.friendUid,
                                 senderName: "qa1",
                                 receiverName: "qa2",
                                 senderImage: Constant.base64Image,
@@ -116,8 +122,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 timestamp: Timestamp.now()));
                         context.read<ChatsBloc>().add(
                               ChatAddGetMessageEvent(
-                                sender: "1",
-                                receiver: "2",
+                                sender: widget.userUid,
+                                receiver: widget.friendUid,
                                 message: _sendController.text,
                               ),
                             );

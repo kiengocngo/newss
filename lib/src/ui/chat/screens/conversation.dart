@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +13,7 @@ class ConversationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ConversationsBloc>().add(ConversationSubmit(currentUser: uid));
+    context.read<ConversationsBloc>().add(ConversationSubmit(currentUser: "cZRLuMBnsdRkfPBOaIcKfI8sZBi1"));
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -69,7 +71,7 @@ class ConversationScreen extends StatelessWidget {
                       itemCount: state.conversations.length,
                       itemBuilder: ((context, index) {
                         return RecentConversation(
-                          senderId: uid,
+                          senderId: "cZRLuMBnsdRkfPBOaIcKfI8sZBi1",
                           receiverId: state.currentUser ==
                                   state.conversations[index].senderId
                               ? state.conversations[index].receiverId

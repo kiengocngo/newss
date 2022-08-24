@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
+import 'package:news_app/src/ui/chat/screens/details.dart';
 
 class RecentConversation extends StatelessWidget {
   String userImage;
@@ -33,7 +34,14 @@ class RecentConversation extends StatelessWidget {
             context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
-            Navigator.pushNamed(context, "/details");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailsScreen(
+                        userUid: senderId,
+                        friendUid: receiverId,
+                      )),
+            );
           },
           child: Row(
             children: [

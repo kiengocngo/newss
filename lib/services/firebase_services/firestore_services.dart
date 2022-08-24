@@ -6,6 +6,25 @@ import 'package:news_app/src/models/my_user.dart';
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 
+ Future<SearchResponse> getUserByUid(String uid) async {
+    try {
+      var data = await _instance
+          .collection("Users")
+          .where("uid", isEqualTo: uid)
+          .get();
+      List<MyUser> tmp = [];
+      tmp.add(MyUser.fromJson(data.docs[0].data()));
+      tmp[0].uid = data.docs[0].id;
+      return SearchResponse(isSuccess: true, data: tmp);
+    } catch (e) {
+      return SearchResponse(isSuccess: false, data: []);
+    }
+  }
+
+  fixUserInfo(String uid, String field, dynamic data) {
+    _instance.collection("Users").doc(uid).update({field: data});
+  }
+
   getUserByName(String name) async {
     try {
       var data = await _instance
@@ -72,12 +91,6 @@ class FireStoreService {
       String senderId,
       String receiverId) async {
     var database = _instance.collection("Conversations");
-    database
-        .where("senderId", isEqualTo: senderId)
-        .where("receiverId", isEqualTo: receiverId);
-    database
-        .where("senderId", isEqualTo: receiverId)
-        .where("receiverId", isEqualTo: senderId);
-    return await database.get();
+    return await database. where("senderId",whereIn: [senderId,receiverId]).get();
   }
 }

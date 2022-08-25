@@ -1,13 +1,9 @@
 class Categories {
-  final int id;
   final String description;
-  Categories({required this.id, required this.description});
-  factory Categories.fromMap(Map<String, dynamic> categories) {
-    return Categories(
-        id: categories['id'], description: categories['description']);
+  Categories({required this.description});
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'description': description,
+    };
   }
-  Map<String, Object> toMap() => {
-        'id': id,
-        'description': description,
-      };
 }

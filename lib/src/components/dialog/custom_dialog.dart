@@ -63,48 +63,43 @@ class CustomDialogBox extends StatelessWidget {
                 height: 22,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: GestureDetector(
-                        onTap: okHandle,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 1 / 4,
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border:
-                                  Border.all(width: 0.25, color: Colors.grey)),
-                          child: Center(
-                            child: Text(
-                              okText,
-                              style: const TextStyle(fontSize: 18),
-                            ),
+                  GestureDetector(
+                      onTap: okHandle,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 0.25, color: Colors.grey)),
+                        child: Center(
+                          child: Text(
+                            okText,
+                            style: const TextStyle(fontSize: 18),
                           ),
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 1 / 4,
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border:
-                                  Border.all(width: 0.25, color: Colors.grey)),
-                          child: Center(
-                            child: Text(
-                              cancelText,
-                              style: const TextStyle(fontSize: 18),
-                            ),
+                        ),
+                      )),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 0.25, color: Colors.grey)),
+                        child: Center(
+                          child: Text(
+                            cancelText,
+                            style: const TextStyle(fontSize: 18),
                           ),
-                        )),
-                  ),
+                        ),
+                      )),
                 ],
               ),
             ],

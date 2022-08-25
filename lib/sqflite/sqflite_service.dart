@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:news_app/src/models/favorite/categories.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class SQLHelper {
@@ -10,7 +11,7 @@ class SQLHelper {
 
   static Future<sql.Database> db() async {
     return sql.openDatabase(
-      'categories.db',
+      'category.db',
       version: 1,
       onCreate: (sql.Database database, int version) async {
         await createTables(database);
@@ -19,25 +20,29 @@ class SQLHelper {
   }
 
   // Create new category
-  static Future<int> createItem(String description) async {
+  static Future<int> createItem(Categories categories) async {
     final db = await SQLHelper.db();
-    final data = {'description': description};
-    final id = await db.insert('categories', data,
+    return db.insert('categories', categories.toMap(),
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
-    return id;
   }
 
   // Read all categories
-  static Future<List<Map<String, dynamic>>> getItems() async {
+  static Future<List<Categories>> getAll() async {
     final db = await SQLHelper.db();
-    return db.query('categories', orderBy: "id");
+    final map = await db.query('categories');
+    return List.generate(map.length, (index) {
+      return Categories(description: map[index]['description'] as String);
+    });
   }
 
   // Read a single cateogy by id
-  static Future<List<Map<String, dynamic>>> getItem(String description) async {
+  static Future<List<Categories>> getCategory(String description) async {
     final db = await SQLHelper.db();
-    return db.query('categories',
+    final map = await db.query('categories',
         where: "description = ?", whereArgs: [description], limit: 1);
+    return List.generate(map.length, (index) {
+      return Categories(description: map[index]['description'] as String);
+    });
   }
 
   // Delete

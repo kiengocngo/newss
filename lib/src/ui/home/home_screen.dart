@@ -6,11 +6,14 @@ import 'package:news_app/bloc/news/news_state.dart';
 import 'package:news_app/bloc/news/news_status.dart';
 import 'package:news_app/bloc/news_for_you/news_topic_cubit.dart';
 import 'package:news_app/bloc/news_for_you/news_topic_state.dart';
+import 'package:news_app/src/components/loading/center_loader.dart';
 import 'package:news_app/src/components/news_item/news_items.dart';
 import 'package:news_app/src/components/news_item/news_topic_items.dart';
-import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
+import 'package:news_app/src/loaduri/load_url.dart';
+import 'package:news_app/src/ui/home/news/topic/load_more_screen.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,6 +23,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void loadUri(String link) async {
+    await launchUrl(Uri.parse(link));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -54,9 +61,26 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '#Hot News',
-                style: NewsThemeData.fromContext(context).textAppBar,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '#Hot News',
+                    style: NewsThemeData.fromContext(context).textAppBar,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoadMoreScreen()));
+                    },
+                    child: Text(
+                      'More',
+                      style: NewsThemeData.fromContext(context).textNewsTitle,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
@@ -73,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: _buildNewsItem1(context),
               ),
               const SizedBox(
@@ -108,18 +132,11 @@ Widget _buildNewsItem(BuildContext context) {
             itemBuilder: (context, index) => NewsItems(
                 results: state.results[index],
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DetailNewsScreen(
-                                results: state.results[index],
-                              )));
+                  LoadUrl().loadUrl(state.results[index].link);
                 }),
           );
         default:
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CenterLoader();
       }
     },
   );
@@ -135,20 +152,17 @@ Widget _buildNewsItem1(BuildContext context) {
           if (state.results.isEmpty) {
             return const Text('no data');
           }
-          return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 10,
-                );
-              },
+          return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 6, mainAxisSpacing: 6),
               itemCount: state.results.length,
-              itemBuilder: (context, index) =>
-                  NewsTopicItems(results: state.results[index], onTap: () {}));
+              itemBuilder: (context, index) => NewsTopicItems(
+                  results: state.results[index],
+                  onTap: () {
+                    LoadUrl().loadUrl(state.results[index].link);
+                  }));
         default:
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CenterLoader();
       }
     },
   );

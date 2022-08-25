@@ -38,6 +38,10 @@ dependencies:
   flutter_bloc: ^8.1.1
   equatable: ^2.0.3
   cached_network_image: ^3.2.1
+  http: ^0.13.5
+  url_launcher: ^6.1.5
+  bloc_concurrency: ^0.2.0
+  stream_transform: ^2.0.0
 
 dev_dependencies:
   flutter_test:

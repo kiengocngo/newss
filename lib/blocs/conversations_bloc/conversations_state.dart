@@ -1,12 +1,10 @@
 part of 'conversations_bloc.dart';
 
-enum RecentStatus { init, loading, loaded, error }
-
 // ignore: must_be_immutable
 class ConversationsState extends Equatable {
   String currentUser;
   List<RecentConversation> conversations;
-  RecentStatus status;
+  CustomStatus status;
   ConversationsState({
     required this.currentUser,
     required this.conversations,
@@ -14,7 +12,7 @@ class ConversationsState extends Equatable {
   });
 
   ConversationsState.init()
-      : this(currentUser: "", conversations: [], status: RecentStatus.init);
+      : this(currentUser: "", conversations: [], status: CustomStatus.init);
 
   ConversationsState.loaded(
     String currentUser,
@@ -22,13 +20,13 @@ class ConversationsState extends Equatable {
   ) : this(
             currentUser: currentUser,
             conversations: conversations,
-            status: RecentStatus.loaded);
+            status: CustomStatus.loaded);
 
   ConversationsState.loading()
-      : this(currentUser: "", conversations: [], status: RecentStatus.loading);
+      : this(currentUser: "", conversations: [], status: CustomStatus.loading);
 
   ConversationsState.error()
-      : this(currentUser: "", conversations: [], status: RecentStatus.error);
+      : this(currentUser: "", conversations: [], status: CustomStatus.error);
 
   @override
   List<Object> get props => [currentUser, conversations, status];

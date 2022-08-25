@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
+import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/models/chat.dart';
 
 part 'chats_event.dart';
@@ -12,7 +13,6 @@ part 'chats_state.dart';
 class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   FireStoreService fireStoreService = FireStoreService();
   ChatsBloc() : super(ChatsState.init()) {
-    on<ChatsEvent>((event, emit) {});
     on<ChatInitEvent>(
       (event, emit) async {
         await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(

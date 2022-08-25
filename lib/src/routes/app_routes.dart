@@ -9,17 +9,6 @@ class AppRoutes {
     '/conversations': (context) => const ConversationScreen(
           uid: "",
         ),
-    '/details': (context) => DetailsScreen(
-          userUid: "",
-          friendUid: "",
-          friendImage: '',
-          friendName: '',
-          userImage: '',
-          userName: '',
-        ),
-    "/friends_search": (context) => FriendSearch(
-          uid: "",
-        ),
     "/enter_chat_room": (context) => EnterChatRoom(),
   };
 }

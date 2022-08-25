@@ -42,8 +42,6 @@ class UserDetails extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Column(children: [
-            Text(currentUserUid),
-            Text(detailsUserUid),
             ClipOval(
               child: SizedBox.fromSize(
                 size: const Size(100, 100), // Image radius

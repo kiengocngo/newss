@@ -1,5 +1,5 @@
 import '../models/my_user.dart';
-
+enum CustomStatus { init, loading, loaded, error }
 class Constant {
   static MyUser defaultUser = MyUser(
     uid: "",

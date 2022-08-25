@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:news_app/blocs/friend_search_bloc/friend_search_bloc.dart';
+import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/components/user_info.dart';
 
@@ -57,15 +58,15 @@ class FriendSearch extends StatelessWidget {
             BlocBuilder<FriendSearchBloc, FriendSearchState>(
               builder: (context, state) {
                 switch (state.searchStatus) {
-                  case SearchStatus.init:
+                  case CustomStatus.init:
                     return Container();
-                  case SearchStatus.loading:
+                  case CustomStatus.loading:
                     return const Center(
                         child: SpinKitFadingCircle(
                       color: Colors.blue,
                       size: 50.0,
                     ));
-                  case SearchStatus.loaded:
+                  case CustomStatus.loaded:
                     return SizedBox(
                       height: size.height * 0.7,
                       child: ListView.builder(

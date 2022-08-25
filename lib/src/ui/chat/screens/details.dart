@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -56,31 +57,61 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   return previous != current;
                 },
                 builder: (context, state) {
-                  if (state.chatStatus == ChatStatus.loaded) {
+                  if (state.chatStatus == CustomStatus.loaded) {
                     return ListView.builder(
                       reverse: false,
                       controller: widget._scrollController,
-                      itemCount: state.chats.length,
+                      itemCount: state.chats.length + 1,
                       itemBuilder: (context, index) {
-                        if (state.chats[index].senderId == widget.userUid) {
-                          {
-                            return SenderMessage(
-                                timeStamp: state.chats[index].timeStamp,
-                                sendMessage: state.chats[index].message);
-                          }
-                        } else {
-                          return Column(
-                            children: [
-                              Text(
-                                DateFormat.yMd().add_jm().format(
-                                    state.chats[index].timeStamp.toDate()),
-                                style: const TextStyle(color: Colors.white),
+                        if (index == 0) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  ClipOval(
+                                    child: SizedBox.fromSize(
+                                      size: const Size(100, 100), // Image radius
+                                      child: Image.memory(
+                                        base64.decode(
+                                          widget.friendImage,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.friendName,
+                                    style: const TextStyle(
+                                        fontSize: 30, color: Colors.white),
+                                  ),
+                                ],
                               ),
-                              ReceiverMessage(
-                                  sendMessage: state.chats[index].message,
-                                  base64Image: Constant.base64Image),
-                            ],
+                            ),
                           );
+                        } else {
+                          if (state.chats[index - 1].senderId ==
+                              widget.userUid) {
+                            {
+                              return SenderMessage(
+                                  timeStamp: state.chats[index-1].timeStamp,
+                                  sendMessage: state.chats[index-1].message);
+                            }
+                          } else {
+                            return Column(
+                              children: [
+                                Text(
+                                  DateFormat.yMd().add_jm().format(state
+                                      .chats[index - 1].timeStamp
+                                      .toDate()),
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                ReceiverMessage(
+                                    sendMessage: state.chats[index-1].message,
+                                    base64Image: Constant.base64Image),
+                              ],
+                            );
+                          }
                         }
                       },
                     );

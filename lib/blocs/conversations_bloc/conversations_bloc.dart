@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
+import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/models/recent_conversation.dart';
 
 part 'conversations_event.dart';

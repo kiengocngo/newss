@@ -10,7 +10,7 @@ import 'package:news_app/src/components/loading/center_loader.dart';
 import 'package:news_app/src/components/news_item/news_items.dart';
 import 'package:news_app/src/components/news_item/news_topic_items.dart';
 import 'package:news_app/src/loaduri/load_url.dart';
-import 'package:news_app/src/ui/home/news/load_more_news.dart';
+import 'package:news_app/src/ui/home/news/topic/load_more_screen.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoadMoreNews()));
+                              builder: (context) => const LoadMoreScreen()));
                     },
                     child: Text(
                       'More',

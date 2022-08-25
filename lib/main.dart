@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news/more_news/more_news_cubit.dart';
+import 'package:news_app/bloc/news/load_more.dart/load_more_bloc.dart';
 import 'package:news_app/bloc/news/news_cubit.dart';
 import 'package:news_app/bloc/news_topic/entertainment/news_enteratainment_cubit.dart';
 import 'package:news_app/bloc/news_topic/sport/news_sports_cubit.dart';
@@ -25,19 +25,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) => NewsTopicsCubit(dio: Dio())),
         BlocProvider(
-            create: (BuildContext context) => MoreNewsCubit(DioClient())),
-        BlocProvider(
             create: (BuildContext context) => NewsSportsCubit(dio: Dio())),
         BlocProvider(
             create: (BuildContext context) =>
                 NewsEntertainmentCubit(dio: Dio())),
         BlocProvider(
             create: (BuildContext context) => NewsTechnologyCubit(dio: Dio())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                LoadMoreBloc(dioClient: DioClient())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        initialRoute: '/more_news',
+        initialRoute: '/news_list',
         routes: AppRoutes.routes,
       ),
     );

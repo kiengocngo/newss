@@ -16,35 +16,14 @@ class ConversationSubmit extends ConversationsEvent {
 }
 
 class ConversationsAddNewMessage extends ConversationsEvent {
-  final String senderId;
-  final String receiverId;
-  final String senderName;
-  final String receiverName;
-  final String senderImage;
-  final String receiverImage;
-  final String message;
-  final Timestamp timestamp;
+  final RecentConversation recentConversation;
 
   const ConversationsAddNewMessage({
-    required this.senderId,
-    required this.receiverId,
-    required this.senderName,
-    required this.receiverName,
-    required this.senderImage,
-    required this.receiverImage,
-    required this.message,
-    required this.timestamp,
+   required this.recentConversation,
   });
 
   @override
   List<Object> get props => [
-        senderId,
-        receiverId,
-        senderName,
-        receiverName,
-        senderImage,
-        receiverImage,
-        message,
-        timestamp,
+        recentConversation,
       ];
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/auth_response.dart';
 import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/recent_conversation.dart';
 
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
@@ -60,24 +61,9 @@ class FireStoreService {
   }
 
   addNewConversations(
-      String senderId,
-      String receiverId,
-      String senderName,
-      String receiverName,
-      String senderImage,
-      String receiverImage,
-      String message,
-      Timestamp timestamp) async {
-    await _instance.collection("Conversations").add({
-      "senderId": senderId,
-      "receiverId": receiverId,
-      "senderName": senderName,
-      "receiverName": receiverName,
-      "senderImage": senderImage,
-      "receiverImage": receiverImage,
-      "message": message,
-      "dateTime": Timestamp.now()
-    });
+      RecentConversation recentConversation) async {
+    await _instance.collection("Conversations").add(
+      recentConversation.toMap());
   }
 
   getAllUser() async {

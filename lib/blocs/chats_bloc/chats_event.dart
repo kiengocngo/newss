@@ -20,19 +20,13 @@ class ChatInitEvent extends ChatsEvent {
 
 // ignore: must_be_immutable
 class ChatAddGetMessageEvent extends ChatsEvent {
-  String sender;
-  String receiver;
-  String message;
+  final Chat chat;
 
   ChatAddGetMessageEvent({
-    required this.sender,
-    required this.receiver,
-    required this.message,
+   required this.chat,
   });
   @override
   List<Object> get props => [
-        sender,
-        receiver,
-        message,
+       chat
       ];
 }

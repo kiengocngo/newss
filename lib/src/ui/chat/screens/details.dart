@@ -9,26 +9,19 @@ import 'package:intl/intl.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/src/components/constant.dart';
+import 'package:news_app/src/models/chat.dart';
+import 'package:news_app/src/models/details_screen_model.dart';
+import 'package:news_app/src/models/recent_conversation.dart';
 import 'package:news_app/src/ui/chat/components/receiver_message.dart';
 import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
 // ignore: must_be_immutable
 class DetailsScreen extends StatefulWidget {
   final ScrollController _scrollController = ScrollController();
-  String userUid;
-  String friendUid;
-  String userName;
-  String friendName;
-  String userImage;
-  String friendImage;
+  DetailsModel detailsModel;
   DetailsScreen({
     Key? key,
-    required this.userUid,
-    required this.friendUid,
-    required this.userName,
-    required this.friendName,
-    required this.userImage,
-    required this.friendImage,
+    required this.detailsModel,
   }) : super(key: key);
 
   @override
@@ -40,8 +33,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log(widget.userUid);
-    log(widget.friendUid);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -71,17 +62,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 children: [
                                   ClipOval(
                                     child: SizedBox.fromSize(
-                                      size: const Size(100, 100), // Image radius
+                                      size:
+                                          const Size(100, 100), // Image radius
                                       child: Image.memory(
                                         base64.decode(
-                                          widget.friendImage,
+                                          widget.detailsModel.friendImage,
                                         ),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
                                   Text(
-                                    widget.friendName,
+                                    widget.detailsModel. friendName,
                                     style: const TextStyle(
                                         fontSize: 30, color: Colors.white),
                                   ),
@@ -91,11 +83,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           );
                         } else {
                           if (state.chats[index - 1].senderId ==
-                              widget.userUid) {
+                              widget.detailsModel. userUid) {
                             {
                               return SenderMessage(
-                                  timeStamp: state.chats[index-1].timeStamp,
-                                  sendMessage: state.chats[index-1].message);
+                                  timeStamp: state.chats[index - 1].timeStamp,
+                                  sendMessage: state.chats[index - 1].message);
                             }
                           } else {
                             return Column(
@@ -107,7 +99,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   style: const TextStyle(color: Colors.white),
                                 ),
                                 ReceiverMessage(
-                                    sendMessage: state.chats[index-1].message,
+                                    sendMessage: state.chats[index - 1].message,
                                     base64Image: Constant.base64Image),
                               ],
                             );
@@ -137,21 +129,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       onPressed: () {
                         //tin moi nhat se duoc add vao conversations
 
-                        context.read<ConversationsBloc>().add(
-                            ConversationsAddNewMessage(
-                                senderId: widget.userUid,
-                                receiverId: widget.friendUid,
-                                senderName: widget.userName,
-                                receiverName: widget.friendName,
-                                senderImage: widget.userImage,
-                                receiverImage: widget.friendImage,
-                                message: _sendController.text,
-                                timestamp: Timestamp.now()));
+                        context
+                            .read<ConversationsBloc>()
+                            .add(ConversationsAddNewMessage(
+                                recentConversation: RecentConversation(
+                              senderId: widget.detailsModel.userUid,
+                              receiverId:widget.detailsModel.friendUid,
+                              senderName: widget.detailsModel.userName,
+                              receiverName: widget.detailsModel.friendName,
+                              senderBase64Image:widget.detailsModel.userImage,
+                              receiverBase64Image: widget.detailsModel.friendImage,
+                              message: _sendController.text,
+                              dateTime: Timestamp.now(),
+                            )));
                         context.read<ChatsBloc>().add(
                               ChatAddGetMessageEvent(
-                                sender: widget.userUid,
-                                receiver: widget.friendUid,
-                                message: _sendController.text,
+                                chat: Chat(
+                                    senderId: widget.detailsModel.userUid,
+                                    receiverId: widget.detailsModel.friendUid,
+                                    message: _sendController.text,
+                                    timeStamp: Timestamp.now()),
                               ),
                             );
 

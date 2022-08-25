@@ -7,7 +7,7 @@ class RecentConversation {
   String receiverName;
   String senderBase64Image;
   String receiverBase64Image;
-  Timestamp timeStamp;
+  Timestamp dateTime;
   String message;
   RecentConversation({
     required this.senderId,
@@ -16,7 +16,7 @@ class RecentConversation {
     required this.receiverName,
     required this.senderBase64Image,
     required this.receiverBase64Image,
-    required this.timeStamp,
+    required this.dateTime,
     required this.message,
   });
 
@@ -28,7 +28,20 @@ class RecentConversation {
         receiverName: json["receiverName"],
         senderBase64Image: json["senderImage"],
         receiverBase64Image: json["receiverImage"],
-        timeStamp: json["dateTime"],
+        dateTime: json["dateTime"],
         message: json["message"]);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "senderId": senderId,
+      "receiverId": receiverId,
+      "senderName": senderName,
+      "receiverName": receiverName,
+      "senderBase64Image": senderBase64Image,
+      'receiverBase64Image': receiverBase64Image,
+      'dateTime': dateTime,
+      'message': message,
+    };
   }
 }

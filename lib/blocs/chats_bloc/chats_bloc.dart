@@ -1,3 +1,6 @@
+import 'dart:async';
+
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,41 +17,37 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
   FireStoreService fireStoreService = FireStoreService();
   ChatsBloc() : super(ChatsState.init()) {
     on<ChatInitEvent>(
-      (event, emit) async {
-        await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
-            FireStoreResponse().getChats(event.senderId, event.receiverId),
-            onData: ((data) {
-          List<Chat> tmp = [];
-          for (int i = 0; i < data.docs.length; i++) {
-            if ([event.senderId, event.receiverId]
-                .contains(data.docs[i].data()["receiverId"])) {
-              tmp.add(Chat(
-                  senderId: data.docs[i].data()["senderId"],
-                  receiverId: data.docs[i].data()["receiverId"],
-                  timeStamp: data.docs[i].data()["dateTime"],
-                  message: data.docs[i].data()["message"]));
-            }
-          }
-          emit(ChatsState.loaded(tmp));
-
-          //  log(tmp.toString());
-        }));
-      },
+      _onInitEvent,
       transformer: concurrent(),
     );
-
     on<ChatAddGetMessageEvent>(
-      (event, emit) {
-        fireStoreService.addNewChat(
-            event.sender, event.receiver, event.message);
-        state.chats.add(Chat(
-            senderId: event.sender,
-            receiverId: event.receiver,
-            timeStamp: Timestamp.now(),
-            message: event.message));
-
-        emit(ChatsState.loaded(state.chats));
-      },
+      _onAddGetMessage,
     );
+  }
+  FutureOr<void> _onInitEvent(
+      ChatInitEvent event, Emitter<ChatsState> emit) async {
+    await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
+        FireStoreResponse().getChats(event.senderId, event.receiverId),
+        onData: ((data) {
+      List<Chat> tmp = [];
+      data.docs.forEach(((element) {
+        if ([event.senderId, event.receiverId]
+            .contains(element.data()["receiverId"])) {
+          tmp.add(Chat.fromJson(element.data()));
+        }
+      }));
+      emit(ChatsState.loaded(tmp));
+
+      //  log(tmp.toString());
+    }));
+  }
+
+  FutureOr<void> _onAddGetMessage(
+      ChatAddGetMessageEvent event, Emitter<ChatsState> emit) {
+    fireStoreService.addNewChat(
+        event.chat.senderId, event.chat.receiverId, event.chat.message);
+    state.chats.add(event.chat);
+
+    emit(ChatsState.loaded(state.chats));
   }
 }

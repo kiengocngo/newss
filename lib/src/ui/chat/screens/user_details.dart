@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
+import 'package:news_app/src/models/recent_conversation.dart';
 
 // ignore: must_be_immutable
 class UserDetails extends StatelessWidget {
@@ -81,16 +82,19 @@ class UserDetails extends StatelessWidget {
                             FriendRequestEventSubmit(
                                 firstUid: currentUserUid,
                                 secondUid: detailsUserUid));
-                        context.read<ConversationsBloc>().add(
-                            ConversationsAddNewMessage(
-                                senderId: currentUserUid,
-                                receiverId: detailsUserUid,
-                                senderName: currentUserName,
-                                receiverName: detailsUserName,
-                                senderImage: image,
-                                receiverImage: detailsUserImage,
-                                message: "You guys are friends, have a chat",
-                                timestamp: Timestamp.now()));
+                        context
+                            .read<ConversationsBloc>()
+                            .add(ConversationsAddNewMessage(
+                              recentConversation: RecentConversation(
+                                  senderId: currentUserUid,
+                                  receiverId: detailsUserUid,
+                                  senderName: currentUserName,
+                                  receiverName: detailsUserName,
+                                  senderBase64Image: image,
+                                  receiverBase64Image: detailsUserImage,
+                                  message: "You guys are friends, have a chat",
+                                  dateTime: Timestamp.now()),
+                            ));
                       },
                       child: const Text("Accept ?"),
                     );

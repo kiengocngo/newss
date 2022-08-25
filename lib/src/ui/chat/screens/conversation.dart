@@ -36,7 +36,6 @@ class ConversationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: InkWell(
                   onTap: () {
-                    log("this is uid:   $uid");
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -74,7 +73,7 @@ class ConversationScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: state.conversations.length,
                       itemBuilder: ((context, index) {
-                        return RecentConversation(
+                        return RecentConversationScreen(
                           senderId: uid,
                           receiverId: state.currentUser ==
                                   state.conversations[index].senderId

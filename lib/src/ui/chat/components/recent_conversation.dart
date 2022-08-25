@@ -6,18 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
+import 'package:news_app/src/models/details_screen_model.dart';
 import 'package:news_app/src/ui/chat/screens/details.dart';
 
 import '../../../../services/firebase_services/firestore_services.dart';
 
 // ignore: must_be_immutable
-class RecentConversation extends StatelessWidget {
+class RecentConversationScreen extends StatelessWidget {
   String userImage;
   String senderId;
   String receiverId;
   String message;
   String conversationsUserName;
-  RecentConversation({
+  RecentConversationScreen({
     Key? key,
     required this.userImage,
     required this.senderId,
@@ -45,12 +46,14 @@ class RecentConversation extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => DetailsScreen(
-                        userUid: senderId,
-                        friendUid: receiverId,
-                        userName: tmp.data[0].name,
-                        friendName: conversationsUserName,
-                        friendImage: userImage,
-                        userImage: tmp.data[0].base64Image,
+                        detailsModel: DetailsModel(
+                          userUid: senderId,
+                          friendUid: receiverId,
+                          userName: tmp.data[0].name,
+                          friendName: conversationsUserName,
+                          friendImage: userImage,
+                          userImage: tmp.data[0].base64Image,
+                        ),
                       )),
             );
           },

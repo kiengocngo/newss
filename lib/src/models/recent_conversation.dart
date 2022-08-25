@@ -26,8 +26,8 @@ class RecentConversation {
         receiverId: json["receiverId"],
         senderName: json["senderName"],
         receiverName: json["receiverName"],
-        senderBase64Image: json["senderImage"],
-        receiverBase64Image: json["receiverImage"],
+        senderBase64Image: json["senderBase64Image"],
+        receiverBase64Image: json["receiverBase64Image"],
         dateTime: json["dateTime"],
         message: json["message"]);
   }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +72,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
                                   ),
                                   Text(
-                                    widget.detailsModel. friendName,
+                                    widget.detailsModel.friendName,
                                     style: const TextStyle(
                                         fontSize: 30, color: Colors.white),
                                   ),
@@ -83,7 +82,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           );
                         } else {
                           if (state.chats[index - 1].senderId ==
-                              widget.detailsModel. userUid) {
+                              widget.detailsModel.userUid) {
                             {
                               return SenderMessage(
                                   timeStamp: state.chats[index - 1].timeStamp,
@@ -134,11 +133,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             .add(ConversationsAddNewMessage(
                                 recentConversation: RecentConversation(
                               senderId: widget.detailsModel.userUid,
-                              receiverId:widget.detailsModel.friendUid,
+                              receiverId: widget.detailsModel.friendUid,
                               senderName: widget.detailsModel.userName,
                               receiverName: widget.detailsModel.friendName,
-                              senderBase64Image:widget.detailsModel.userImage,
-                              receiverBase64Image: widget.detailsModel.friendImage,
+                              senderBase64Image: widget.detailsModel.userImage,
+                              receiverBase64Image:
+                                  widget.detailsModel.friendImage,
                               message: _sendController.text,
                               dateTime: Timestamp.now(),
                             )));

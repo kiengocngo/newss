@@ -9,6 +9,15 @@ class AuthResponse {
   });
 }
 
+class FriendsListResponse {
+  bool isSuccess;
+  List<String> friends;
+  FriendsListResponse({
+    required this.isSuccess,
+    required this.friends,
+  });
+}
+
 class SearchResponse {
   bool isSuccess;
   List<MyUser> data;

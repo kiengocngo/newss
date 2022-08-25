@@ -1,7 +1,5 @@
 part of 'chats_bloc.dart';
 
-
-
 // ignore: must_be_immutable
 class ChatsState extends Equatable {
   CustomStatus chatStatus;

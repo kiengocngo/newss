@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
@@ -13,31 +12,49 @@ part 'friend_request_state.dart';
 class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
   FriendRequestBloc() : super(FriendRequestState.init()) {
     on<FriendRequestEventInit>(_onFriendRequestInit);
-    on<FriendRequestEventSubmit>((event, emit) async {
-      SearchResponse firstUser =
-          await FireStoreService().getUserByUid(event.firstUid);
-      SearchResponse secondUser =
-          await FireStoreService().getUserByUid(event.secondUid);
-      log("1 ${firstUser.data[0].uid}  ${secondUser.data[0].uid}");
-      if (!firstUser.data[0].friends.contains(event.secondUid) &&
-          !secondUser.data[0].friends.contains(event.firstUid)) {
+    on<FriendRequestEventSubmit>(_onFriendRequestSubmit);
+  }
+
+  _onFriendRequestSubmit(
+      FriendRequestEventSubmit event, Emitter<FriendRequestState> emit) async {
+    SearchResponse firstUser =
+        await FireStoreService().getUserByUid(event.firstUid);
+    SearchResponse secondUser =
+        await FireStoreService().getUserByUid(event.secondUid);
+    List<dynamic> firstUserList = firstUser.data[0].friends;
+    List<dynamic> secondUserList = secondUser.data[0].friends;
+
+    // ignore: unused_local_variable
+    int friendsCase = (firstUserList.contains(event.secondUid) ? 1 : 0) +
+        (secondUserList.contains(event.firstUid) ? 1 : 0);
+
+    switch (friendsCase) {
+      case 0:
+        // no request
         emit(FriendRequestState.noRequest());
-        firstUser.data[0].friends.add(event.secondUid);
-        FireStoreService().fixUserInfo(
-            firstUser.data[0].uid, "friends", firstUser.data[0].friends);
+        firstUserList.add(event.secondUid);
+        FireStoreService()
+            .fixUserInfo(firstUser.data[0].uid, "friends", firstUserList);
         emit(FriendRequestState.firstRequest());
-      } else if (firstUser.data[0].friends.contains(event.secondUid) &&
-          !secondUser.data[0].friends.contains(event.firstUid)) {
-        emit(FriendRequestState.firstRequest());
-      } else if (!firstUser.data[0].friends.contains(event.secondUid) &&
-          secondUser.data[0].friends.contains(event.firstUid)) {
-        emit(FriendRequestState.secondRequest());
-        firstUser.data[0].friends.add(event.secondUid);
-        FireStoreService().fixUserInfo(
-            firstUser.data[0].uid, "friends", firstUser.data[0].friends);
+        break;
+      case 1:
+        //1 send request cho 2
+        if (firstUserList.contains(event.secondUid)) {
+          emit(FriendRequestState.firstRequest());
+          break;
+        } else {
+          // 2 reuest doi 1 accept
+          emit(FriendRequestState.secondRequest());
+          firstUserList.add(event.secondUid);
+          FireStoreService()
+              .fixUserInfo(firstUser.data[0].uid, "friends", firstUserList);
+          emit(FriendRequestState.accept());
+          break;
+        }
+      default:
         emit(FriendRequestState.accept());
-      }
-    });
+        break;
+    }
   }
 
   FutureOr<void> _onFriendRequestInit(
@@ -46,18 +63,30 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
         await FireStoreService().getUserByUid(event.firstUid);
     SearchResponse secondUser =
         await FireStoreService().getUserByUid(event.secondUid);
-   
-    if (!firstUser.data[0].friends.contains(event.secondUid) &&
-        !secondUser.data[0].friends.contains(event.firstUid)) {
-      emit(FriendRequestState.noRequest());
-    } else if (firstUser.data[0].friends.contains(event.secondUid) &&
-        !secondUser.data[0].friends.contains(event.firstUid)) {
-      emit(FriendRequestState.firstRequest());
-    } else if (!firstUser.data[0].friends.contains(event.secondUid) &&
-        secondUser.data[0].friends.contains(event.firstUid)) {
-      emit(FriendRequestState.secondRequest());
-    } else {
-      emit(FriendRequestState.accept());
+    List<dynamic> firstUserList = firstUser.data[0].friends;
+    List<dynamic> secondUserList = secondUser.data[0].friends;
+
+    // ignore: unused_local_variable
+    int friendsCase = (firstUserList.contains(event.secondUid) ? 1 : 0) +
+        (secondUserList.contains(event.firstUid) ? 1 : 0);
+
+    switch (friendsCase) {
+      case 0:
+        // no request
+        emit(FriendRequestState.noRequest());
+        break;
+      case 1:
+        //1 send request cho 2 hoac nguoc lai
+        if (firstUserList.contains(event.secondUid)) {
+          emit(FriendRequestState.firstRequest());
+          break;
+        } else {
+          emit(FriendRequestState.secondRequest());
+          break;
+        }
+      default:
+        emit(FriendRequestState.accept());
+        break;
     }
   }
 }

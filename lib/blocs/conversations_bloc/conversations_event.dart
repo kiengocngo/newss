@@ -19,7 +19,7 @@ class ConversationsAddNewMessage extends ConversationsEvent {
   final RecentConversation recentConversation;
 
   const ConversationsAddNewMessage({
-   required this.recentConversation,
+    required this.recentConversation,
   });
 
   @override

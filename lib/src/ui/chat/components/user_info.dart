@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,6 @@ class UserInfo extends StatelessWidget {
         context.read<FriendRequestBloc>().add(FriendRequestEventInit(
             firstUid: userUid, secondUid: detailUserUid));
         final tmp = await FireStoreService().getUserByUid(userUid);
-        log("this is data when run${tmp.data[0].uid}");
         Navigator.push(
           context,
           MaterialPageRoute(

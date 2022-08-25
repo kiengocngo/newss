@@ -60,10 +60,8 @@ class FireStoreService {
         .update({"message": message, "dateTime": Timestamp.now()});
   }
 
-  addNewConversations(
-      RecentConversation recentConversation) async {
-    await _instance.collection("Conversations").add(
-      recentConversation.toMap());
+  addNewConversations(RecentConversation recentConversation) async {
+    await _instance.collection("Conversations").add(recentConversation.toMap());
   }
 
   getAllUser() async {

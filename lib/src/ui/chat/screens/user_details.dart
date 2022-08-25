@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -64,16 +63,19 @@ class UserDetails extends StatelessWidget {
                   case FriendState.noRequest:
                     return ElevatedButton(
                         onPressed: () {
-                          log(currentUserUid);
-                          log(detailsUserUid);
                           context.read<FriendRequestBloc>().add(
                               FriendRequestEventSubmit(
                                   firstUid: currentUserUid,
                                   secondUid: detailsUserUid));
                         },
-                        child: const Text("Add"));
+                        child: const Text(
+                          "Add",
+                        ));
                   case FriendState.firstRequest:
-                    return const Text("Request has sended");
+                    return const Text(
+                      "Request has sended",
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    );
 
                   case FriendState.seccondRequest:
                     return ElevatedButton(
@@ -96,11 +98,17 @@ class UserDetails extends StatelessWidget {
                                   dateTime: Timestamp.now()),
                             ));
                       },
-                      child: const Text("Accept ?"),
+                      child: const Text(
+                        "Accept ?",
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
                     );
                   case FriendState.accept:
                     {
-                      return const Text("you guys are friend");
+                      return const Text(
+                        "you guys are friend",
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      );
                     }
                   default:
                     return const Icon(Icons.error);

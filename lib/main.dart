@@ -16,7 +16,7 @@ import 'package:news_app/bloc/news_topic/sport/news_sports_cubit.dart';
 import 'package:news_app/bloc/news_topic/technology/news_technology_cubit.dart';
 import 'bloc/news_for_you/news_topic_cubit.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

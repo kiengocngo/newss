@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +70,6 @@ class FriendSearch extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: state.users.length,
                         itemBuilder: (context, index) {
-                          log("uid in friend search $uid");
                           return UserInfo(
                             userUid: uid,
                             userName: state.users[index].name,

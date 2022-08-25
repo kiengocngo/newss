@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'dart:async';
 
 // ignore: depend_on_referenced_packages
@@ -24,8 +25,7 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       _onAddGetMessage,
     );
   }
-  FutureOr<void> _onInitEvent(
-      ChatInitEvent event, Emitter<ChatsState> emit) async {
+  _onInitEvent(ChatInitEvent event, Emitter<ChatsState> emit) async {
     await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
         FireStoreResponse().getChats(event.senderId, event.receiverId),
         onData: ((data) {
@@ -37,13 +37,10 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         }
       }));
       emit(ChatsState.loaded(tmp));
-
-      //  log(tmp.toString());
     }));
   }
 
-  FutureOr<void> _onAddGetMessage(
-      ChatAddGetMessageEvent event, Emitter<ChatsState> emit) {
+  _onAddGetMessage(ChatAddGetMessageEvent event, Emitter<ChatsState> emit) {
     fireStoreService.addNewChat(
         event.chat.senderId, event.chat.receiverId, event.chat.message);
     state.chats.add(event.chat);

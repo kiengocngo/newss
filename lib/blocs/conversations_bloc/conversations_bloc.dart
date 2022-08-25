@@ -1,6 +1,7 @@
-// ignore: depend_on_referenced_packages
+// ignore: depend_on_referenced_packages, unused_import
 import 'dart:async';
 
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,39 +23,23 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
     );
     on<ConversationSubmit>(
       _onConversationSubmit,
-    );
-  }
-  FutureOr<void> _onConversationSubmit(
-      ConversationSubmit event, Emitter<ConversationsState> emit) async {
-    await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
-      FireStoreResponse().getConversations(event.currentUser),
-      onData: (data) {
-        List<RecentConversation> tmp = [];
-        for (int i = 0; i < data.docs.length; i++) {
-          //add model from json
-          if (data.docs[i].data()["senderId"] == event.currentUser ||
-              data.docs[i].data()["receiverId"] == event.currentUser) {
-            tmp.add(RecentConversation.fromJson(data.docs[i].data()));
-          }
-        }
-        emit(ConversationsState.loaded(event.currentUser, tmp));
-      },
+      transformer: concurrent(),
     );
   }
 
-  FutureOr<void> _onConversationsAddNewMessage(ConversationsAddNewMessage event,
+  _onConversationsAddNewMessage(ConversationsAddNewMessage event,
       Emitter<ConversationsState> emit) async {
     var data = await service.getConversations(
         event.recentConversation.senderId, event.recentConversation.receiverId);
     List<QueryDocumentSnapshot<Map<String, dynamic>>> tmp = [];
-    data.docs.forEach((element) {
+    for (var element in data.docs) {
       if ([
         event.recentConversation.senderId,
         event.recentConversation.receiverId
       ].contains(element.data()["receiverId"])) {
         tmp.add(element);
       }
-    });
+    }
 
     if (tmp.isEmpty) {
       service.addNewConversations(event.recentConversation);
@@ -64,5 +49,21 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
     state.conversations.add(event.recentConversation);
     emit(ConversationsState.loaded(
         event.recentConversation.senderId, state.conversations));
+  }
+
+  _onConversationSubmit(
+      ConversationSubmit event, Emitter<ConversationsState> emit) async {
+    await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
+        FireStoreResponse().getConversations(event.currentUser),
+        onData: (data) {
+      List<RecentConversation> tmp = [];
+      for (var element in data.docs) {
+        if (element.data()['senderId'] == event.currentUser ||
+            element.data()['receiverId'] == event.currentUser) {
+          tmp.add(RecentConversation.fromJson(element.data()));
+        }
+      }
+      emit(ConversationsState.loaded(event.currentUser, tmp));
+    });
   }
 }

@@ -22,11 +22,9 @@ class ChatInitEvent extends ChatsEvent {
 class ChatAddGetMessageEvent extends ChatsEvent {
   final Chat chat;
 
-  ChatAddGetMessageEvent({
-   required this.chat,
+  const ChatAddGetMessageEvent({
+    required this.chat,
   });
   @override
-  List<Object> get props => [
-       chat
-      ];
+  List<Object> get props => [chat];
 }

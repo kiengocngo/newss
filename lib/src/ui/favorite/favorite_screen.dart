@@ -25,7 +25,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   void _deleteCategory(String category) {
-    SQLHelper.deleteItem(category).then((value) => Navigator.pop(context));
+    SQLHelper.deleteCateogry(category).then((value) => Navigator.pop(context));
     _refreshJournals();
   }
 

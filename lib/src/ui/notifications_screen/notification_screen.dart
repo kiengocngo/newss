@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/components/noti_item/noti_items.dart';
 import 'package:news_app/src/models/notifications_model/notifications_model.dart';
-import 'package:news_app/src/ui/home/home_screen.dart';
 import 'package:news_app/src/ui/notifications_screen/notifications_services.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -17,18 +16,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   late final LocalNotificationService service;
   List<PushNotifications> list = [
     PushNotifications(
-      routeName: '',
+      routeName: 'settings',
       title: 'Thong bao A',
       body: 'Noi dung thong bao A',
-      //type: 'A',
-      time: DateTime.now(),
-      image:
-          'https://thumbs.dreamstime.com/z/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg',
-    ),
-    PushNotifications(
-      routeName: '',
-      title: 'Thong bao B',
-      body: 'Noi dung thong bao B',
       //type: 'A',
       time: DateTime.now(),
       image:
@@ -115,7 +105,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Column(
         children: [
           SizedBox(
@@ -137,7 +127,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               onPressed: () {
                 service.showNotification(id: 0, title: 'Title', body: 'body');
               },
-              child: Text('Click'))
+              child: const Text('Click'))
         ],
       ),
     ));

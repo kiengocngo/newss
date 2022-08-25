@@ -64,20 +64,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       itemBuilder: (context, index) {
                         if (state.chats[index].senderId == widget.userUid) {
                           {
-                            return Column(
-                              children: [
-                                SenderMessage(
-                                    sendMessage: state.chats[index].message),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    DateFormat.yMd().add_jm().format(
-                                        state.chats[index].timeStamp.toDate()),
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ],
-                            );
+                            return SenderMessage(
+                                timeStamp: state.chats[index].timeStamp,
+                                sendMessage: state.chats[index].message);
                           }
                         } else {
                           return Column(

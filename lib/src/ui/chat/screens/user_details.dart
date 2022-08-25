@@ -30,7 +30,14 @@ class UserDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          detailsUserName,
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -39,7 +46,7 @@ class UserDetails extends StatelessWidget {
             Text(detailsUserUid),
             ClipOval(
               child: SizedBox.fromSize(
-                size: const Size(50, 50), // Image radius
+                size: const Size(100, 100), // Image radius
                 child: Image.memory(
                   base64.decode(
                     detailsUserImage,
@@ -47,6 +54,10 @@ class UserDetails extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
+            ),
+            Text(
+              detailsUserName,
+              style: const TextStyle(fontSize: 30, color: Colors.white),
             ),
             BlocBuilder<FriendRequestBloc, FriendRequestState>(
               builder: (context, state) {

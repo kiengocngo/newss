@@ -1,12 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class SenderMessage extends StatelessWidget {
   String sendMessage;
-
+  Timestamp timeStamp;
   SenderMessage({
     Key? key,
     required this.sendMessage,
+    required this.timeStamp,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,13 @@ class SenderMessage extends StatelessWidget {
                     style: const TextStyle(color: Colors.white),
                   ),
                 )),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                DateFormat.yMd().add_jm().format(timeStamp.toDate()),
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),

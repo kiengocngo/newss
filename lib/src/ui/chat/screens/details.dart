@@ -14,7 +14,6 @@ import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
 // ignore: must_be_immutable
 class DetailsScreen extends StatefulWidget {
- 
   DetailsModel detailsModel;
   DetailsScreen({
     Key? key,
@@ -27,7 +26,7 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   final TextEditingController _sendController = TextEditingController();
-   final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +105,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 decoration: InputDecoration(
                   filled: true,
                   suffixIcon: IconButton(
-                      onPressed: _addConversation(context),
+                      onPressed: () {
+                        _addConversation(context);
+                      },
                       icon: const Icon(Icons.send)),
                   fillColor: Colors.grey,
                   contentPadding: const EdgeInsets.only(left: 4),
@@ -148,11 +149,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     _sendController.clear();
     setState(() {
-     if(_scrollController.hasClients)
-     {
-       _scrollController
-          .jumpTo(_scrollController.position.maxScrollExtent);
-     }
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      }
     });
   }
 }

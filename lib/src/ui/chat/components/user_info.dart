@@ -28,7 +28,9 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _onChangeToUserDetails(context),
+      onTap: () {
+        _onChangeToUserDetails(context);
+      },
       child: Row(
         children: [
           ClipOval(

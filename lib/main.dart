@@ -51,9 +51,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-
         initialRoute: '/enter_chat_room',
-
         routes: AppRoutes.routes,
       ),
     );

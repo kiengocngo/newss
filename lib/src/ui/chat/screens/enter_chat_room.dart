@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/screens/conversation.dart';
 
-
 class EnterChatRoom extends StatelessWidget {
   final _controller = TextEditingController();
   EnterChatRoom({super.key});

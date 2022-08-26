@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,13 +9,12 @@ import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/models/chats/user_details_screen_model.dart';
 import 'package:news_app/src/ui/chat/screens/user_details.dart';
 
-
 class UserInfo extends StatelessWidget {
- final  String userName;
- final String userImage;
- final String userUid;
- final String detailUserUid;
- const UserInfo({
+  final String userName;
+  final String userImage;
+  final String userUid;
+  final String detailUserUid;
+  const UserInfo({
     Key? key,
     required this.userName,
     required this.userImage,
@@ -58,8 +55,8 @@ class UserInfo extends StatelessWidget {
   }
 
   _onChangeToUserDetails(BuildContext context) async {
-    context.read<FriendRequestBloc>().add(
-        FriendRequestEventInit(firstUid: userUid, secondUid: detailUserUid));
+    context.read<FriendRequestBloc>().add(FriendRequestEventInit(
+        currentUserUid: userUid, targetUserUid: detailUserUid));
     final tmp = await FireStoreService().getUserByUid(userUid);
     final UserDetailsModel userDetailsModel = UserDetailsModel(
       currentUserName: tmp.data[0].name,

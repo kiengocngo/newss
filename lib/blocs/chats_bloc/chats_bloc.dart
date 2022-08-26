@@ -21,8 +21,8 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       _onAddGetMessage,
     );
   }
-  _onInitEvent(ChatInitEvent event, Emitter<ChatsState> emit){
-     emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
+  _onInitEvent(ChatInitEvent event, Emitter<ChatsState> emit) {
+    emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
         FireStoreResponse().getChats(event.senderId, event.receiverId),
         onData: ((data) {
       List<Chat> tmp = [];

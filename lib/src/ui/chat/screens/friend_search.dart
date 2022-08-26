@@ -8,7 +8,6 @@ import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/components/user_info.dart';
 
-
 class FriendSearch extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
   final String uid;

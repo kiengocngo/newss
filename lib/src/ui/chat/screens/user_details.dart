@@ -54,11 +54,13 @@ class UserDetails extends StatelessWidget {
                         onPressed: () {
                           context.read<FriendRequestBloc>().add(
                               FriendRequestEventSubmit(
-                                  firstUid: userDetailsModel.currentUserUid,
-                                  secondUid: userDetailsModel.detailsUserUid));
+                                  currentUserUid:
+                                      userDetailsModel.currentUserUid,
+                                  targetUserUid:
+                                      userDetailsModel.detailsUserUid));
                         },
                         child: const Text(
-                          "Add",
+                          "Add to friend list",
                         ));
                   case FriendState.firstRequest:
                     return const Text(
@@ -71,8 +73,9 @@ class UserDetails extends StatelessWidget {
                       onPressed: () {
                         context.read<FriendRequestBloc>().add(
                             FriendRequestEventSubmit(
-                                firstUid: userDetailsModel.currentUserUid,
-                                secondUid: userDetailsModel.detailsUserUid));
+                                currentUserUid: userDetailsModel.currentUserUid,
+                                targetUserUid:
+                                    userDetailsModel.detailsUserUid));
                         context
                             .read<ConversationsBloc>()
                             .add(ConversationsAddNewMessage(

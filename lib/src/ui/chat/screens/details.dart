@@ -12,9 +12,8 @@ import 'package:news_app/src/ui/chat/components/receiver_info.dart';
 import 'package:news_app/src/ui/chat/components/receiver_message.dart';
 import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
-
 class DetailsScreen extends StatefulWidget {
- final DetailsModel detailsModel;
+  final DetailsModel detailsModel;
   const DetailsScreen({
     Key? key,
     required this.detailsModel,

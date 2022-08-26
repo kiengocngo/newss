@@ -1,3 +1,4 @@
+import 'package:news_app/src/models/chats/friends_models.dart';
 import 'package:news_app/src/models/chats/my_user.dart';
 
 class AuthResponse {
@@ -24,5 +25,14 @@ class SearchResponse {
   SearchResponse({
     required this.isSuccess,
     required this.data,
+  });
+}
+
+class FriendsResponse {
+  bool isSuccess;
+  List<FriendModel> friendModel;
+  FriendsResponse({
+    required this.isSuccess,
+    required this.friendModel,
   });
 }

@@ -1,11 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/chats/auth_response.dart';
 import 'package:news_app/src/models/chats/chat.dart';
+import 'package:news_app/src/models/chats/friends_models.dart';
 import 'package:news_app/src/models/chats/my_user.dart';
 import 'package:news_app/src/models/chats/recent_conversation.dart';
 
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
+
+  addFriendsRequest(String currentUserUid, String targetUserUid) {
+    FriendModel friendModel = FriendModel(
+        requestUid: currentUserUid, acceptUid: targetUserUid, status: false);
+    _instance.collection("Friends").add(friendModel.toMap());
+  }
+
+  fixFriendRequest(String uid) {
+    _instance.collection("Friends").doc(uid).update({"status": true});
+  }
+
+  getFriends(String currentUserUid, String targetUserUid) {
+    return _instance
+        .collection("Friends")
+        .where("requestUid", whereIn: [currentUserUid, targetUserUid]).get();
+  }
 
   Future<SearchResponse> getUserByUid(String uid) async {
     try {

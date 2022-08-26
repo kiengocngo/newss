@@ -37,7 +37,7 @@ class RecentConversationScreen extends StatelessWidget {
           onTap: () async {
             final SearchResponse tmp =
                 await FireStoreService().getUserByUid(senderId);
-            
+
             context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));

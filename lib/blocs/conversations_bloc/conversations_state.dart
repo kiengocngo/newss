@@ -1,11 +1,10 @@
 part of 'conversations_bloc.dart';
 
-
 class ConversationsState extends Equatable {
   final String currentUser;
   final List<RecentConversation> conversations;
   final CustomStatus status;
- const  ConversationsState({
+  const ConversationsState({
     required this.currentUser,
     required this.conversations,
     required this.status,

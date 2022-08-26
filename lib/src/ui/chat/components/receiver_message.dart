@@ -4,12 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class ReceiverMessage extends StatelessWidget {
-final  String sendMessage;
- final   String base64Image;
- final   Timestamp timestamp;
-const  ReceiverMessage({
+  final String sendMessage;
+  final String base64Image;
+  final Timestamp timestamp;
+  const ReceiverMessage({
     Key? key,
     required this.timestamp,
     required this.sendMessage,

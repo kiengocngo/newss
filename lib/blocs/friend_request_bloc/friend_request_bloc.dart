@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/models/chats/auth_response.dart';
+import 'package:news_app/src/models/chats/friends_models.dart';
 
 part 'friend_request_event.dart';
 part 'friend_request_state.dart';
@@ -19,82 +21,63 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
 
   _onFriendRequestSubmit(
       FriendRequestEventSubmit event, Emitter<FriendRequestState> emit) async {
-    SearchResponse firstUser =
-        await FireStoreService().getUserByUid(event.firstUid);
-    SearchResponse secondUser =
-        await FireStoreService().getUserByUid(event.secondUid);
-    if (firstUser.isSuccess && secondUser.isSuccess) {
-      List<dynamic> firstUserList = firstUser.data.first.friends;
-      List<dynamic> secondUserList = secondUser.data.first.friends;
-
-      int firstCase = firstUserList.contains(event.secondUid) ? 1 : 0;
-      int secondCase = secondUserList.contains(event.firstUid) ? 2 : 0;
-      CustomCase friendsCase = CustomCase.values[firstCase | secondCase];
-      switch (friendsCase) {
-        case CustomCase.notRequest:
-          // no request
-          emit(const FriendRequestState.noRequest());
-          firstUserList.add(event.secondUid);
-          FireStoreService()
-              .fixUserInfo(firstUser.data.first.uid, "friends", firstUserList);
-          emit(const FriendRequestState.firstRequest());
-          break;
-        case CustomCase.request:
-          //1 send request cho 2
-          emit(const FriendRequestState.firstRequest());
-          break;
-        case CustomCase.acceptRequest:
-          // 2 request doi 1 accept
-          emit(const FriendRequestState.secondRequest());
-          firstUserList.add(event.secondUid);
-          FireStoreService()
-              .fixUserInfo(firstUser.data.first.uid, "friends", firstUserList);
-          emit(const FriendRequestState.accept());
-          break;
-
-        default:
-          emit(const FriendRequestState.accept());
-          break;
-      }
-    } else {
+    final QuerySnapshot<Map<String, dynamic>> data = await FireStoreService()
+        .getFriends(event.currentUserUid, event.targetUserUid);
+    if (data.docs.isEmpty) {
       emit(const FriendRequestState.noRequest());
+      FireStoreService()
+          .addFriendsRequest(event.currentUserUid, event.targetUserUid);
+      emit(const FriendRequestState.firstRequest());
+      return;
+    } else {
+      for (var element in data.docs) {
+        if (element.data()["acceptUid"] == event.currentUserUid ||
+            element.data()["acceptUid"] == event.targetUserUid) {
+          FriendModel friendModel = FriendModel.fromJson(element.data());
+          if (friendModel.status == true) {
+            emit(const FriendRequestState.accept());
+            return;
+          } else {
+            if (friendModel.requestUid == event.currentUserUid) {
+              emit(const FriendRequestState.firstRequest());
+              return;
+            } else {
+              emit(const FriendRequestState.secondRequest());
+              FireStoreService().fixFriendRequest(element.id);
+              return;
+            }
+          }
+        }
+      }
     }
   }
 
-  FutureOr<void> _onFriendRequestInit(
+  _onFriendRequestInit(
       FriendRequestEventInit event, Emitter<FriendRequestState> emit) async {
-    SearchResponse firstUser =
-        await FireStoreService().getUserByUid(event.firstUid);
-    SearchResponse secondUser =
-        await FireStoreService().getUserByUid(event.secondUid);
-    if (firstUser.isSuccess && secondUser.isSuccess) {
-      List<dynamic> firstUserList = firstUser.data.first.friends;
-      List<dynamic> secondUserList = secondUser.data.first.friends;
-
-      int firstCase = firstUserList.contains(event.secondUid) ? 1 : 0;
-      int secondCase = secondUserList.contains(event.firstUid) ? 2 : 0;
-      CustomCase friendsCase = CustomCase.values[firstCase | secondCase];
-
-      switch (friendsCase) {
-        case CustomCase.notRequest:
-          // no request
-          emit(const FriendRequestState.noRequest());
-          break;
-        case CustomCase.request:
-          //1 send request cho 2 hoac nguoc lai
-
-          emit(const FriendRequestState.firstRequest());
-          break;
-        case CustomCase.acceptRequest:
-          emit(const FriendRequestState.secondRequest());
-          break;
-
-        default:
-          emit(const FriendRequestState.accept());
-          break;
-      }
-    } else {
+    final QuerySnapshot<Map<String, dynamic>> data = await FireStoreService()
+        .getFriends(event.currentUserUid, event.targetUserUid);
+    if (data.docs.isEmpty) {
       emit(const FriendRequestState.noRequest());
+      return;
+    } else {
+      for (var element in data.docs) {
+        if (element.data()["acceptUid"] == event.currentUserUid ||
+            element.data()["acceptUid"] == event.targetUserUid) {
+          FriendModel friendModel = FriendModel.fromJson(element.data());
+          if (friendModel.status == true) {
+            emit(const FriendRequestState.accept());
+            return;
+          } else {
+            if (friendModel.requestUid == event.currentUserUid) {
+              emit(const FriendRequestState.firstRequest());
+              return;
+            } else {
+              emit(const FriendRequestState.secondRequest());
+              return;
+            }
+          }
+        }
+      }
     }
   }
 }

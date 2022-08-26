@@ -1,6 +1,5 @@
 part of 'chats_bloc.dart';
 
-
 class ChatsState extends Equatable {
   final CustomStatus chatStatus;
   final List<Chat> chats;

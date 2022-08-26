@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class TextInputField extends StatelessWidget {
   final String text;
   final TextInputType type;

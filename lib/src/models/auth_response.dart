@@ -25,4 +25,6 @@ class SearchResponse {
     required this.isSuccess,
     required this.data,
   });
+
+
 }

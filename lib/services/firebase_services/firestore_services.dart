@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:news_app/src/models/auth_response.dart';
-import 'package:news_app/src/models/chat.dart';
-import 'package:news_app/src/models/my_user.dart';
-import 'package:news_app/src/models/recent_conversation.dart';
+import 'package:news_app/src/models/chats/auth_response.dart';
+import 'package:news_app/src/models/chats/chat.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
+import 'package:news_app/src/models/chats/recent_conversation.dart';
 
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
@@ -33,10 +33,10 @@ class FireStoreService {
           .where("name", isEqualTo: name)
           .get();
       List<MyUser> tmp = [];
-      // ignore: avoid_function_literals_in_foreach_calls
-      data.docs.forEach(
-        (element) => tmp.add(MyUser.fromJson(element.data())),
-      );
+
+      for (var element in data.docs) {
+        tmp.add(MyUser.fromJson(element.data()));
+      }
       return SearchResponse(isSuccess: true, data: tmp);
     } catch (e) {
       return SearchResponse(isSuccess: false, data: []);

@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
-import 'package:news_app/src/models/recent_conversation.dart';
-import 'package:news_app/src/models/user_details_screen_model.dart';
+import 'package:news_app/src/models/chats/recent_conversation.dart';
+import 'package:news_app/src/models/chats/user_details_screen_model.dart';
 
 class UserDetails extends StatelessWidget {
   final UserDetailsModel userDetailsModel;

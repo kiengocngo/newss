@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
-import 'package:news_app/src/models/details_screen_model.dart';
+import 'package:news_app/src/models/chats/auth_response.dart';
+import 'package:news_app/src/models/chats/details_screen_model.dart';
 import 'package:news_app/src/ui/chat/screens/details.dart';
 
 import '../../../../services/firebase_services/firestore_services.dart';
@@ -33,10 +34,10 @@ class RecentConversationScreen extends StatelessWidget {
       child: BlocListener<ChatsBloc, ChatsState>(
         listener: (context, state) {},
         child: InkWell(
-          // ignore: duplicate_ignore
           onTap: () async {
-            var tmp = await FireStoreService().getUserByUid(senderId);
-
+            final SearchResponse tmp =
+                await FireStoreService().getUserByUid(senderId);
+            
             context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
@@ -78,13 +79,15 @@ class RecentConversationScreen extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           child: Text(
                             conversationsUserName,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
                           )),
                       Text(
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         message,
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ],
                   ),

@@ -1,4 +1,4 @@
-import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
 
 class AuthResponse {
   bool isSuccess;

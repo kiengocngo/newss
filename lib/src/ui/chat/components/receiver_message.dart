@@ -4,12 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
+
 class ReceiverMessage extends StatelessWidget {
-  String sendMessage;
-  String base64Image;
-  Timestamp timestamp;
-  ReceiverMessage({
+final  String sendMessage;
+ final   String base64Image;
+ final   Timestamp timestamp;
+const  ReceiverMessage({
     Key? key,
     required this.timestamp,
     required this.sendMessage,

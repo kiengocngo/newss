@@ -1,10 +1,10 @@
 import 'dart:async';
 
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
-import 'package:news_app/src/models/auth_response.dart';
+import 'package:news_app/src/models/chats/auth_response.dart';
 
 part 'friend_request_event.dart';
 part 'friend_request_state.dart';
@@ -12,7 +12,7 @@ part 'friend_request_state.dart';
 enum CustomCase { notRequest, request, acceptRequest, accepted }
 
 class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
-  FriendRequestBloc() : super(FriendRequestState.init()) {
+  FriendRequestBloc() : super(const FriendRequestState.init()) {
     on<FriendRequestEventInit>(_onFriendRequestInit);
     on<FriendRequestEventSubmit>(_onFriendRequestSubmit);
   }
@@ -33,31 +33,31 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
       switch (friendsCase) {
         case CustomCase.notRequest:
           // no request
-          emit(FriendRequestState.noRequest());
+          emit(const FriendRequestState.noRequest());
           firstUserList.add(event.secondUid);
           FireStoreService()
               .fixUserInfo(firstUser.data.first.uid, "friends", firstUserList);
-          emit(FriendRequestState.firstRequest());
+          emit(const FriendRequestState.firstRequest());
           break;
         case CustomCase.request:
           //1 send request cho 2
-          emit(FriendRequestState.firstRequest());
+          emit(const FriendRequestState.firstRequest());
           break;
         case CustomCase.acceptRequest:
           // 2 request doi 1 accept
-          emit(FriendRequestState.secondRequest());
+          emit(const FriendRequestState.secondRequest());
           firstUserList.add(event.secondUid);
           FireStoreService()
               .fixUserInfo(firstUser.data.first.uid, "friends", firstUserList);
-          emit(FriendRequestState.accept());
+          emit(const FriendRequestState.accept());
           break;
 
         default:
-          emit(FriendRequestState.accept());
+          emit(const FriendRequestState.accept());
           break;
       }
     } else {
-      emit(FriendRequestState.noRequest());
+      emit(const FriendRequestState.noRequest());
     }
   }
 
@@ -78,23 +78,23 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
       switch (friendsCase) {
         case CustomCase.notRequest:
           // no request
-          emit(FriendRequestState.noRequest());
+          emit(const FriendRequestState.noRequest());
           break;
         case CustomCase.request:
           //1 send request cho 2 hoac nguoc lai
 
-          emit(FriendRequestState.firstRequest());
+          emit(const FriendRequestState.firstRequest());
           break;
         case CustomCase.acceptRequest:
-          emit(FriendRequestState.secondRequest());
+          emit(const FriendRequestState.secondRequest());
           break;
 
         default:
-          emit(FriendRequestState.accept());
+          emit(const FriendRequestState.accept());
           break;
       }
     } else {
-      emit(FriendRequestState.noRequest());
+      emit(const FriendRequestState.noRequest());
     }
   }
 }

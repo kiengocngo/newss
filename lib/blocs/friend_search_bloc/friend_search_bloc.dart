@@ -1,10 +1,11 @@
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
+
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/components/constant.dart';
-import 'package:news_app/src/models/auth_response.dart';
-import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/chats/auth_response.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
 
 part 'friend_search_event.dart';
 part 'friend_search_state.dart';

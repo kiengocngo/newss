@@ -1,10 +1,9 @@
 part of 'friend_search_bloc.dart';
 
-// ignore: must_be_immutable
 class FriendSearchState extends Equatable {
-  CustomStatus searchStatus;
-  List<MyUser> users;
-  FriendSearchState({
+  final CustomStatus searchStatus;
+  final List<MyUser> users;
+  const FriendSearchState({
     required this.searchStatus,
     required this.users,
   });
@@ -12,7 +11,7 @@ class FriendSearchState extends Equatable {
   FriendSearchState.init() : this(searchStatus: CustomStatus.init, users: []);
   FriendSearchState.loading()
       : this(searchStatus: CustomStatus.loading, users: []);
-  FriendSearchState.loaded(List<MyUser> users)
+  const FriendSearchState.loaded(List<MyUser> users)
       : this(searchStatus: CustomStatus.loaded, users: users);
   FriendSearchState.error() : this(searchStatus: CustomStatus.error, users: []);
 

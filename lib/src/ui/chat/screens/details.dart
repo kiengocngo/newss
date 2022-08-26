@@ -5,17 +5,17 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/src/components/constant.dart';
-import 'package:news_app/src/models/chat.dart';
-import 'package:news_app/src/models/details_screen_model.dart';
-import 'package:news_app/src/models/recent_conversation.dart';
+import 'package:news_app/src/models/chats/chat.dart';
+import 'package:news_app/src/models/chats/details_screen_model.dart';
+import 'package:news_app/src/models/chats/recent_conversation.dart';
 import 'package:news_app/src/ui/chat/components/receiver_info.dart';
 import 'package:news_app/src/ui/chat/components/receiver_message.dart';
 import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
-// ignore: must_be_immutable
+
 class DetailsScreen extends StatefulWidget {
-  DetailsModel detailsModel;
-  DetailsScreen({
+ final DetailsModel detailsModel;
+  const DetailsScreen({
     Key? key,
     required this.detailsModel,
   }) : super(key: key);
@@ -101,7 +101,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 textAlign: TextAlign.start,
                 enableInteractiveSelection: false,
                 obscureText: false,
-                // ignore: prefer_const_constructors
                 decoration: InputDecoration(
                   filled: true,
                   suffixIcon: IconButton(

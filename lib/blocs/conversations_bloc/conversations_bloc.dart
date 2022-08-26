@@ -44,7 +44,7 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
     if (tmp.isEmpty) {
       service.addNewConversations(event.recentConversation);
     } else {
-      service.fixConversation(tmp[0].id, event.recentConversation.message);
+      service.fixConversation(tmp.first.id, event.recentConversation.message);
     }
     state.conversations.add(event.recentConversation);
     emit(ConversationsState.loaded(

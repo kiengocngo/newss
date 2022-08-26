@@ -11,14 +11,14 @@ import 'package:news_app/src/ui/chat/screens/details.dart';
 
 import '../../../../services/firebase_services/firestore_services.dart';
 
-// ignore: must_be_immutable
+
 class RecentConversationScreen extends StatelessWidget {
-  String userImage;
-  String senderId;
-  String receiverId;
-  String message;
-  String conversationsUserName;
-  RecentConversationScreen({
+ final String userImage;
+ final  String senderId;
+ final  String receiverId;
+ final  String message;
+ final  String conversationsUserName;
+const RecentConversationScreen({
     Key? key,
     required this.userImage,
     required this.senderId,
@@ -75,7 +75,6 @@ class RecentConversationScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Align(
                           alignment: Alignment.topLeft,

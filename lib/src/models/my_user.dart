@@ -31,4 +31,16 @@ class MyUser {
         address: json["address"],
         base64Image: json["base64Image"]);
   }
+  factory MyUser.defaultUser() {
+    return MyUser(
+      uid: "",
+      name: "",
+      email: "",
+      password: "",
+      address: "",
+      base64Image: "",
+      phoneNumber: "",
+      friends: [],
+    );
+  }
 }

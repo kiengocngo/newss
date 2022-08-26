@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
+
 class SenderMessage extends StatelessWidget {
-  String sendMessage;
-  Timestamp timeStamp;
-  SenderMessage({
+  final String sendMessage;
+  final Timestamp timeStamp;
+  const SenderMessage({
     Key? key,
     required this.sendMessage,
     required this.timeStamp,

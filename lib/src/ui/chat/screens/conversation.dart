@@ -47,16 +47,16 @@ class ConversationScreen extends StatelessWidget {
                         ),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20))),
-                    // ignore: prefer_const_literals_to_create_immutables
-                    child: Row(children: [
-                      const Padding(
+              
+                    child: Row(children: const [
+                      Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
                         child: Icon(
                           Icons.search,
                           color: Colors.grey,
                         ),
                       ),
-                      const Text(
+                      Text(
                         "Find your friend",
                         style: TextStyle(color: Colors.grey, fontSize: 20),
                       )

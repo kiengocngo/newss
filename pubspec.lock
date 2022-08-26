@@ -170,8 +170,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  http:
+  get:
     dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.6.5"
+  http:
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -234,7 +241,7 @@ packages:
     source: hosted
     version: "1.0.2"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.dartlang.org"
@@ -344,7 +351,7 @@ packages:
     source: hosted
     version: "1.8.2"
   sqflite:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sqflite
       url: "https://pub.dartlang.org"

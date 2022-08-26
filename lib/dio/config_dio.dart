@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:news_app/dio/dio_exception.dart';
-import 'package:news_app/src/models/base_model.dart';
-import 'package:news_app/src/models/news/news_model.dart';
-import 'package:news_app/src/models/news/results_model.dart';
-import 'end_point.dart';
+import '../src/models/model.dart';
+import 'dio.dart';
 
 class DioClient {
   DioClient()
@@ -42,10 +39,10 @@ class DioClient {
     }
   }
 
-  Future<BaseModel> fetchNewsForYou() async {
+  Future<BaseModel> fetchNewsForYou(String listCategories) async {
     try {
       final response = await _dio
-          .get('/news', queryParameters: {"category": "business,sports"});
+          .get('/news', queryParameters: {"category": listCategories});
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);

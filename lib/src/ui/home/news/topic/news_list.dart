@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news/load_more.dart/load_more_bloc.dart';
-import 'package:news_app/bloc/news/load_more.dart/load_more_event.dart';
-import 'package:news_app/bloc/news/load_more.dart/load_more_state.dart';
-import 'package:news_app/src/components/loading/bottom_loader.dart';
-import 'package:news_app/src/components/news_item/topic_items.dart';
-import 'package:news_app/src/loaduri/load_url.dart';
-import 'package:news_app/src/models/news/results_model.dart';
+import 'package:news_app/bloc/bloc.dart';
+import 'package:news_app/src/components/components.dart';
+import 'package:news_app/src/load_url/load_url.dart';
+import 'package:news_app/src/models/model.dart';
 
 class NewsList extends StatefulWidget {
   const NewsList({super.key});

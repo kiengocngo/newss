@@ -1,19 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news/news_cubit.dart';
-import 'package:news_app/bloc/news/news_state.dart';
-import 'package:news_app/bloc/news/news_status.dart';
-import 'package:news_app/bloc/news_for_you/news_topic_cubit.dart';
-import 'package:news_app/bloc/news_for_you/news_topic_state.dart';
-import 'package:news_app/src/components/loading/center_loader.dart';
-import 'package:news_app/src/components/news_item/news_items.dart';
-import 'package:news_app/src/components/news_item/news_topic_items.dart';
-import 'package:news_app/src/loaduri/load_url.dart';
-import 'package:news_app/src/ui/home/news/topic/load_more_screen.dart';
-import 'package:news_app/theme/news_colors.dart';
-import 'package:news_app/theme/news_theme_data.dart';
+import 'package:news_app/bloc/bloc.dart';
+import 'package:news_app/sqflite/sqflite_service.dart';
+import 'package:news_app/src/components/components.dart';
+import 'package:news_app/src/load_url/load_url.dart';
+import 'package:news_app/src/models/model.dart';
+import 'package:news_app/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'news/news.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,11 +22,24 @@ class _HomeScreenState extends State<HomeScreen> {
     await launchUrl(Uri.parse(link));
   }
 
+  List<Categories> _categories = [];
+  String listCategories = '';
+
+  void _refreshJournals() async {
+    final data = await SQLHelper.getAll();
+    setState(() {
+      _categories = data;
+    });
+    for (int i = 0; i < _categories.length; i++) {
+      listCategories = '$listCategories${_categories[i].description},';
+    }
+  }
+
   @override
   void initState() {
-    super.initState();
+    _refreshJournals();
     context.read<NewsCubit>().getNews();
-    context.read<NewsTopicsCubit>().getNews();
+    super.initState();
   }
 
   @override
@@ -109,61 +117,66 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
 
-Widget _buildNewsItem(BuildContext context) {
-  return BlocBuilder<NewsCubit, NewsState>(
-    builder: (context, state) {
-      switch (state.status) {
-        case NewsStatus.failure:
-          return Text(state.error);
-        case NewsStatus.success:
-          if (state.results.isEmpty) {
-            return const Text('no data');
-          }
-          return ListView.separated(
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                width: 10,
-              );
-            },
-            itemCount: state.results.length,
-            itemBuilder: (context, index) => NewsItems(
-                results: state.results[index],
-                onTap: () {
-                  LoadUrl().loadUrl(state.results[index].link);
-                }),
-          );
-        default:
-          return const CenterLoader();
-      }
-    },
-  );
-}
-
-Widget _buildNewsItem1(BuildContext context) {
-  return BlocBuilder<NewsTopicsCubit, NewsTopicsState>(
-    builder: (context, state) {
-      switch (state.status) {
-        case NewsStatus.failure:
-          return Text(state.error);
-        case NewsStatus.success:
-          if (state.results.isEmpty) {
-            return const Text('no data');
-          }
-          return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, crossAxisSpacing: 6, mainAxisSpacing: 6),
+  Widget _buildNewsItem(BuildContext context) {
+    return BlocBuilder<NewsCubit, NewsState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case NewsStatus.failure:
+            return Text(state.error!);
+          case NewsStatus.success:
+            if (state.results.isEmpty) {
+              return const Text('no data');
+            }
+            return ListView.separated(
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  width: 10,
+                );
+              },
               itemCount: state.results.length,
-              itemBuilder: (context, index) => NewsTopicItems(
+              itemBuilder: (context, index) => NewsItems(
                   results: state.results[index],
                   onTap: () {
                     LoadUrl().loadUrl(state.results[index].link);
-                  }));
-        default:
-          return const CenterLoader();
-      }
-    },
-  );
+                  }),
+            );
+          default:
+            return const CenterLoader();
+        }
+      },
+    );
+  }
+
+  Widget _buildNewsItem1(BuildContext context) {
+    return BlocBuilder<NewsTopicsBloc, NewsTopicsState>(
+      bloc: context.read<NewsTopicsBloc>()
+        ..add(NewsForYou(
+            listCategories: listCategories.isEmpty
+                ? ''
+                : listCategories.substring(0, listCategories.length - 1))),
+      builder: (context, state) {
+        switch (state.status) {
+          case NewsStatus.failure:
+            return Text(listCategories.substring(0, listCategories.length - 1));
+          case NewsStatus.success:
+            if (state.results.isEmpty) {
+              return const Text('no data');
+            }
+            return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, crossAxisSpacing: 6, mainAxisSpacing: 6),
+                itemCount: state.results.length,
+                itemBuilder: (context, index) => NewsTopicItems(
+                    results: state.results[index],
+                    onTap: () {
+                      LoadUrl().loadUrl(state.results[index].link);
+                    }));
+          default:
+            return const CenterLoader();
+        }
+      },
+    );
+  }
 }

@@ -4,7 +4,7 @@ import 'package:news_app/sqflite/sqflite_service.dart';
 import 'package:news_app/src/components/dialog/custom_dialog.dart';
 import 'package:news_app/src/components/favorite_items/favorite_item.dart';
 import 'package:news_app/src/models/favorite/categories.dart';
-import 'package:news_app/src/ui/favorite/add_cateogry.dart';
+import 'package:news_app/src/ui/favorite/add_category.dart';
 import 'package:news_app/theme/news_theme_data.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -16,12 +16,14 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   List<Categories> _categories = [];
+  String listCategories = '';
 
   void _refreshJournals() async {
     final data = await SQLHelper.getAll();
     setState(() {
       _categories = data;
     });
+   
   }
 
   void _deleteCategory(String category) {
@@ -37,6 +39,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
+     for (int i = 0; i < _categories.length; i++) {
+      listCategories = '$listCategories${_categories[i].description},';
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -68,7 +73,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         child: _categories.isEmpty
             ? Center(
                 child: Text(
-                  'Bạn chưa theo dõi loại tin tức nào, \nChọn + để theo dõi thêm danh mục',
+                  'Bạn chưa theo dõi loại tin tức nào, \nChọn + để theo dõi thêm danh mục ',
                   style: NewsThemeData.fromContext(context).textNewsTitle,
                 ),
               )
@@ -80,21 +85,27 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (context, index) {
-                  return FavoriteItems(
-                    category: _categories[index].description,
-                    onTap: () => showDialog(
-                        context: context,
-                        builder: (BuildContext context) => CustomDialogBox(
-                            title: 'Cảnh báo',
-                            descriptions:
-                                'Bạn có muốn huỷ theo dõi tin tức ${_categories[index].description}',
-                            okText: 'Bỏ theo dõi',
-                            cancelText: 'Huỷ',
-                            okHandle: () {
-                              _deleteCategory(_categories[index].description);
-                            },
-                            img: Image.network(
-                                'https://cdn.popsww.com/blog/sites/2/2022/02/Edogawa-Conan-.jpg'))),
+                  return Column(
+                    children: [
+                      Text(listCategories),
+                      FavoriteItems(
+                        category: _categories[index].description,
+                        onTap: () => showDialog(
+                            context: context,
+                            builder: (BuildContext context) => CustomDialogBox(
+                                title: 'Cảnh báo',
+                                descriptions:
+                                    'Bạn có muốn huỷ theo dõi tin tức ${_categories[index].description}',
+                                okText: 'Bỏ theo dõi',
+                                cancelText: 'Huỷ',
+                                okHandle: () {
+                                  _deleteCategory(
+                                      _categories[index].description);
+                                },
+                                img: Image.network(
+                                    'https://cdn.popsww.com/blog/sites/2/2022/02/Edogawa-Conan-.jpg'))),
+                      ),
+                    ],
                   );
                 },
               ),

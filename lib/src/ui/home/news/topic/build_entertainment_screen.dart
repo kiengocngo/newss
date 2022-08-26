@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news/news_status.dart';
-import 'package:news_app/src/components/loading/center_loader.dart';
-import 'package:news_app/src/loaduri/load_url.dart';
-import 'package:news_app/src/components/news_item/topic_items.dart';
-import 'package:news_app/bloc/news_topic/entertainment/news_enteratainment_cubit.dart';
-import 'package:news_app/bloc/news_topic/entertainment/news_entertainment_state.dart';
+import 'package:news_app/bloc/bloc.dart';
+import 'package:news_app/src/components/components.dart';
+import 'package:news_app/src/load_url/load_url.dart';
 
 class BuildEntertainment extends StatefulWidget {
   const BuildEntertainment({Key? key}) : super(key: key);
@@ -32,7 +29,7 @@ class _BuildEntertainmentState extends State<BuildEntertainment>
       switch (state.status) {
         case NewsStatus.failure:
           return Center(
-            child: Text(state.error),
+            child: Text(state.error!),
           );
         case NewsStatus.success:
           if (state.results.isEmpty) {

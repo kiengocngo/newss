@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news/news_status.dart';
 import 'package:news_app/bloc/news_topic/sport/news_sports_state.dart';
 import 'package:news_app/dio/config_dio.dart';
 
@@ -13,12 +12,9 @@ class NewsSportsCubit extends Cubit<NewsSportsState> {
     final base = await DioClient().fetchNewsWithTopics('sports');
 
     if (base.data != null) {
-      emit(state.copyWith(status: NewsStatus.success, results: base.data));
+      emit(NewsSportsState.success(base.data));
     } else {
-      emit(state.copyWith(
-        status: NewsStatus.failure,
-        error: base.error,
-      ));
+      emit(NewsSportsState.failure(base.error!));
     }
   }
 }

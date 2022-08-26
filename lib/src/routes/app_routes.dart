@@ -12,10 +12,7 @@ class AppRoutes {
     '/splash': (context) => const SplashScreen(),
     '/tutorial': (context) => const TutorialScreen(),
     '/news_topic': (context) => const NewsTopicScreen(),
-<<<<<<< HEAD
     '/news_list': (context) => const LoadMoreScreen(),
-=======
     '/favorite': (context) => const FavoriteScreen(),
->>>>>>> main
   };
 }

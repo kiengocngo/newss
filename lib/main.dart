@@ -21,7 +21,6 @@ void main() async {
   );
 
   await EasyLocalization.ensureInitialized();
-  
 
   runApp(
     EasyLocalization(
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ChangePasswordBloc()),
       ],
       child: MaterialApp(
-        initialRoute: '/login',
+        initialRoute: '/bottom',
         routes: {
           '/home': (context) => const HomeScreen(),
           'settings': ((context) => const SettingsScreen()),
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: ThemeData(), 
+        theme: ThemeData(),
         // home: const BottomNavigationScreen(),
       ),
     );

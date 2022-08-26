@@ -24,15 +24,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             // ignore: prefer_const_constructors
-            HomeScreen(
-              
-            ),
+            HomeScreen(),
             // ignore: prefer_const_constructors
             Text(
               'Index 2: Chat',
             ),
             // ignore: prefer_const_constructors
-            Text('Favourite'),
+            Text('Favorite'),
             // ignore: prefer_const_constructors
             NotificationScreen(),
             // ignore: prefer_const_constructors
@@ -61,7 +59,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               Icons.favorite_rounded,
               color: Colors.green,
             ),
-            label: 'Favourite',
+            label: 'Favorite',
           ),
           BottomNavigationBarItem(
             icon: Badge(

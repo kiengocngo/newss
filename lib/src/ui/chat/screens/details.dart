@@ -14,7 +14,7 @@ import 'package:news_app/src/ui/chat/components/sender_message.dart';
 
 // ignore: must_be_immutable
 class DetailsScreen extends StatefulWidget {
-  final ScrollController _scrollController = ScrollController();
+ 
   DetailsModel detailsModel;
   DetailsScreen({
     Key? key,
@@ -27,6 +27,7 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   final TextEditingController _sendController = TextEditingController();
+   final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     case CustomStatus.loaded:
                       return ListView.builder(
                         reverse: false,
-                        controller: widget._scrollController,
+                        controller: _scrollController,
                         itemCount: state.chats.length + 1,
                         itemBuilder: (context, index) {
                           if (index == 0) {
@@ -147,8 +148,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     _sendController.clear();
     setState(() {
-      widget._scrollController
-          .jumpTo(widget._scrollController.position.maxScrollExtent);
+     if(_scrollController.hasClients)
+     {
+       _scrollController
+          .jumpTo(_scrollController.position.maxScrollExtent);
+     }
     });
   }
 }

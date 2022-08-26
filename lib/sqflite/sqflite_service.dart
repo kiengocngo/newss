@@ -35,7 +35,7 @@ class SQLHelper {
     });
   }
 
-  // Read a single cateogy by id
+  // Read a single cateogy by category
   static Future<List<Categories>> getCategory(String description) async {
     final db = await SQLHelper.db();
     final map = await db.query('categories',
@@ -46,20 +46,11 @@ class SQLHelper {
   }
 
   // Delete
-  static Future<void> deleteItem(String description) async {
+  static Future<void> deleteCateogry(String description) async {
     final db = await SQLHelper.db();
     try {
       await db.delete("categories",
           where: "description = ?", whereArgs: [description]);
-    } catch (err) {
-      debugPrint("Something went wrong when deleting an item: $err");
-    }
-  }
-
-  static Future<void> deleteItemById(int id) async {
-    final db = await SQLHelper.db();
-    try {
-      await db.delete("items", where: "id = ?", whereArgs: [id]);
     } catch (err) {
       debugPrint("Something went wrong when deleting an item: $err");
     }

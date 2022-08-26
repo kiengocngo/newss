@@ -1,11 +1,7 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
-import 'package:news_app/src/models/chats/auth_response.dart';
 import 'package:news_app/src/models/chats/friends_models.dart';
 
 part 'friend_request_event.dart';

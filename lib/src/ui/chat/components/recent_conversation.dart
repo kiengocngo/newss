@@ -48,10 +48,10 @@ class RecentConversationScreen extends StatelessWidget {
                         detailsModel: DetailsModel(
                           userUid: senderId,
                           friendUid: receiverId,
-                          userName: tmp.data[0].name,
+                          userName: tmp.data[0].name!,
                           friendName: conversationsUserName,
                           friendImage: userImage,
-                          userImage: tmp.data[0].base64Image,
+                          userImage: tmp.data[0].base64Image!,
                         ),
                       )),
             );

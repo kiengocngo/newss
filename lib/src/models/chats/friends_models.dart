@@ -12,9 +12,10 @@ class FriendModel {
 
   factory FriendModel.fromJson(Map<String, dynamic> json) {
     return FriendModel(
-        requestUid: json["requestUid"],
-        acceptUid: json["acceptUid"],
-        status: json["status"]);
+      requestUid: json["requestUid"] ?? "null",
+      acceptUid: json["acceptUid"] ?? "null",
+      status: json["status"] ?? false,
+    );
   }
 
   toMap() {

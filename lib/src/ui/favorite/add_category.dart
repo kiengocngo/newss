@@ -28,7 +28,8 @@ class _AddCategoryState extends State<AddCategory> {
     Categories(description: 'politics'),
   ];
   late List<Categories> sports = [];
-
+  String capitalizeFirstLetter(String str) =>
+      str[0].toUpperCase() + str.substring(1);
   void _creatCategory(Categories category) {
     SQLHelper.createItem(category);
     _refreshJournals();
@@ -99,13 +100,13 @@ class _AddCategoryState extends State<AddCategory> {
                       children: [
                         Card(
                           child: Container(
-                            // color: contains.isEmpty ? Colors.green : Colors.red,
                             decoration: BoxDecoration(
                               gradient: NewsColor.kGradient,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
-                                child: Text(categoires[index].description)),
+                                child: Text(capitalizeFirstLetter(
+                                    categoires[index].description))),
                           ),
                         ),
                         Positioned(

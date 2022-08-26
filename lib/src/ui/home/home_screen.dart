@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         switch (state.status) {
           case NewsStatus.failure:
-            return Text(listCategories.substring(0, listCategories.length - 1));
+            return const Text('');
           case NewsStatus.success:
             if (state.results.isEmpty) {
               return const Text('no data');

@@ -16,14 +16,13 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   List<Categories> _categories = [];
-  String listCategories = '';
-
+  String capitalizeFirstLetter(String str) =>
+      str[0].toUpperCase() + str.substring(1);
   void _refreshJournals() async {
     final data = await SQLHelper.getAll();
     setState(() {
       _categories = data;
     });
-   
   }
 
   void _deleteCategory(String category) {
@@ -39,9 +38,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-     for (int i = 0; i < _categories.length; i++) {
-      listCategories = '$listCategories${_categories[i].description},';
-    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -85,27 +81,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Text(listCategories),
-                      FavoriteItems(
-                        category: _categories[index].description,
-                        onTap: () => showDialog(
-                            context: context,
-                            builder: (BuildContext context) => CustomDialogBox(
-                                title: 'Cảnh báo',
-                                descriptions:
-                                    'Bạn có muốn huỷ theo dõi tin tức ${_categories[index].description}',
-                                okText: 'Bỏ theo dõi',
-                                cancelText: 'Huỷ',
-                                okHandle: () {
-                                  _deleteCategory(
-                                      _categories[index].description);
-                                },
-                                img: Image.network(
-                                    'https://cdn.popsww.com/blog/sites/2/2022/02/Edogawa-Conan-.jpg'))),
-                      ),
-                    ],
+                  return FavoriteItems(
+                    category:
+                        capitalizeFirstLetter(_categories[index].description),
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => CustomDialogBox(
+                            title: 'Cảnh báo',
+                            descriptions:
+                                'Bạn có muốn huỷ theo dõi tin tức ${_categories[index].description}',
+                            okText: 'Bỏ theo dõi',
+                            cancelText: 'Huỷ',
+                            okHandle: () {
+                              _deleteCategory(_categories[index].description);
+                            },
+                            img: Image.network(
+                                'https://cdn.popsww.com/blog/sites/2/2022/02/Edogawa-Conan-.jpg'))),
                   );
                 },
               ),

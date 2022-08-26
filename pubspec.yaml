@@ -36,11 +36,19 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   flutter_bloc: ^8.1.1
+  cloud_firestore: ^3.4.4
+  bloc_concurrency: ^0.2.0
+  date_format: ^2.0.6
+  intl: ^0.17.0
+  flutter_spinkit: ^5.1.0
+  animations: ^2.0.3
   equatable: ^2.0.3
   cached_network_image: ^3.2.1
+  firebase_core: ^1.21.0
   sqflite: ^2.0.3+1
   path: ^1.8.1
   get: ^4.6.5
+
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/image.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "664224390267",
+    "firebase_url": "https://news-f660a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "news-f660a",
+    "storage_bucket": "news-f660a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664224390267:android:d4ac20eeb4e9489e5bd6de",
+        "android_client_info": {
+          "package_name": "com.example.news_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664224390267-eeqkhv2me547rraed7hla5tet7fjm0so.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb-EKt9wljb9dTMYLbL-H2KuDzrKRvAj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664224390267-eeqkhv2me547rraed7hla5tet7fjm0so.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "664224390267-5hb075d1pqm4j3k8joghbob4sji7gj5c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newsApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

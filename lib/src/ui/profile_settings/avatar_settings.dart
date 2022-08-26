@@ -65,8 +65,7 @@ class _AvatarSettingsState extends State<AvatarSettings> {
                   ? CircleAvatar(
                       radius: 50,
                       backgroundImage:
-                          FileImage(context.read<ImageCubit>().state!)
-                              as ImageProvider,
+                          FileImage(context.read<ImageCubit>().state!),
                       backgroundColor: Colors.blue,
                     )
                   : ClipOval(

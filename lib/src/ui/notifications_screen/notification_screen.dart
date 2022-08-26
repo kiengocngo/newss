@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -125,6 +126,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
           ElevatedButton(
               onPressed: () {
+                final user = FirebaseAuth.instance.currentUser;
+                if (user != null) {
+                  final name = user.uid;
+                  print(name);
+                } else {
+                  print('nulllll');
+                }
                 service.showNotification(id: 0, title: 'Title', body: 'body');
               },
               child: const Text('Click'))

@@ -29,9 +29,9 @@ class SearchResponse {
 }
 
 class FriendsResponse {
-final  bool isSuccess;
-final  List<FriendModel> friendModel;
- const FriendsResponse({
+  final bool isSuccess;
+  final List<FriendModel> friendModel;
+  const FriendsResponse({
     required this.isSuccess,
     required this.friendModel,
   });

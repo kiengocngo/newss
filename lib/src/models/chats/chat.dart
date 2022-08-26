@@ -14,10 +14,10 @@ class Chat {
 
   factory Chat.fromJson(Map<String, dynamic> json) {
     return Chat(
-        senderId: json["senderId"] ?json["senderId"]: "",
-        receiverId: json["receiverId"]?json["receiverId"]:"",
-        message: json["message"]?json["message"]:"",
-        timeStamp: json["dateTime"]?json["dateTime"]:Timestamp.now());
+        senderId: json["senderId"] ? json["senderId"] : "",
+        receiverId: json["receiverId"] ? json["receiverId"] : "",
+        message: json["message"] ? json["message"] : "",
+        timeStamp: json["dateTime"] ? json["dateTime"] : Timestamp.now());
   }
 
   Map<String, dynamic> toMap() {
@@ -29,5 +29,3 @@ class Chat {
     };
   }
 }
-
-

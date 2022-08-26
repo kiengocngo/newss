@@ -33,10 +33,8 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
         event.recentConversation.senderId, event.recentConversation.receiverId);
     List<QueryDocumentSnapshot<Map<String, dynamic>>> tmp = [];
     for (var element in data.docs) {
-      if ([
-        event.recentConversation.senderId,
-        event.recentConversation.receiverId
-      ].contains(element.data()["receiverId"])) {
+      if (event.recentConversation.senderId == element.data()["receiverId"] ||
+          event.recentConversation.receiverId == element.data()["receiverId"]) {
         tmp.add(element);
       }
     }

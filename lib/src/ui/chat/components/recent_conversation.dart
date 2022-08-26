@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -11,14 +11,13 @@ import 'package:news_app/src/ui/chat/screens/details.dart';
 
 import '../../../../services/firebase_services/firestore_services.dart';
 
-
 class RecentConversationScreen extends StatelessWidget {
- final String userImage;
- final  String senderId;
- final  String receiverId;
- final  String message;
- final  String conversationsUserName;
-const RecentConversationScreen({
+  final String userImage;
+  final String senderId;
+  final String receiverId;
+  final String message;
+  final String conversationsUserName;
+  const RecentConversationScreen({
     Key? key,
     required this.userImage,
     required this.senderId,
@@ -34,14 +33,13 @@ const RecentConversationScreen({
       child: BlocListener<ChatsBloc, ChatsState>(
         listener: (context, state) {},
         child: InkWell(
+          // ignore: duplicate_ignore
           onTap: () async {
             var tmp = await FireStoreService().getUserByUid(senderId);
 
-            // ignore: use_build_context_synchronously
             context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
-            // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               MaterialPageRoute(

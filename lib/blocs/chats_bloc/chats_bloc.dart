@@ -31,8 +31,8 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
         onData: ((data) {
       List<Chat> tmp = [];
       data.docs.forEach(((element) {
-        if ([event.senderId, event.receiverId]
-            .contains(element.data()["receiverId"])) {
+        if (event.senderId == element.data()["receiverId"] ||
+            event.receiverId == element.data()["receiverId"]) {
           tmp.add(Chat.fromJson(element.data()));
         }
       }));

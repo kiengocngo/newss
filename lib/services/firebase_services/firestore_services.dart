@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/auth_response.dart';
+import 'package:news_app/src/models/chat.dart';
 import 'package:news_app/src/models/my_user.dart';
 import 'package:news_app/src/models/recent_conversation.dart';
 
@@ -43,14 +44,15 @@ class FireStoreService {
   }
 
   addNewChat(String sender, String receiver, String message) async {
-    await _instance.collection("Chats").add(
-      {
-        "senderId": sender,
-        "receiverId": receiver,
-        "message": message,
-        "dateTime": DateTime.now(),
-      },
+    final Chat chat = Chat(
+      senderId: sender,
+      receiverId: receiver,
+      message: message,
+      timeStamp: Timestamp.now(),
     );
+    await _instance.collection("Chats").add(
+          chat.toMap(),
+        );
   }
 
   fixConversation(String uid, String message) async {
@@ -62,10 +64,6 @@ class FireStoreService {
 
   addNewConversations(RecentConversation recentConversation) async {
     await _instance.collection("Conversations").add(recentConversation.toMap());
-  }
-
-  getAllUser() async {
-    return _instance.collection("Users").get();
   }
 
   getChats(String sender, String receiver) async {}

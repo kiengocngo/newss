@@ -7,24 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
 import 'package:news_app/src/models/recent_conversation.dart';
+import 'package:news_app/src/models/user_details_screen_model.dart';
 
-// ignore: must_be_immutable
 class UserDetails extends StatelessWidget {
-  String image;
-  String currentUserName;
-  String currentUserUid;
-  String detailsUserUid;
-  String detailsUserName;
-  String detailsUserImage;
-
-  UserDetails({
+  final UserDetailsModel userDetailsModel;
+  const UserDetails({
     Key? key,
-    required this.image,
-    required this.currentUserName,
-    required this.currentUserUid,
-    required this.detailsUserUid,
-    required this.detailsUserName,
-    required this.detailsUserImage,
+    required this.userDetailsModel,
   }) : super(key: key);
 
   @override
@@ -34,7 +23,7 @@ class UserDetails extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          detailsUserName,
+          userDetailsModel.detailsUserName,
           style: const TextStyle(color: Colors.white),
         ),
       ),
@@ -47,14 +36,14 @@ class UserDetails extends StatelessWidget {
                 size: const Size(100, 100), // Image radius
                 child: Image.memory(
                   base64.decode(
-                    detailsUserImage,
+                    userDetailsModel.detailsUserImage,
                   ),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Text(
-              detailsUserName,
+              userDetailsModel.detailsUserName,
               style: const TextStyle(fontSize: 30, color: Colors.white),
             ),
             BlocBuilder<FriendRequestBloc, FriendRequestState>(
@@ -65,8 +54,8 @@ class UserDetails extends StatelessWidget {
                         onPressed: () {
                           context.read<FriendRequestBloc>().add(
                               FriendRequestEventSubmit(
-                                  firstUid: currentUserUid,
-                                  secondUid: detailsUserUid));
+                                  firstUid: userDetailsModel.currentUserUid,
+                                  secondUid: userDetailsModel.detailsUserUid));
                         },
                         child: const Text(
                           "Add",
@@ -82,18 +71,20 @@ class UserDetails extends StatelessWidget {
                       onPressed: () {
                         context.read<FriendRequestBloc>().add(
                             FriendRequestEventSubmit(
-                                firstUid: currentUserUid,
-                                secondUid: detailsUserUid));
+                                firstUid: userDetailsModel.currentUserUid,
+                                secondUid: userDetailsModel.detailsUserUid));
                         context
                             .read<ConversationsBloc>()
                             .add(ConversationsAddNewMessage(
                               recentConversation: RecentConversation(
-                                  senderId: currentUserUid,
-                                  receiverId: detailsUserUid,
-                                  senderName: currentUserName,
-                                  receiverName: detailsUserName,
-                                  senderBase64Image: image,
-                                  receiverBase64Image: detailsUserImage,
+                                  senderId: userDetailsModel.currentUserUid,
+                                  receiverId: userDetailsModel.detailsUserUid,
+                                  senderName: userDetailsModel.currentUserName,
+                                  receiverName:
+                                      userDetailsModel.detailsUserName,
+                                  senderBase64Image: userDetailsModel.image,
+                                  receiverBase64Image:
+                                      userDetailsModel.detailsUserImage,
                                   message: "You guys are friends, have a chat",
                                   dateTime: Timestamp.now()),
                             ));

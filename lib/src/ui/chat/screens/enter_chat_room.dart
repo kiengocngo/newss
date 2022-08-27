@@ -33,7 +33,7 @@ class EnterChatRoom extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ConversationScreen(
-                              uid: userMap[_controller.text] ?? "no user",
+                              uid:"wRfJLxGkvUSooyVfzRDGI8TQDsy2",
                             )),
                   );
                 },

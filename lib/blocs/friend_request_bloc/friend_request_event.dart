@@ -8,23 +8,23 @@ class FriendRequestEvent extends Equatable {
 }
 
 class FriendRequestEventSubmit extends FriendRequestEvent {
-  final String firstUid;
-  final String secondUid;
+  final String currentUserUid;
+  final String targetUserUid;
   const FriendRequestEventSubmit({
-    required this.firstUid,
-    required this.secondUid,
+    required this.currentUserUid,
+    required this.targetUserUid,
   });
   @override
-  List<Object> get props => [firstUid, secondUid];
+  List<Object> get props => [currentUserUid, targetUserUid];
 }
 
 class FriendRequestEventInit extends FriendRequestEvent {
-  final String firstUid;
-  final String secondUid;
+  final String currentUserUid;
+  final String targetUserUid;
   const FriendRequestEventInit({
-    required this.firstUid,
-    required this.secondUid,
+    required this.currentUserUid,
+    required this.targetUserUid,
   });
   @override
-  List<Object> get props => [firstUid, secondUid];
+  List<Object> get props => [currentUserUid, targetUserUid];
 }

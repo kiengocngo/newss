@@ -18,7 +18,6 @@ class ChatInitEvent extends ChatsEvent {
   List<Object> get props => [senderId, receiverId];
 }
 
-// ignore: must_be_immutable
 class ChatAddGetMessageEvent extends ChatsEvent {
   final Chat chat;
 

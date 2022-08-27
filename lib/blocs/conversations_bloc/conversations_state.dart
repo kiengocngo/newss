@@ -1,11 +1,10 @@
 part of 'conversations_bloc.dart';
 
-// ignore: must_be_immutable
 class ConversationsState extends Equatable {
-  String currentUser;
-  List<RecentConversation> conversations;
-  CustomStatus status;
-  ConversationsState({
+  final String currentUser;
+  final List<RecentConversation> conversations;
+  final CustomStatus status;
+  const ConversationsState({
     required this.currentUser,
     required this.conversations,
     required this.status,
@@ -14,7 +13,7 @@ class ConversationsState extends Equatable {
   ConversationsState.init()
       : this(currentUser: "", conversations: [], status: CustomStatus.init);
 
-  ConversationsState.loaded(
+  const ConversationsState.loaded(
     String currentUser,
     List<RecentConversation> conversations,
   ) : this(

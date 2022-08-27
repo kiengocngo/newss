@@ -1,10 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:news_app/src/models/auth_response.dart';
-import 'package:news_app/src/models/my_user.dart';
-import 'package:news_app/src/models/recent_conversation.dart';
+import 'package:news_app/src/models/chats/auth_response.dart';
+import 'package:news_app/src/models/chats/chat.dart';
+import 'package:news_app/src/models/chats/friends_models.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
+import 'package:news_app/src/models/chats/recent_conversation.dart';
 
 class FireStoreService {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
+
+  addFriendsRequest(String currentUserUid, String targetUserUid) {
+    FriendModel friendModel = FriendModel(
+        requestUid: currentUserUid, acceptUid: targetUserUid, status: false);
+    _instance.collection("Friends").add(friendModel.toMap());
+  }
+
+  fixFriendRequest(String uid) {
+    _instance.collection("Friends").doc(uid).update({"status": true});
+  }
+
+  getFriends(String currentUserUid, String targetUserUid) {
+    return _instance
+        .collection("Friends")
+        .where("requestUid", whereIn: [currentUserUid, targetUserUid]).get();
+  }
 
   Future<SearchResponse> getUserByUid(String uid) async {
     try {
@@ -32,10 +50,10 @@ class FireStoreService {
           .where("name", isEqualTo: name)
           .get();
       List<MyUser> tmp = [];
-      // ignore: avoid_function_literals_in_foreach_calls
-      data.docs.forEach(
-        (element) => tmp.add(MyUser.fromJson(element.data())),
-      );
+
+      for (var element in data.docs) {
+        tmp.add(MyUser.fromJson(element.data()));
+      }
       return SearchResponse(isSuccess: true, data: tmp);
     } catch (e) {
       return SearchResponse(isSuccess: false, data: []);
@@ -43,14 +61,15 @@ class FireStoreService {
   }
 
   addNewChat(String sender, String receiver, String message) async {
-    await _instance.collection("Chats").add(
-      {
-        "senderId": sender,
-        "receiverId": receiver,
-        "message": message,
-        "dateTime": DateTime.now(),
-      },
+    final Chat chat = Chat(
+      senderId: sender,
+      receiverId: receiver,
+      message: message,
+      timeStamp: Timestamp.now(),
     );
+    await _instance.collection("Chats").add(
+          chat.toMap(),
+        );
   }
 
   fixConversation(String uid, String message) async {
@@ -62,10 +81,6 @@ class FireStoreService {
 
   addNewConversations(RecentConversation recentConversation) async {
     await _instance.collection("Conversations").add(recentConversation.toMap());
-  }
-
-  getAllUser() async {
-    return _instance.collection("Users").get();
   }
 
   getChats(String sender, String receiver) async {}

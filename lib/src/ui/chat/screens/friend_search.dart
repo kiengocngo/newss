@@ -8,10 +8,9 @@ import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/components/user_info.dart';
 
-// ignore: must_be_immutable
 class FriendSearch extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
-  String uid;
+  final String uid;
   FriendSearch({
     Key? key,
     required this.uid,

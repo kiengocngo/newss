@@ -1,10 +1,9 @@
 part of 'chats_bloc.dart';
 
-// ignore: must_be_immutable
 class ChatsState extends Equatable {
-  CustomStatus chatStatus;
-  List<Chat> chats;
-  ChatsState({
+  final CustomStatus chatStatus;
+  final List<Chat> chats;
+  const ChatsState({
     required this.chatStatus,
     required this.chats,
   });
@@ -25,7 +24,7 @@ class ChatsState extends Equatable {
           chatStatus: CustomStatus.error,
           chats: [],
         );
-  ChatsState.loaded(List<Chat> chats)
+  const ChatsState.loaded(List<Chat> chats)
       : this(chatStatus: CustomStatus.loaded, chats: chats);
   @override
   List<Object> get props => [chatStatus, chats];

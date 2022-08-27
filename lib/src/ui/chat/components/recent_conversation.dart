@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:news_app/blocs/chats_bloc/chats_bloc.dart';
-import 'package:news_app/src/models/details_screen_model.dart';
+import 'package:news_app/src/models/chats/auth_response.dart';
+import 'package:news_app/src/models/chats/details_screen_model.dart';
 import 'package:news_app/src/ui/chat/screens/details.dart';
 
 import '../../../../services/firebase_services/firestore_services.dart';
 
-
 class RecentConversationScreen extends StatelessWidget {
- final String userImage;
- final  String senderId;
- final  String receiverId;
- final  String message;
- final  String conversationsUserName;
-const RecentConversationScreen({
+  final String userImage;
+  final String senderId;
+  final String receiverId;
+  final String message;
+  final String conversationsUserName;
+  const RecentConversationScreen({
     Key? key,
     required this.userImage,
     required this.senderId,
@@ -35,13 +35,12 @@ const RecentConversationScreen({
         listener: (context, state) {},
         child: InkWell(
           onTap: () async {
-            var tmp = await FireStoreService().getUserByUid(senderId);
+            final SearchResponse tmp =
+                await FireStoreService().getUserByUid(senderId);
 
-            // ignore: use_build_context_synchronously
             context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
-            // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -49,10 +48,10 @@ const RecentConversationScreen({
                         detailsModel: DetailsModel(
                           userUid: senderId,
                           friendUid: receiverId,
-                          userName: tmp.data[0].name,
+                          userName: tmp.data[0].name!,
                           friendName: conversationsUserName,
                           friendImage: userImage,
-                          userImage: tmp.data[0].base64Image,
+                          userImage: tmp.data[0].base64Image!,
                         ),
                       )),
             );
@@ -80,13 +79,15 @@ const RecentConversationScreen({
                           alignment: Alignment.topLeft,
                           child: Text(
                             conversationsUserName,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
                           )),
                       Text(
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         message,
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ],
                   ),

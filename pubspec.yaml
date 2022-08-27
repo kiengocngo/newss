@@ -45,6 +45,10 @@ dependencies:
   equatable: ^2.0.3
   cached_network_image: ^3.2.1
   firebase_core: ^1.21.0
+  sqflite: ^2.0.3+1
+  path: ^1.8.1
+  get: ^4.6.5
+
 
 dev_dependencies:
   flutter_test:

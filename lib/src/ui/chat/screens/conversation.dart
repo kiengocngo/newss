@@ -47,7 +47,6 @@ class ConversationScreen extends StatelessWidget {
                         ),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20))),
-              
                     child: Row(children: const [
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),

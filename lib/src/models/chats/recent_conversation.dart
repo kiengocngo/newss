@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecentConversation {
-  String senderId;
-  String receiverId;
-  String senderName;
-  String receiverName;
-  String senderBase64Image;
-  String receiverBase64Image;
-  Timestamp dateTime;
-  String message;
-  RecentConversation({
+  final String senderId;
+  final String receiverId;
+  final String senderName;
+  final String receiverName;
+  final String senderBase64Image;
+  final String receiverBase64Image;
+  final Timestamp dateTime;
+  final String message;
+  const RecentConversation({
     required this.senderId,
     required this.receiverId,
     required this.senderName,
@@ -22,14 +22,14 @@ class RecentConversation {
 
   factory RecentConversation.fromJson(Map<String, dynamic> json) {
     return RecentConversation(
-        senderId: json["senderId"],
-        receiverId: json["receiverId"],
-        senderName: json["senderName"],
-        receiverName: json["receiverName"],
-        senderBase64Image: json["senderBase64Image"],
-        receiverBase64Image: json["receiverBase64Image"],
-        dateTime: json["dateTime"],
-        message: json["message"]);
+        senderId: json["senderId"] ?? "null",
+        receiverId: json["receiverId"] ?? "null",
+        senderName: json["senderName"] ?? "null",
+        receiverName: json["receiverName"] ?? "null",
+        senderBase64Image: json["senderBase64Image"] ?? "null",
+        receiverBase64Image: json["receiverBase64Image"] ?? "null",
+        dateTime: json["dateTime"] ?? Timestamp.now(),
+        message: json["message"] ?? "null");
   }
 
   Map<String, dynamic> toMap() {

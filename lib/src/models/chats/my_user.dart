@@ -22,25 +22,13 @@ class MyUser {
 
   factory MyUser.fromJson(Map<String, dynamic> json) {
     return MyUser(
-        uid: json["uid"],
-        name: json["name"],
-        email: json["email"],
+        uid: json["uid"] ?? "null",
+        name: json["name"] ?? "null",
+        email: json["email"] ?? "null",
         password: "no",
-        friends: json["friends"],
-        phoneNumber: json["phoneNumber"],
-        address: json["address"],
-        base64Image: json["base64Image"]);
-  }
-  factory MyUser.defaultUser() {
-    return MyUser(
-      uid: "",
-      name: "",
-      email: "",
-      password: "",
-      address: "",
-      base64Image: "",
-      phoneNumber: "",
-      friends: [],
-    );
+        friends: json["friends"] ?? "null",
+        phoneNumber: json["phoneNumber"] ?? "null",
+        address: json["address"] ?? "null",
+        base64Image: json["base64Image"] ?? "null");
   }
 }

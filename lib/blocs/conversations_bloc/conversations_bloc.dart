@@ -1,15 +1,11 @@
-// ignore: depend_on_referenced_packages, unused_import
-import 'dart:async';
-
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/components/constant.dart';
-import 'package:news_app/src/models/recent_conversation.dart';
+import 'package:news_app/src/models/chats/recent_conversation.dart';
 
 part 'conversations_event.dart';
 part 'conversations_state.dart';
@@ -33,10 +29,8 @@ class ConversationsBloc extends Bloc<ConversationsEvent, ConversationsState> {
         event.recentConversation.senderId, event.recentConversation.receiverId);
     List<QueryDocumentSnapshot<Map<String, dynamic>>> tmp = [];
     for (var element in data.docs) {
-      if ([
-        event.recentConversation.senderId,
-        event.recentConversation.receiverId
-      ].contains(element.data()["receiverId"])) {
+      if (event.recentConversation.senderId == element.data()["receiverId"] ||
+          event.recentConversation.receiverId == element.data()["receiverId"]) {
         tmp.add(element);
       }
     }

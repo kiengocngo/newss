@@ -33,7 +33,7 @@ class _TutorialScreenState extends State<TutorialScreen>
                     CustomButton(
                         title: 'Next',
                         onTap: () {
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushNamed(context, '/sign_up');
                         })
                   ],
                 ),

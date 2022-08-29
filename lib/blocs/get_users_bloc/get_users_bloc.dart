@@ -17,7 +17,11 @@ class GetUsersBloc extends Bloc<GetUsersEvent, GetUsersState> {
       var users = await _getUsersData.getUsersData(event.uid);
       emit(GetUsersSuccess(users: users));
     } on FirebaseException catch (e) {
-      emit(GetUsersError(message: e.message!));
+      emit(GetUsersError(message: e.code));
+    }
+    catch(e)
+    {
+      emit(GetUsersError(message: e.toString()));
     }
   }
 }

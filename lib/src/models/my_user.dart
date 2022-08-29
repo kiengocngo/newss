@@ -7,7 +7,7 @@ class MyUser {
   String address;
   String base64Image;
 
-  List<String> friends;
+
 
   MyUser({
     required this.uid,
@@ -17,7 +17,7 @@ class MyUser {
     required this.phoneNumber,
     required this.address,
     required this.base64Image,
-    this.friends = const [],
+
   });
 
   factory MyUser.defaultUser() {
@@ -28,7 +28,7 @@ class MyUser {
         password: "password",
         phoneNumber: "phoneNumber",
         address: "address",
-        friends: [],
+
         base64Image: "base64Image");
   }
   factory MyUser.fromJson(Map<String, dynamic> json) {
@@ -39,7 +39,7 @@ class MyUser {
         password: json["password"],
         phoneNumber: json["phoneNumber"],
         address: json["address"],
-        friends: json["friends"],
+   
         base64Image: json["base64Image"]);
   }
   toJson() {
@@ -50,7 +50,7 @@ class MyUser {
       "password": password,
       "phoneNumber": phoneNumber,
       "address": address,
-      "friends": friends,
+
       "base64Image": base64Image
     };
   }

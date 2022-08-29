@@ -7,16 +7,16 @@ part 'update_users_state.dart';
 
 class UpdateUsersBloc extends Bloc<UpdateUsersEvent, UpdateUsersState> {
   final UpdateServices _updateServices = UpdateServices();
-  UpdateUsersBloc() : super(UpdateUsersInitial()) {
+  UpdateUsersBloc() : super(const UpdateUsersState.init()) {
     on<UpdateUsers>(_onUpdateUsers);
   }
   void _onUpdateUsers(UpdateUsers event, Emitter<UpdateUsersState> emit) async {
     UpdateResponse status = await _updateServices.updateUser(
         event.uid, event.name, event.phone, event.address, event.base64Image);
     if (status.isSuccess == true) {
-      emit(UpdateUsersSuccess(message: status.message));
+      emit(UpdateUsersState.success(status.message));
     } else {
-      emit(UpdateUsersErrors(message: status.message));
+      emit(UpdateUsersState.error(status.message));
     }
   }
 }

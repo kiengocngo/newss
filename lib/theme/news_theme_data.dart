@@ -5,14 +5,11 @@ class NewsThemeData {
   NewsThemeData();
 
   late TextStyle textAppBar;
-<<<<<<< HEAD
   late TextStyle textNewsTitle;
   late TextStyle textHotNews;
   late TextStyle textDescription;
   late TextStyle textButton;
-=======
   late TextStyle textSetting;
->>>>>>> tu26
 
   factory NewsThemeData.fromContext(BuildContext context) {
     final NewsThemeData theme = NewsThemeData();
@@ -21,7 +18,6 @@ class NewsThemeData {
       fontSize: 18,
       color: NewsColor.textBlack,
     );
-<<<<<<< HEAD
     theme.textNewsTitle = const TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 15,
@@ -46,12 +42,11 @@ class NewsThemeData {
       fontSize: 16,
       color: NewsColor.textWhite,
       fontStyle: FontStyle.normal,
-=======
+    );
     theme.textSetting = const TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 16,
       color: NewsColor.textBlack,
->>>>>>> tu26
     );
     return theme;
   }

@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/auth_response.dart';
-<<<<<<< HEAD
-=======
-
->>>>>>> tu26
 import 'package:news_app/src/models/my_user.dart';
 
 class FireStoreService {

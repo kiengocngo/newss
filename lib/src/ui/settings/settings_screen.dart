@@ -9,28 +9,20 @@ import '../password_change/password_change_screen.dart';
 
 enum Language { english, vietnammese }
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  Language? _character = Language.english;
+class SettingsScreen extends StatelessWidget {
+  Language character = Language.english;
+  SettingsScreen({Key? key}) : super(key: key);
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     context
         .read<GetUsersBloc>()
         .add(const GetUsers(uid: 'cZRLuMBnsdRkfPBOaIcKfI8sZBi1'));
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  
     return Scaffold(
         appBar: AppBar(
-               iconTheme: const IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 0.25,
           centerTitle: true,
@@ -120,11 +112,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                               title: const Text('English'),
                                               leading: Radio<Language>(
                                                 value: Language.english,
-                                                groupValue: _character,
+                                                groupValue: character,
                                                 onChanged: (Language? value) {
-                                                  setState(() {
-                                                    _character = value;
-                                                  });
+                                                 
                                                   Get.updateLocale(
                                                       const Locale('en', 'US'));
                                                   Navigator.pop(context);
@@ -135,11 +125,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                               title: const Text('Vietnammese'),
                                               leading: Radio<Language>(
                                                 value: Language.vietnammese,
-                                                groupValue: _character,
+                                                groupValue: character,
                                                 onChanged: (Language? value) {
-                                                  setState(() {
-                                                    _character = value;
-                                                  });
+                                                
                                                   Get.updateLocale(
                                                       const Locale('vi', 'VN'));
                                                   Navigator.pop(context);
@@ -166,7 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const PasswordScreen()));
+                                         PasswordScreen()));
                             },
                           ),
                         ],
@@ -175,6 +163,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
               );
+            } else if (state is GetUsersError) {
+              return Text(state.message);
             } else {
               return const Text('Error');
             }

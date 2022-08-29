@@ -7,8 +7,6 @@ class GetUsersData {
     var data =
         await _instance.collection("Users").where("uid", isEqualTo: uid).get();
     var usersData = MyUser.fromJson(data.docs[0].data());
-    
     return usersData;
-    
   }
 }

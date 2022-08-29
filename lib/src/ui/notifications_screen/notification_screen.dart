@@ -38,7 +38,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('user granted');
       FirebaseMessaging.instance.getInitialMessage().then((message) {
         if (message != null) {
           final routeFromMessage = message.data["routePage"];
@@ -129,9 +128,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
                   final name = user.uid;
-                  print(name);
                 } else {
-                  print('nulllll');
                 }
                 service.showNotification(id: 0, title: 'Title', body: 'body');
               },
@@ -145,7 +142,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       service.onNotificationClick.stream.listen(onNoticationListener);
   void onNoticationListener(String? payload) {
     if (payload != null && payload.isNotEmpty) {
-      print(payload);
       if (payload == 'settings') {
         Navigator.pushNamed(context, 'settings');
       } else if (payload == 'home') {

@@ -20,11 +20,6 @@ import 'package:news_app/src/routes/app_routes.dart';
 import 'package:news_app/blocs/change_password_bloc/change_password_bloc.dart';
 import 'package:news_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:news_app/blocs/update_users_bloc/update_users_bloc.dart';
-import 'package:news_app/src/ui/bottom_navigator/bottom_navigator_screen.dart';
-import 'package:news_app/src/ui/home/home_screen.dart';
-import 'package:news_app/src/ui/login/login_screen.dart';
-import 'package:news_app/src/ui/settings/settings_screen.dart';
-
 import 'blocs/log_in_bloc/log_in_bloc.dart';
 
 

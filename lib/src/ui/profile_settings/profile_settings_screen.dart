@@ -115,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               BlocListener<UpdateUsersBloc, UpdateUsersState>(
                 listener: (context, state) {
-                  if (state is UpdateUsersSuccess) {
+                  if (state.updateState ==UpdateState.success) {
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Update Success')));
                     context
@@ -123,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         .add(GetUsers(uid: widget.users.uid));
                     Navigator.pop(context);
                   }
-                  if (state is UpdateUsersErrors) {
+                  if (state.updateState == UpdateState.error) {
                     log('error');
                   }
                 },

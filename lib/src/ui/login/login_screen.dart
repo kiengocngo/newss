@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,13 +23,6 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/settings');
-              },
-              icon: const Icon(Icons.settings))
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -71,18 +63,17 @@ class LoginScreen extends StatelessWidget {
                   listener: (context, state) {
                     switch (state.logInStatus) {
                       case LogInStatus.loading:
-                        log("loading");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Logging in")));
                         break;
                       case LogInStatus.loaded:
-                        log("loaded");
-
-                        Navigator.pushNamed(context, '/home');
+                        Navigator.pushNamed(context, '/bottom');
                         break;
                       case LogInStatus.error:
-                        log("error");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.message)));
                         break;
                       default:
-                        log("default");
                         break;
                     }
                   },

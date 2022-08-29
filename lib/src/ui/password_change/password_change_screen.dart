@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:news_app/src/components/input_text/password_field.dart';
 
 import '../../../blocs/change_password_bloc/change_password_bloc.dart';
 
-class PasswordScreen extends StatefulWidget {
-  const PasswordScreen({Key? key}) : super(key: key);
+class PasswordScreen extends StatelessWidget {
+  final TextEditingController currentPasswordController =
+      TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
-  @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
-}
-
-class _PasswordScreenState extends State<PasswordScreen> {
-  TextEditingController currentPasswordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  bool _isObscure = true;
-  bool _isObscure1 = true;
-  bool _isObscure2 = true;
+  PasswordScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        automaticallyImplyLeading: false,
         elevation: 0.25,
         title: Text(
           'change_pass'.tr,
         ),
-        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -37,114 +30,34 @@ class _PasswordScreenState extends State<PasswordScreen> {
             if (state.status == ChangePasswordStatus.success) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.message)));
+              Navigator.pop(context);
             } else if (state.status == ChangePasswordStatus.error) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.message)));
             }
           },
           child: Column(children: [
-            TextFormField(
-              obscureText: _isObscure,
-              controller: currentPasswordController,
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
-                    icon: Icon(
-                      _isObscure ? Icons.visibility : Icons.visibility_off,
-                    ),
-                  ),
-                  hintStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                  label: Text(
-                    'current_pass'.tr,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.black, width: 1),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.black, width: 1),
-                  )),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              obscureText: _isObscure1,
-              controller: newPasswordController,
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isObscure1 = !_isObscure1;
-                      });
-                    },
-                    icon: Icon(
-                      _isObscure1 ? Icons.visibility : Icons.visibility_off,
-                    ),
-                  ),
-                  hintStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                  label: Text(
-                    'new_pass'.tr,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.black, width: 1),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.black, width: 1),
-                  )),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              obscureText: _isObscure2,
-              controller: confirmPasswordController,
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isObscure2 = !_isObscure2;
-                      });
-                    },
-                    icon: Icon(
-                      _isObscure2 ? Icons.visibility : Icons.visibility_off,
-                    ),
-                  ),
-                  hintStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                  label: Text(
-                    'confirm_pass'.tr,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.black, width: 1),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.black, width: 1),
-                  )),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
+            PassWordField(
+                hintText: 'current_pass'.tr,
+                prefixIcon: const Icon(Icons.lock),
+                passwordController: currentPasswordController),
+            PassWordField(
+                hintText: 'new_pass'.tr,
+                prefixIcon: const Icon(Icons.lock),
+                passwordController: newPasswordController),
+            PassWordField(
+                hintText: 'confirm_pass'.tr,
+                prefixIcon: const Icon(Icons.lock),
+                passwordController: confirmPasswordController),
             InkWell(
               onTap: () {
                 context.read<ChangePasswordBloc>().add(ChangePassword(
                     currentPassword: currentPasswordController.text,
                     newPassword: newPasswordController.text,
                     confirmPassword: confirmPasswordController.text));
+                currentPasswordController.clear();
+                newPasswordController.clear();
+                confirmPasswordController.clear();
               },
               child: Center(
                 child: Container(

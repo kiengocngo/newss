@@ -1,7 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
+import 'package:news_app/app_translations.dart';
 import 'package:news_app/blocs/change_password_bloc/change_password_bloc.dart';
 import 'package:news_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:news_app/blocs/update_users_bloc/update_users_bloc.dart';
@@ -20,15 +21,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await EasyLocalization.ensureInitialized();
-
   runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale("en"), Locale("vi")],
-      path: 'assets/translations',
-      startLocale: const Locale('en'),
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 
@@ -45,18 +39,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GetUsersBloc()),
         BlocProvider(create: (context) => ChangePasswordBloc()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
+        translations: AppTranslation(),
+        locale: Get.deviceLocale,
         initialRoute: '/bottom',
         routes: {
           '/home': (context) => const HomeScreen(),
           'settings': ((context) => const SettingsScreen()),
           '/login': (context) => LoginScreen(),
-          '/bottom': (context) => const BottomNavigationScreen(),
+          '/bottom': (context) => const MainScreen(),
         },
         debugShowCheckedModeBanner: false,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
         theme: ThemeData(),
         // home: const BottomNavigationScreen(),
       ),

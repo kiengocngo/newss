@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../blocs/change_password_bloc/change_password_bloc.dart';
 
@@ -21,10 +22,13 @@ class _PasswordScreenState extends State<PasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Password Change',
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        elevation: 0.25,
+        title: Text(
+          'change_pass'.tr, 
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -53,11 +57,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       _isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
                   ),
-                  hintText: 'Input Current Password',
                   hintStyle: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w500),
-                  label: const Text(
-                    'Current Password',
+                  label: Text(
+                    'current_pass'.tr,
                     style: TextStyle(fontSize: 20),
                   ),
                   border: OutlineInputBorder(
@@ -86,11 +89,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       _isObscure1 ? Icons.visibility : Icons.visibility_off,
                     ),
                   ),
-                  hintText: 'Input New Password',
                   hintStyle: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w500),
-                  label: const Text(
-                    'New Password',
+                  label: Text(
+                    'new_pass'.tr,
                     style: TextStyle(fontSize: 20),
                   ),
                   border: OutlineInputBorder(
@@ -119,11 +121,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       _isObscure2 ? Icons.visibility : Icons.visibility_off,
                     ),
                   ),
-                  hintText: 'Confirm New Password',
                   hintStyle: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w500),
-                  label: const Text(
-                    'Confirm Password',
+                  label: Text(
+                    'confirm_pass'.tr,
                     style: TextStyle(fontSize: 20),
                   ),
                   border: OutlineInputBorder(
@@ -152,11 +153,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   decoration: BoxDecoration(
                       color: Colors.blue[400],
                       borderRadius: BorderRadius.circular(16)),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Submit Change',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      'submit_change'.tr,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),

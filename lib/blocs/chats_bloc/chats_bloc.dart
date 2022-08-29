@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -21,10 +23,10 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       _onAddGetMessage,
     );
   }
-  _onInitEvent(ChatInitEvent event, Emitter<ChatsState> emit) {
-    emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
+  _onInitEvent(ChatInitEvent event, Emitter<ChatsState> emit) async {
+    await emit.onEach<QuerySnapshot<Map<String, dynamic>>>(
         FireStoreResponse().getChats(event.senderId, event.receiverId),
-        onData: ((data) {
+        onData: (data) {
       List<Chat> tmp = [];
       for (var element in data.docs) {
         if (event.senderId == element.data()["receiverId"] ||
@@ -32,8 +34,9 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
           tmp.add(Chat.fromJson(element.data()));
         }
       }
+
       emit(ChatsState.loaded(tmp));
-    }));
+    });
   }
 
   _onAddGetMessage(ChatAddGetMessageEvent event, Emitter<ChatsState> emit) {

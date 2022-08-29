@@ -6,7 +6,9 @@ class MyUser {
   String phoneNumber;
   String address;
   String base64Image;
+
   List<String> friends;
+
   MyUser({
     required this.uid,
     required this.name,

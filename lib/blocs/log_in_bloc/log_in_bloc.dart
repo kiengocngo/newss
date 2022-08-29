@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:news_app/services/firebase_auth_services.dart';
 import 'package:news_app/src/models/auth_response.dart';

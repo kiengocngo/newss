@@ -15,7 +15,7 @@ class ChangePasswordBloc
   final FirebaseAuth _user = FirebaseAuth.instance;
   final ChangePasswordServices _changePasswordServices =
       ChangePasswordServices();
-  ChangePasswordBloc() : super(ChangePasswordInitial()) {
+  ChangePasswordBloc() : super(const ChangePasswordState.init()) {
     on<ChangePassword>(_onChangePassword);
   }
   void _onChangePassword(
@@ -28,14 +28,14 @@ class ChangePasswordBloc
     if (event.currentPassword == usersData.password) {
       if (event.newPassword == event.confirmPassword) {
         _changePasswordServices.changePassword(event.newPassword);
-        emit(const ChangePasswordSuccess(message: 'Success'));
+        emit( const ChangePasswordState.success( 'Success'));
       } else {
-        emit(const ChangePasswordError(
-            message: 'New Pass and Confirm Pass is not matched'));
+        emit( const ChangePasswordState.error(
+             'New Pass and Confirm Pass is not matched'));
       }
     } else {
-      emit(const ChangePasswordError(
-          message: 'Current Password is wrong, please try again'));
+      emit(const ChangePasswordState.error(
+           'Current Password is wrong, please try again'));
     }
   }
 }

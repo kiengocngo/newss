@@ -30,12 +30,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+               iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 0.25,
           centerTitle: true,
           title: Text(
-            'Settings'.tr,
-            style: const TextStyle(),
+            'settings'.tr,
+            style: const TextStyle(color: Colors.black),
           ),
         ),
         body: BlocBuilder<GetUsersBloc, GetUsersState>(

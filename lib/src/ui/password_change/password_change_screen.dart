@@ -26,7 +26,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         automaticallyImplyLeading: false,
         elevation: 0.25,
         title: Text(
-          'change_pass'.tr, 
+          'change_pass'.tr,
         ),
         backgroundColor: Colors.white,
       ),
@@ -34,10 +34,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
           listener: (context, state) {
-            if (state is ChangePasswordSuccess) {
+            if (state.status == ChangePasswordStatus.success) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.message)));
-            } else if (state is ChangePasswordError) {
+            } else if (state.status == ChangePasswordStatus.error) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.message)));
             }
@@ -61,7 +61,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       fontSize: 16, fontWeight: FontWeight.w500),
                   label: Text(
                     'current_pass'.tr,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -125,7 +125,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       fontSize: 16, fontWeight: FontWeight.w500),
                   label: Text(
                     'confirm_pass'.tr,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),

@@ -18,7 +18,6 @@ class _MainScreenState extends State<MainScreen> {
     Center(child: Text('chat')),
     Center(child: Text('follow')),
     Center(child: Text('noti')),
-    SettingsScreen(),
   ];
 
   @override
@@ -139,31 +138,6 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                   Text(
                     ('noti'.tr),
-                  ),
-                ],
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedIndex = 4;
-                });
-              },
-              child: Column(
-                children: [
-                  _selectedIndex == 4
-                      ? const Icon(
-                          CupertinoIcons.settings,
-                          color: Colors.black,
-                          size: 25,
-                        )
-                      : const Icon(
-                          CupertinoIcons.settings,
-                          color: Colors.grey,
-                          size: 25,
-                        ),
-                  Text(
-                    ('settings'.tr),
                   ),
                 ],
               ),

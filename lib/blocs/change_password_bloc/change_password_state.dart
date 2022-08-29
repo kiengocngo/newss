@@ -1,23 +1,24 @@
 part of 'change_password_bloc.dart';
 
-abstract class ChangePasswordState extends Equatable {
-  const ChangePasswordState();
+enum ChangePasswordStatus { init, success, error }
 
-  @override
-  List<Object> get props => [];
-}
-
-class ChangePasswordInitial extends ChangePasswordState {}
-
-class ChangePasswordSuccess extends ChangePasswordState {
+class ChangePasswordState extends Equatable {
   final String message;
-  const ChangePasswordSuccess({required this.message});
-  @override
-  List<Object> get props => [message];
-}
-class ChangePasswordError extends ChangePasswordState {
-  final String message;
-  const ChangePasswordError({required this.message});
+  final ChangePasswordStatus status;
+  const ChangePasswordState({required this.message, required this.status});
+
+  const ChangePasswordState.init()
+      : this(message: "init", status: ChangePasswordStatus.init);
+  const ChangePasswordState.success(String message)
+      : this(
+          message: message,
+          status: ChangePasswordStatus.success,
+        );
+  const ChangePasswordState.error(String message)
+      : this(
+          message: message,
+          status: ChangePasswordStatus.error,
+        );
   @override
   List<Object> get props => [message];
 }

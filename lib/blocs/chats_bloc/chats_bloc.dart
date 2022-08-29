@@ -31,10 +31,11 @@ class ChatsBloc extends Bloc<ChatsEvent, ChatsState> {
       for (var element in data.docs) {
         if (event.senderId == element.data()["receiverId"] ||
             event.receiverId == element.data()["receiverId"]) {
+         
           tmp.add(Chat.fromJson(element.data()));
+           log(element.id);
         }
       }
-
       emit(ChatsState.loaded(tmp));
     });
   }

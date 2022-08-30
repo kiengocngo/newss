@@ -1,5 +1,5 @@
 part of 'info_changes_bloc.dart';
-
+// file can be missed
 abstract class InfoChangesEvent extends Equatable {
   const InfoChangesEvent();
   @override

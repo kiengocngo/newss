@@ -42,9 +42,9 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
             } else {
               emit(const FriendRequestState.secondRequest());
               FireStoreService().fixFriendRequest(element.id);
+              emit(const FriendRequestState.accept());
               return;
             }
-            
           }
         }
       }
@@ -52,6 +52,7 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
       FireStoreService()
           .addFriendsRequest(event.currentUserUid, event.targetUserUid);
       emit(const FriendRequestState.firstRequest());
+
       return;
     }
   }

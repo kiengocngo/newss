@@ -15,6 +15,12 @@ class FireStoreResponse {
         .orderBy("dateTime", descending: false)
         .snapshots();
   }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getLogInStatus(String uid)
+  {
+      final CollectionReference<Map<String, dynamic>> database =
+        _instance.collection("UserStatus");
+        return database.snapshots();
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getConversations(
       String currentUser) {
@@ -23,3 +29,4 @@ class FireStoreResponse {
     return database.orderBy("dateTime", descending: false).snapshots();
   }
 }
+

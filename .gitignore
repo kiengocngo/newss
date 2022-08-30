@@ -45,4 +45,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-pubspec.lock
+assets/images/sign_up.jpg
+assets/images/sign_up.jpg

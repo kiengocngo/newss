@@ -16,6 +16,7 @@ class AppTranslation extends Translations {
           'current_pass': 'Current Password',
           'new_pass': 'New Password',
           'confirm_pass': 'Confirm Password',
+          'log_out':'Log Out',
         },
         'vi_VN': {
           'home': 'Trang chủ',
@@ -30,6 +31,7 @@ class AppTranslation extends Translations {
           'current_pass': 'Mật khẩu cũ',
           'new_pass': 'Mật khẩu mới',
           'confirm_pass': 'Nhập lại mật khẩu',
+          'log_out':"Đăng xuất"
         }
       };
 }

@@ -7,21 +7,19 @@ import 'package:news_app/src/models/my_user.dart';
 part 'get_users_event.dart';
 part 'get_users_state.dart';
 
-class GetUsersBloc extends Bloc<GetUsersEvent, GetUsersState> {
-  final GetUsersData _getUsersData = GetUsersData();
-  GetUsersBloc() : super(GetUsersInitial()) {
+class GetUserBloc extends Bloc<GetUsersEvent, GetUserState> {
+  final GetUserData _getUsersData = GetUserData();
+  GetUserBloc() : super(GetUserState.init()) {
     on<GetUsers>(_onGetUsers);
   }
-  void _onGetUsers(GetUsers event, Emitter<GetUsersState> emit) async {
+  void _onGetUsers(GetUsers event, Emitter<GetUserState> emit) async {
     try {
-      var users = await _getUsersData.getUsersData(event.uid);
-      emit(GetUsersSuccess(users: users));
+      var user = await _getUsersData.getUsersData(event.uid);
+      emit(GetUserState.success(user));
     } on FirebaseException catch (e) {
-      emit(GetUsersError(message: e.code));
-    }
-    catch(e)
-    {
-      emit(GetUsersError(message: e.toString()));
+      emit(GetUserState.error(e.code));
+    } catch (e) {
+      emit(GetUserState.error(e.toString()));
     }
   }
 }

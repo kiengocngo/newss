@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/my_user.dart';
 
-class GetUsersData {
+class GetUserData {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
   Future<MyUser> getUsersData(String uid) async {
     var data =

@@ -29,8 +29,8 @@ class SignUpMailPass extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                  height: size.height * 0.4,
-                  width: size.width * 0.8,
+                  height: size.height * 0.35,
+                  width: size.width * 0.7,
                   child: Image.asset(
                     "assets/images/sign_up.jpg",
                     fit: BoxFit.cover,

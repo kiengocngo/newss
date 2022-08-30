@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:equatable/equatable.dart';
@@ -19,6 +18,12 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         emit(LogInState.loaded(result.data));
       } else {
         emit(LogInState.error(result.data));
+      }
+    });
+    on<LogInSignOutEvent>((event, emit) {
+      if (state.logInStatus == LogInStatus.loaded) {
+        _firebaseAuthServices.signOut();
+        emit(LogInState.init());
       }
     });
   }

@@ -15,6 +15,7 @@ class PasswordScreen extends StatelessWidget {
   PasswordScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,13 +28,18 @@ class PasswordScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
           listener: (context, state) {
-            if (state.status == ChangePasswordStatus.success) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.message)));
-              Navigator.pop(context);
-            } else if (state.status == ChangePasswordStatus.error) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.message)));
+            switch (state.status) {
+              case ChangePasswordStatus.success:
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(state.message)));
+                Navigator.pop(context);
+                break;
+              case ChangePasswordStatus.error:
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(state.message)));
+                break;
+              default:
+                break;
             }
           },
           child: Column(children: [
@@ -59,18 +65,30 @@ class PasswordScreen extends StatelessWidget {
                 newPasswordController.clear();
                 confirmPasswordController.clear();
               },
-              child: Center(
-                child: Container(
-                  height: 40,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      color: Colors.blue[400],
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Center(
-                    child: Text(
-                      'submit_change'.tr,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w700),
+              child: Padding(
+                padding: const EdgeInsets.only(top:8.0),
+                child: Center(
+                  child: Container(
+                    height: size.height * 0.07,
+                    width: size.width * 0.4,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF3366FF),
+                            Color(0xFF00CCFF),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'submit_change'.tr,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                 ),

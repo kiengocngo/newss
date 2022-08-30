@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => NewsTechnologyCubit(dio: Dio())),
               BlocProvider(create: (context) => ImageCubit()),
         BlocProvider(create: (context) => UpdateUsersBloc()),
-        BlocProvider(create: (context) => GetUsersBloc()),
+        BlocProvider(create: (context) => GetUserBloc()),
         BlocProvider(create: (context) => ChangePasswordBloc()),
       ],
       child: GetMaterialApp(

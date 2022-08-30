@@ -33,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -40,125 +41,132 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-        child: Container(
-          color: Colors.green[200],
-          child: SingleChildScrollView(
-            child: Column(children: [
-              AvatarSettings(
-                image: widget.users.base64Image,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                    label: const Text(
-                      'Name',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1),
-                    )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
-                    label: const Text(
-                      'Phone',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1),
-                    )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: _adddressController,
-                decoration: InputDecoration(
-                    label: const Text(
-                      'Address',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide:
-                          const BorderSide(color: Colors.black, width: 1),
-                    )),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              BlocListener<UpdateUsersBloc, UpdateUsersState>(
-                listener: (context, state) {
-                  if (state.updateState ==UpdateState.success) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Update Success')));
-                    context
-                        .read<GetUsersBloc>()
-                        .add(GetUsers(uid: widget.users.uid));
-                    Navigator.pop(context);
-                  }
-                  if (state.updateState == UpdateState.error) {
-                    log('error');
-                  }
+        child: SingleChildScrollView(
+          child: Column(children: [
+            AvatarSettings(
+              image: widget.users.base64Image,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                  label: const Text(
+                    'Name',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 1),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 1),
+                  )),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: _phoneController,
+              decoration: InputDecoration(
+                  label: const Text(
+                    'Phone',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 1),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 1),
+                  )),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: _adddressController,
+              decoration: InputDecoration(
+                  label: const Text(
+                    'Address',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 1),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 1),
+                  )),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            BlocListener<UpdateUsersBloc, UpdateUsersState>(
+              listener: (context, state) {
+                if (state.updateState == UpdateState.success) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Update Success')));
+                  context
+                      .read<GetUserBloc>()
+                      .add(GetUsers(uid: widget.users.uid));
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.message)));
+                }
+              },
+              child: InkWell(
+                onTap: () {
+                  final image = base64.decode(widget.users.base64Image);
+                  final bytes = context.read<ImageCubit>().state != null
+                      ? context.read<ImageCubit>().state!.readAsBytesSync()
+                      : image;
+                  context.read<UpdateUsersBloc>().add(UpdateUsers(
+                      uid: widget.users.uid,
+                      name: _nameController.text,
+                      address: _adddressController.text,
+                      phone: _phoneController.text,
+                      base64Image: base64.encode(bytes)));
                 },
-                child: InkWell(
-                  onTap: () {
-                    final image = base64.decode(widget.users.base64Image);
-                    final bytes = context.read<ImageCubit>().state != null
-                        ? context.read<ImageCubit>().state!.readAsBytesSync()
-                        : image;
-                    context.read<UpdateUsersBloc>().add(UpdateUsers(
-                        uid: widget.users.uid,
-                        name: _nameController.text,
-                        address: _adddressController.text,
-                        phone: _phoneController.text,
-                        base64Image: base64.encode(bytes)));
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 50,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          color: Colors.blue[300],
-                          borderRadius: BorderRadius.circular(16)),
-                      child: const Center(
-                          child: Text(
-                        'Submit',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                      )),
+                child: Center(
+                  child: Container(
+                    height: size.height*0.07,
+                    width: size.width*0.3,
+                    decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  gradient: LinearGradient(
+                    colors: [
+                  Color(0xFF3366FF),
+                  Color(0xFF00CCFF),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp),
+                ) ,
+                    child: const Center(
+                      child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
                     ),
                   ),
                 ),
               ),
-            ]),
-          ),
+            ),
+          ]),
         ),
       ),
     );

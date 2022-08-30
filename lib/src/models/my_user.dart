@@ -28,7 +28,6 @@ class MyUser {
         password: "password",
         phoneNumber: "phoneNumber",
         address: "address",
-
         base64Image: "base64Image");
   }
   factory MyUser.fromJson(Map<String, dynamic> json) {

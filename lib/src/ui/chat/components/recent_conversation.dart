@@ -51,7 +51,7 @@ class RecentConversationScreen extends StatelessWidget {
                           userName: tmp.data[0].name!,
                           friendName: conversationsUserName,
                           friendImage: userImage,
-                          userImage: tmp.data[0].base64Image!,
+                          userImage: tmp.data[0].base64Image,
                         ),
                       )),
             );

@@ -16,20 +16,18 @@ import 'package:news_app/src/ui/chat/screens/enter_chat_room.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
-    '/conversations': (context) => const ConversationScreen(
-          uid: "",
-        ),
+    '/conversations': (context) => const ConversationScreen(),
     "/enter_chat_room": (context) => EnterChatRoom(),
     '/home': (context) => const HomeScreen(),
     '/detail_news': (context) => const DetailNewsScreen(),
     '/splash': (context) => const SplashScreen(),
     '/tutorial': (context) => const TutorialScreen(),
     '/news_topic': (context) => const NewsTopicScreen(),
-    'settings': ((context) =>  SettingsScreen()),
+    'settings': ((context) => SettingsScreen()),
     '/login': (context) => LoginScreen(),
     '/bottom': (context) => const MainScreen(),
     '/favorite': (context) => const FavoriteScreen(),
-    '/sign_up':((context) =>  SignUpMailPass()),
+    '/sign_up': ((context) => SignUpMailPass()),
     '/log_in': (context) => LoginScreen(),
   };
 }

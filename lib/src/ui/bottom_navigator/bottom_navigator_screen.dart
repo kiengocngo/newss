@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/src/ui/chat/screens/conversation.dart';
 import 'package:news_app/src/ui/home/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Center(child: Text('chat')),
+    ConversationScreen(),
     Center(child: Text('follow')),
     Center(child: Text('noti')),
   ];

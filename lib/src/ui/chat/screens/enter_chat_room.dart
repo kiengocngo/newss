@@ -27,7 +27,6 @@ class EnterChatRoom extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ConversationScreen(
-                              uid: _controller.text,
                             )),
                   );
                 },

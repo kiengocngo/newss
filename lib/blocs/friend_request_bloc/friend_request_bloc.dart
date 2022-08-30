@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,9 +44,15 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
               FireStoreService().fixFriendRequest(element.id);
               return;
             }
+            
           }
         }
       }
+      emit(const FriendRequestState.noRequest());
+      FireStoreService()
+          .addFriendsRequest(event.currentUserUid, event.targetUserUid);
+      emit(const FriendRequestState.firstRequest());
+      return;
     }
   }
 

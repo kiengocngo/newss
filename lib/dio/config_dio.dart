@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:news_app/dio/dio_exception.dart';
-import 'package:news_app/src/models/base_model.dart';
+import 'package:news_app/src/models/chats/base_model.dart';
 import 'package:news_app/src/models/news/news_model.dart';
 import 'package:news_app/src/models/news/results_model.dart';
 

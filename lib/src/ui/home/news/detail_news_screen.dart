@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/models/news/results_model.dart';
@@ -33,7 +32,6 @@ class _DetailNewsScreenState extends State<DetailNewsScreen>
         .animate(CurvedAnimation(
             parent: containerAnimationController, curve: Curves.ease));
     containerAnimationController.forward();
-    log(widget.results!.category.toString());
   }
 
   @override

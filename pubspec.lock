@@ -106,20 +106,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.7"
-  easy_localization:
-    dependency: "direct main"
-    description:
-      name: easy_localization
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.1"
-  easy_logger:
-    dependency: transitive
-    description:
-      name: easy_logger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
   equatable:
     dependency: "direct main"
     description:
@@ -148,6 +134,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  firebase_auth:
+    dependency: "direct main"
+    description:
+      name: firebase_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.7.0"
+  firebase_auth_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_auth_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.6.0"
+  firebase_auth_web:
+    dependency: transitive
+    description:
+      name: firebase_auth_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.0"
   firebase_core:
     dependency: "direct main"
     description:
@@ -161,14 +168,14 @@ packages:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.0"
+    version: "4.5.1"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.1"
+    version: "1.7.2"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -230,11 +237,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
-  flutter_localizations:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -252,6 +254,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.6.5"
   http:
     dependency: transitive
     description:

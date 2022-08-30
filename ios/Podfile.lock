@@ -606,6 +606,9 @@ PODS:
     - Firebase/Firestore (= 9.3.0)
     - firebase_core
     - Flutter
+  - Firebase/Auth (9.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 9.3.0)
   - Firebase/CoreOnly (9.3.0):
     - FirebaseCore (= 9.3.0)
   - Firebase/Firestore (9.3.0):
@@ -614,6 +617,10 @@ PODS:
   - Firebase/Messaging (9.3.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 9.3.0)
+  - firebase_auth (3.7.0):
+    - Firebase/Auth (= 9.3.0)
+    - firebase_core
+    - Flutter
   - firebase_core (1.20.1):
     - Firebase/CoreOnly (= 9.3.0)
     - Flutter
@@ -621,6 +628,11 @@ PODS:
     - Firebase/Messaging (= 9.3.0)
     - firebase_core
     - Flutter
+  - FirebaseAuth (9.3.0):
+    - FirebaseCore (~> 9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.7)
   - FirebaseCore (9.3.0):
     - FirebaseCoreDiagnostics (~> 9.0)
     - FirebaseCoreInternal (~> 9.0)
@@ -735,6 +747,7 @@ PODS:
     - gRPC-Core/Interface (= 1.44.0)
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
+  - GTMSessionFetcher/Core (2.0.0)
   - image_picker_ios (0.0.1):
     - Flutter
   - leveldb-library (1.22.1)
@@ -757,6 +770,7 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
@@ -770,6 +784,7 @@ SPEC REPOS:
     - abseil
     - BoringSSL-GRPC
     - Firebase
+    - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreInternal
@@ -780,6 +795,7 @@ SPEC REPOS:
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMSessionFetcher
     - leveldb-library
     - Libuv-gRPC
     - nanopb
@@ -788,6 +804,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -808,8 +826,10 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: 36a45526110ef66139fe4b7ac48a6332188a7605
   Firebase: ef75abb1cdbc746d5a38f4e26c422c807b189b8c
+  firebase_auth: e9a024f4cd147a81064a1fb202b70eecb43cfda2
   firebase_core: e66a443ec996cb5e364dc70b4cfc1809c32cbb2e
   firebase_messaging: b414881f438b3b0b1bf1b0dd4b6767c4cfcf4dc7
+  FirebaseAuth: 9ebc3577fe0acf9092df21ac314024b70aebf21e
   FirebaseCore: c088995ece701a021a48a1348ea0174877de2a6a
   FirebaseCoreDiagnostics: aaa87098082c4d4bdd1a9557b1186d18ca85ce8c
   FirebaseCoreInternal: a13302b0088fbf5f38b79b6ece49c2af7d3e05d6
@@ -822,6 +842,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
+  GTMSessionFetcher: 681175626052e03fdde7952f7e9c7a9785719506
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
@@ -830,6 +851,6 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
 
-PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
+PODFILE CHECKSUM: a761b84f0356ff6507eccd9d953ef83a171a9150
 
 COCOAPODS: 1.11.3

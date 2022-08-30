@@ -1,97 +1,149 @@
-import 'package:badges/badges.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:news_app/src/ui/home/home_screen.dart';
-import 'package:news_app/src/ui/notifications_screen/notification_screen.dart';
 import 'package:news_app/src/ui/settings/settings_screen.dart';
 
-class BottomNavigationScreen extends StatefulWidget {
-  const BottomNavigationScreen({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<BottomNavigationScreen> createState() => _BottomNavigationScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
+class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    Center(child: Text('chat')),
+    Center(child: Text('follow')),
+    Center(child: Text('noti')),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: IndexedStack(
-          index: _selectedIndex,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            // ignore: prefer_const_constructors
-            HomeScreen(
-              
-            ),
-            // ignore: prefer_const_constructors
-            Text(
-              'Index 2: Chat',
-            ),
-            // ignore: prefer_const_constructors
-            Text('Favourite'),
-            // ignore: prefer_const_constructors
-            NotificationScreen(),
-            // ignore: prefer_const_constructors
-            SettingsScreen(),
-          ],
-        ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _widgetOptions,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Colors.green,
-            ),
-            label: 'Home',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat_bubble_outline_rounded,
-              color: Colors.green,
-            ),
-            label: 'Chat',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite_rounded,
-              color: Colors.green,
-            ),
-            label: 'Favourite',
-          ),
-          BottomNavigationBarItem(
-            icon: Badge(
-              position: BadgePosition.topEnd(),
-              badgeColor: const Color.fromARGB(255, 235, 161, 156),
-              badgeContent: const Text('4'),
-              animationDuration: const Duration(seconds: 1),
-              animationType: BadgeAnimationType.fade,
-              child: const Icon(
-                Icons.notification_important_rounded,
-                color: Colors.green,
+      bottomNavigationBar: buildBottomNavigationBar(context),
+    );
+  }
+
+  Container buildBottomNavigationBar(BuildContext context) {
+    return Container(
+      height: 80,
+      decoration: const BoxDecoration(
+        color: Colors.white60,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+              child: Column(
+                children: [
+                  _selectedIndex == 0
+                      ? const Icon(
+                          CupertinoIcons.home,
+                          color: Colors.black,
+                          size: 25,
+                        )
+                      : const Icon(
+                          CupertinoIcons.home,
+                          color: Colors.grey,
+                          size: 25,
+                        ),
+                  Text(
+                    ('home'.tr),
+                  ),
+                ],
               ),
             ),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.green,
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+              },
+              child: Column(
+                children: [
+                  _selectedIndex == 1
+                      ? const Icon(
+                          CupertinoIcons.chat_bubble_2,
+                          color: Colors.black,
+                          size: 25,
+                        )
+                      : const Icon(
+                          CupertinoIcons.chat_bubble_2,
+                          color: Colors.grey,
+                          size: 25,
+                        ),
+                  Text(
+                    ('message'.tr),
+                  ),
+                ],
+              ),
             ),
-            label: tr('Settings'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[700],
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+              },
+              child: Column(
+                children: [
+                  _selectedIndex == 2
+                      ? const Icon(
+                          CupertinoIcons.heart,
+                          color: Colors.black,
+                          size: 25,
+                        )
+                      : const Icon(
+                          CupertinoIcons.heart,
+                          color: Colors.grey,
+                          size: 25,
+                        ),
+                  Text(
+                    ('follow'.tr),
+                  ),
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 3;
+                });
+              },
+              child: Column(
+                children: [
+                  _selectedIndex == 3
+                      ? const Icon(
+                          CupertinoIcons.bell,
+                          color: Colors.black,
+                          size: 25,
+                        )
+                      : const Icon(
+                          CupertinoIcons.bell,
+                          color: Colors.grey,
+                          size: 25,
+                        ),
+                  Text(
+                    ('noti'.tr),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

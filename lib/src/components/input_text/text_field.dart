@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class TextInputField extends StatelessWidget {
-  String text;
-  TextInputType type;
-  Icon prefixIcon;
-  TextEditingController controller;
-  TextInputField({
+  final String text;
+  final TextInputType type;
+  final Icon prefixIcon;
+  final TextEditingController controller;
+
+  const TextInputField({
     Key? key,
     required this.text,
     required this.type,
@@ -17,25 +17,24 @@ class TextInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-            ),
-            borderRadius: BorderRadius.circular(20)),
-        child: TextFormField(
-          keyboardType: type,
-          controller: controller,
-          textAlignVertical: TextAlignVertical.center,
-          textAlign: TextAlign.start,
-          enableInteractiveSelection: false,
-          obscureText: false,
-          decoration: InputDecoration(
-            prefixIcon: prefixIcon,
-            contentPadding: const EdgeInsets.only(left: 4),
-            hintText: text,
-            border: InputBorder.none,
+      padding: const EdgeInsets.all(16.0),
+      child: TextFormField(
+        style: const TextStyle(color: Colors.white),
+        keyboardType: type,
+        controller: controller,
+        textAlignVertical: TextAlignVertical.center,
+        textAlign: TextAlign.start,
+        enableInteractiveSelection: false,
+        obscureText: false,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.grey,
+          prefixIcon: prefixIcon,
+          contentPadding: const EdgeInsets.only(left: 4),
+          hintText: text,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Colors.grey, width: 1),
           ),
         ),
       ),

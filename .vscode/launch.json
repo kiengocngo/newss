@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "newss",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "newss (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "newss (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Android1",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5554"
+        },
+        {
+            "name": "Android2",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5556"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "All Devices",
+            "configurations": ["Android1", "Android2"],
+        }
+    ]
+}

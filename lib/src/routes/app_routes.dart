@@ -29,5 +29,7 @@ class AppRoutes {
     '/login': (context) => LoginScreen(),
     '/bottom': (context) => const MainScreen(),
     '/favorite': (context) => const FavoriteScreen(),
+    '/sign_up':((context) =>  SignUpMailPass()),
+    '/log_in': (context) => LoginScreen(),
   };
 }

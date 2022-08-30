@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
+// package can thiet cho date format
 
 class SenderMessage extends StatelessWidget {
   final String sendMessage;

@@ -35,7 +35,7 @@ class FireStoreService {
       tmp[0].uid = data.docs[0].id;
       return SearchResponse(isSuccess: true, data: tmp);
     } catch (e) {
-      return SearchResponse(isSuccess: false, data: []);
+      return const SearchResponse(isSuccess: false, data: []);
     }
   }
 
@@ -56,7 +56,7 @@ class FireStoreService {
       }
       return SearchResponse(isSuccess: true, data: tmp);
     } catch (e) {
-      return SearchResponse(isSuccess: false, data: []);
+      return const SearchResponse(isSuccess: false, data: []);
     }
   }
 

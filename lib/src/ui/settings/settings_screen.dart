@@ -10,6 +10,7 @@ import '../password_change/password_change_screen.dart';
 
 enum Language { english, vietnammese }
 
+// ignore: must_be_immutable
 class SettingsScreen extends StatelessWidget {
   Language character = Language.english;
   SettingsScreen({Key? key}) : super(key: key);

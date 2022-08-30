@@ -10,7 +10,13 @@ class NewsColor {
   static const Color bgHotNews = Color.fromARGB(255, 135, 199, 241);
   static const Color bgTextForm = Color.fromARGB(255, 208, 208, 208);
   //gradient
-
+static const LinearGradient kGradient = LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFFb92b27),
+        Color(0xFF1565C0),
+      ]);
   //button
   static const Color button1 = Color.fromARGB(255, 215, 49, 49);
   //line

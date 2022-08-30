@@ -10,6 +10,7 @@ class NewsThemeData {
   late TextStyle textDescription;
   late TextStyle textButton;
   late TextStyle textSetting;
+  late TextStyle textButtonDialog;
 
   factory NewsThemeData.fromContext(BuildContext context) {
     final NewsThemeData theme = NewsThemeData();
@@ -43,10 +44,15 @@ class NewsThemeData {
       color: NewsColor.textWhite,
       fontStyle: FontStyle.normal,
     );
-    theme.textSetting = const TextStyle(
-      fontWeight: FontWeight.w500,
-      fontSize: 16,
-      color: NewsColor.textBlack,
+
+  
+
+    theme.textButtonDialog = const TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 14,
+      color: NewsColor.textWhite,
+      fontStyle: FontStyle.normal,
+
     );
     return theme;
   }

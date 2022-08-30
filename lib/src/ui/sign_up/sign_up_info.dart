@@ -69,7 +69,7 @@ class SignUpScreen extends StatelessWidget {
                           if (state.changesStage == ChangesStage.success) {
                             Navigator.pushNamed(
                               context,
-                              '/home',
+                              '/bottom',
                             );
                           }
                         },
@@ -90,7 +90,7 @@ class SignUpScreen extends StatelessWidget {
                                         phoneNumber: _phoneController.text,
                                         address: _addressController.text,
                                         base64Image: base64.encode(bytes))));
-                            Navigator.pushNamed(context, "home");
+                          
                           },
                           child: Container(
                               height: size.height * 0.05,

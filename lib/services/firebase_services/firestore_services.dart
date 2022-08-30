@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/chats/auth_response.dart';
 import 'package:news_app/src/models/chats/chat.dart';
@@ -30,11 +32,13 @@ class FireStoreService {
           .collection("Users")
           .where("uid", isEqualTo: uid)
           .get();
+      log("data length" + data.docs.length.toString());
       List<MyUser> tmp = [];
-      tmp.add(MyUser.fromJson(data.docs[0].data()));
+      tmp.add(MyUser.fromJson(data.docs.first.data()));
       tmp[0].uid = data.docs[0].id;
       return SearchResponse(isSuccess: true, data: tmp);
     } catch (e) {
+      log(e.toString());
       return const SearchResponse(isSuccess: false, data: []);
     }
   }

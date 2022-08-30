@@ -82,6 +82,11 @@ class FriendRequestBloc extends Bloc<FriendRequestEvent, FriendRequestState> {
           }
         }
       }
+      emit(const FriendRequestState.noRequest());
+      FireStoreService()
+          .addFriendsRequest(event.currentUserUid, event.targetUserUid);
+      emit(const FriendRequestState.firstRequest());
+      return;
     }
   }
 }

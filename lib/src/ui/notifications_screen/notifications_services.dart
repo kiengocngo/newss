@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -12,6 +13,14 @@ class LocalNotificationService {
 
   Future<void> intialize() async {
     tz.initializeTimeZones();
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings1 = await messaging.requestPermission();
+    if (settings1.authorizationStatus == AuthorizationStatus.authorized) {
+      print('user granted permission');
+    } else {
+      print('declined');
+    }
+
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('@drawable/ic_stat_android');
 

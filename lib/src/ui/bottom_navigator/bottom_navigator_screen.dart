@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/src/ui/home/home_screen.dart';
-import 'package:news_app/src/ui/settings/settings_screen.dart';
+import 'package:news_app/src/ui/notifications_screen/notification_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     Center(child: Text('chat')),
     Center(child: Text('follow')),
-    Center(child: Text('noti')),
+    NotificationScreen(),
   ];
 
   @override

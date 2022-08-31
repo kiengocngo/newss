@@ -6,7 +6,6 @@ import 'package:news_app/responses/firebase_responses/firestore_responses.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/models/chats/chat.dart';
-
 part 'chats_event.dart';
 part 'chats_state.dart';
 

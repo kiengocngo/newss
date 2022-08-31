@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart' as sql;
-
 import 'package:news_app/src/models/favorite/categories.dart';
 
 class SQLHelper {

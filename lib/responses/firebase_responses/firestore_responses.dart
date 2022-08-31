@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 // response duoc ket noi voi firestore snapshots de thay doi ngay
 // khi co data moi
 class FireStoreResponse {

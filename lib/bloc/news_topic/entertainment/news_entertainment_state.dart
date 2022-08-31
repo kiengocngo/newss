@@ -4,26 +4,18 @@ import 'package:news_app/src/models/news/results_model.dart';
 
 class NewsEntertainmentState extends Equatable {
   final NewsStatus status;
-  final String error;
+  final String? error;
   final List<Results> results;
 
   const NewsEntertainmentState({
     this.status = NewsStatus.initial,
     this.results = const <Results>[],
-    required this.error,
+    this.error,
   });
-
-  NewsEntertainmentState copyWith({
-    NewsStatus? status,
-    String? error,
-    List<Results>? results,
-  }) {
-    return NewsEntertainmentState(
-        status: status ?? this.status,
-        results: results ?? this.results,
-        error: error ?? this.error);
-  }
-
+  const NewsEntertainmentState.initial() : this();
+  const NewsEntertainmentState.success(List<Results> results,)
+      : this(results: results, status: NewsStatus.success);
+  const NewsEntertainmentState.failure(String err) : this(error: err, status: NewsStatus.failure);
   @override
   List<Object?> get props => [
         status,

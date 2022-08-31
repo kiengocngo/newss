@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/src/ui/home/news/topic/build_entertainment_screen.dart';
-import 'package:news_app/theme/news_colors.dart';
-import 'package:news_app/theme/news_theme_data.dart';
-import 'topic/build_sports_screen.dart';
-import 'topic/build_technology_screen.dart';
+import 'package:news_app/src/ui/home/home.dart';
+import 'package:news_app/theme/theme.dart';
 
 class NewsTopicScreen extends StatefulWidget {
   const NewsTopicScreen({Key? key}) : super(key: key);

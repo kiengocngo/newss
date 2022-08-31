@@ -12,6 +12,8 @@ class NewsThemeData {
   late TextStyle textSetting;
   late TextStyle textAuth;
   late TextStyle textNameChat;
+  late TextStyle textButtonDialog;
+  late TextStyle textTutorial;
 
   factory NewsThemeData.fromContext(BuildContext context) {
     final NewsThemeData theme = NewsThemeData();
@@ -61,6 +63,12 @@ class NewsThemeData {
       fontSize: 16,
       fontStyle: FontStyle.normal,
       color: NewsColor.textBlack,
+    );
+    theme.textTutorial = const TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 18,
+      color: Color.fromARGB(255, 36, 210, 94),
+      fontStyle: FontStyle.italic,
     );
     return theme;
   }

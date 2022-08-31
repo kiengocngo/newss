@@ -15,20 +15,21 @@ class AddCategory extends StatefulWidget {
 
 class _AddCategoryState extends State<AddCategory> {
   List<Categories> categoires = [
-    Categories(description: 'Sprots'),
-    Categories(description: 'Entertainment'),
-    Categories(description: 'Environment'),
-    Categories(description: 'Food'),
-    Categories(description: 'Health'),
-    Categories(description: 'Top'),
-    Categories(description: 'World'),
-    Categories(description: 'Business'),
-    Categories(description: 'Science'),
-    Categories(description: 'Technology'),
-    Categories(description: 'Politics'),
+    Categories(description: 'sports'),
+    Categories(description: 'entertainment'),
+    Categories(description: 'environment'),
+    Categories(description: 'food'),
+    Categories(description: 'health'),
+    Categories(description: 'top'),
+    Categories(description: 'world'),
+    Categories(description: 'business'),
+    Categories(description: 'science'),
+    Categories(description: 'technology'),
+    Categories(description: 'politics'),
   ];
   late List<Categories> sports = [];
-
+  String capitalizeFirstLetter(String str) =>
+      str[0].toUpperCase() + str.substring(1);
   void _creatCategory(Categories category) {
     SQLHelper.createItem(category);
     _refreshJournals();
@@ -104,7 +105,8 @@ class _AddCategoryState extends State<AddCategory> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
-                                child: Text(categoires[index].description)),
+                                child: Text(capitalizeFirstLetter(
+                                    categoires[index].description))),
                           ),
                         ),
                         Positioned(

@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:news_app/dio/dio_exception.dart';
 import 'package:news_app/src/models/chats/base_model.dart';
-import 'package:news_app/src/models/news/news_model.dart';
-import 'package:news_app/src/models/news/results_model.dart';
-import 'end_point.dart';
+import 'package:news_app/src/models/model.dart';
+import 'dio.dart';
 
 class DioClient {
   DioClient()
@@ -30,10 +28,22 @@ class DioClient {
     }
   }
 
-  Future<BaseModel> fetchNewsForYou() async {
+  Future<List<Results>> fetchNewsPage(int page) async {
+    try {
+      final response = await _dio.get('/news', queryParameters: {'page': page});
+      var news = News.fromJson(response.data);
+      List<Results>? listResults = news.results;
+      return listResults;
+    } on DioError catch (err) {
+      final errorMesage = DioException.fromDioError(err).toString();
+      throw errorMesage;
+    }
+  }
+
+  Future<BaseModel> fetchNewsForYou(String listCategories) async {
     try {
       final response = await _dio
-          .get('/news', queryParameters: {"category": "business,sports"});
+          .get('/news', queryParameters: {"category": listCategories});
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);
@@ -43,10 +53,10 @@ class DioClient {
     }
   }
 
-  Future<BaseModel> fetchNewsEntertainment() async {
+  Future<BaseModel> fetchNewsWithCategory(String category) async {
     try {
-      final response = await _dio
-          .get('/news', queryParameters: {"category": "entertainment"});
+      final response =
+          await _dio.get('/news', queryParameters: {"category": category});
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);
@@ -60,6 +70,7 @@ class DioClient {
     try {
       final response =
           await _dio.get('/news', queryParameters: {"category": topic});
+
       var news = News.fromJson(response.data);
       List<Results>? listResults = news.results;
       return BaseModel(data: listResults);

@@ -4,7 +4,7 @@ import 'package:news_app/sqflite/sqflite_service.dart';
 import 'package:news_app/src/components/dialog/custom_dialog.dart';
 import 'package:news_app/src/components/favorite_items/favorite_item.dart';
 import 'package:news_app/src/models/favorite/categories.dart';
-import 'package:news_app/src/ui/favorite/add_cateogry.dart';
+import 'package:news_app/src/ui/favorite/add_category.dart';
 import 'package:news_app/theme/news_theme_data.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -16,7 +16,8 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   List<Categories> _categories = [];
-
+  String capitalizeFirstLetter(String str) =>
+      str[0].toUpperCase() + str.substring(1);
   void _refreshJournals() async {
     final data = await SQLHelper.getAll();
     setState(() {
@@ -68,7 +69,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         child: _categories.isEmpty
             ? Center(
                 child: Text(
-                  'Bạn chưa theo dõi loại tin tức nào, \nChọn + để theo dõi thêm danh mục',
+                  'Bạn chưa theo dõi loại tin tức nào, \nChọn + để theo dõi thêm danh mục ',
                   style: NewsThemeData.fromContext(context).textNewsTitle,
                 ),
               )
@@ -81,7 +82,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ),
                 itemBuilder: (context, index) {
                   return FavoriteItems(
-                    category: _categories[index].description,
+                    category:
+                        capitalizeFirstLetter(_categories[index].description),
                     onTap: () => showDialog(
                         context: context,
                         builder: (BuildContext context) => CustomDialogBox(

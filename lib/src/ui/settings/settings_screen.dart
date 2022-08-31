@@ -1,12 +1,13 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:news_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
+import 'package:news_app/src/ui/password_change/password_change_screen.dart';
 import 'package:news_app/src/ui/profile_settings/profile_settings_screen.dart';
 import 'package:news_app/theme/news_theme_data.dart';
-import '../../../blocs/get_users_bloc/get_users_bloc.dart';
-import '../password_change/password_change_screen.dart';
 
 enum Language { english, vietnammese }
 
@@ -18,7 +19,8 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context
         .read<GetUserBloc>()
-        .add(const GetUsers(uid: 'cZRLuMBnsdRkfPBOaIcKfI8sZBi1'));
+        .add(GetUsers(uid: context.read<LogInBloc>().state.message));
+    log(context.read<LogInBloc>().state.message);
 
     return Scaffold(
         appBar: AppBar(

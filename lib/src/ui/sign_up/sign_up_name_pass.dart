@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
@@ -8,7 +6,6 @@ import 'package:news_app/blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:news_app/blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:news_app/src/components/input_text/password_field.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
-import 'package:news_app/src/ui/sign_up/sign_up_info.dart';
 
 class SignUpMailPass extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -64,21 +61,13 @@ class SignUpMailPass extends StatelessWidget {
                 listener: (context, state) {
                   switch (state.signUpStatus) {
                     case SignUpStatus.loading:
-                      log("loading");
                       break;
                     case SignUpStatus.loaded:
-                      log("loaded");
                       context.read<LogInBloc>().add(LogInSubmitEvent(
                           email: _emailController.text,
                           password: _passwordController.text));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpScreen(args: {
-                              "email": _emailController.text,
-                              "password": _passwordController.text
-                            }),
-                          ));
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/bottom', (Route<dynamic> route) => false);
                       break;
                     case SignUpStatus.error:
                       showDialog(

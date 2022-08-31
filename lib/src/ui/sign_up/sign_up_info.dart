@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/info_changes_bloc/info_changes_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
 import 'package:news_app/cubit/image_cubit.dart';
-
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/models/my_user.dart';
-
 import 'components/avatar_picker.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -16,6 +13,7 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+
   SignUpScreen({
     Key? key,
     required this.args,

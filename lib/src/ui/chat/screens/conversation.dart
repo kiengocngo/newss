@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
-
 import 'package:news_app/src/ui/chat/screens/friend_search.dart';
 import '../../../../blocs/conversations_bloc/conversations_bloc.dart';
 import '../components/recent_conversation.dart';

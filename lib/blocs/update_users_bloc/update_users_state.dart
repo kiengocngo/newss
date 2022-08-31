@@ -1,5 +1,4 @@
 part of 'update_users_bloc.dart';
-
 enum UpdateState { init, error, success }
 
 class UpdateUsersState extends Equatable {

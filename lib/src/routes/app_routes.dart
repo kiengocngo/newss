@@ -4,7 +4,6 @@ import 'package:news_app/src/ui/bottom_navigator/bottom_navigator_screen.dart';
 import 'package:news_app/src/ui/home/home_screen.dart';
 import 'package:news_app/src/ui/home/news/detail_news_screen.dart';
 import 'package:news_app/src/ui/home/news/news_topic_screen.dart';
-
 import 'package:news_app/src/ui/login/login_screen.dart';
 import 'package:news_app/src/ui/settings/settings_screen.dart';
 import 'package:news_app/src/ui/sign_up/sign_up_name_pass.dart';

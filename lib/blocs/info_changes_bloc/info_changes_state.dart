@@ -2,7 +2,6 @@ part of 'info_changes_bloc.dart';
 
 enum ChangesStage { init, loading, success, error }
 
-
 class InfoChangesState extends Equatable {
   final ChangesStage changesStage;
   final MyUser myUser;

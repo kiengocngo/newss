@@ -26,14 +26,14 @@ class ChangePasswordBloc
     if (event.currentPassword == usersData.password) {
       if (event.newPassword == event.confirmPassword) {
         _changePasswordServices.changePassword(event.newPassword);
-        emit( const ChangePasswordState.success( 'Success'));
+        emit(const ChangePasswordState.success('Success'));
       } else {
-        emit( const ChangePasswordState.error(
-             'New Pass and Confirm Pass is not matched'));
+        emit(const ChangePasswordState.error(
+            'New Pass and Confirm Pass is not matched'));
       }
     } else {
       emit(const ChangePasswordState.error(
-           'Current Password is wrong, please try again'));
+          'Current Password is wrong, please try again'));
     }
   }
 }

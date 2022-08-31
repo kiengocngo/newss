@@ -66,7 +66,8 @@ class LoginScreen extends StatelessWidget {
                             const SnackBar(content: Text("Logging in")));
                         break;
                       case LogInStatus.loaded:
-                        Navigator.pushNamed(context, '/bottom');
+                        Navigator.pushNamedAndRemoveUntil(context, '/bottom',
+                            (Route<dynamic> route) => false);
                         break;
                       case LogInStatus.error:
                         ScaffoldMessenger.of(context).showSnackBar(

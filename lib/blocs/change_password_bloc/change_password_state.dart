@@ -1,4 +1,5 @@
 part of 'change_password_bloc.dart';
+
 enum ChangePasswordStatus { init, success, error }
 
 class ChangePasswordState extends Equatable {

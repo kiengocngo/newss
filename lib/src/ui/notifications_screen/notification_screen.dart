@@ -128,8 +128,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
                   //final name = user.uid;
-                } else {
-                }
+                } else {}
                 service.showNotification(id: 0, title: 'Title', body: 'body');
               },
               child: const Text('Click'))

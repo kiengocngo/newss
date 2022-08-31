@@ -22,7 +22,7 @@ class AppRoutes {
     '/splash': (context) => const SplashScreen(),
     '/tutorial': (context) => const TutorialScreen(),
     '/news_topic': (context) => const NewsTopicScreen(),
-    'settings': ((context) =>  SettingsScreen()),
+    'settings': ((context) => SettingsScreen()),
     '/login': (context) => LoginScreen(),
     '/bottom': (context) => const MainScreen(),
   };

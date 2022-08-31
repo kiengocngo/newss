@@ -36,10 +36,9 @@ class MyUser {
         password: json["password"],
         phoneNumber: json["phoneNumber"],
         address: json["address"],
-   
         base64Image: json["base64Image"]);
   }
-  
+
   toJson() {
     return {
       "uid": uid,
@@ -48,7 +47,6 @@ class MyUser {
       "password": password,
       "phoneNumber": phoneNumber,
       "address": address,
-
       "base64Image": base64Image
     };
   }

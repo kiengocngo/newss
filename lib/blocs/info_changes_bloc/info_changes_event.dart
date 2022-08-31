@@ -16,7 +16,6 @@ class InfoGetCurrentUser extends InfoChangesEvent {
 }
 
 class InfoAddNewUserEvent extends InfoChangesEvent {
-  // se doi thanh model User
   final MyUser myUser;
   const InfoAddNewUserEvent({
     required this.myUser,

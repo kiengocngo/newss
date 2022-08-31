@@ -57,13 +57,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   )),
             ),
             const SizedBox(
@@ -78,13 +76,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   )),
             ),
             const SizedBox(
@@ -99,13 +95,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   )),
             ),
             const SizedBox(
@@ -140,26 +134,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 child: Center(
                   child: Container(
-                    height: size.height*0.07,
-                    width: size.width*0.3,
+                    height: size.height * 0.07,
+                    width: size.width * 0.3,
                     decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  gradient: LinearGradient(
-                    colors: [
-                  Color(0xFF3366FF),
-                  Color(0xFF00CCFF),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.0, 1.0],
-                    tileMode: TileMode.clamp),
-                ) ,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF3366FF),
+                            Color(0xFF00CCFF),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp),
+                    ),
                     child: const Center(
                       child: Text(
-                      'Submit',
-                      style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
+                        'Submit',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ),

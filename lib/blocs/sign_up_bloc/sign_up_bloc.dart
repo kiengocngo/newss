@@ -6,11 +6,11 @@ import 'package:news_app/src/models/auth_response.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final FirebaseAuthServices _authServices = FirebaseAuthServices();
-  SignUpBloc() : super(SignUpState.init()) {
+  SignUpBloc() : super(const SignUpState.init()) {
     on<SignUpSubmitEvent>((event, emit) async {
-      emit(SignUpState.loading());
+      emit(const SignUpState.loading());
       if (event.password != event.reEnterPassword) {
-        emit(SignUpState.error(
+        emit(const SignUpState.error(
             "your password and re enter are not the same. Please correct!"));
         return;
       }

@@ -8,9 +8,9 @@ class UpdateUsersState extends Equatable {
   const UpdateUsersState({required this.message, required this.updateState});
   const UpdateUsersState.init()
       : this(message: "init", updateState: UpdateState.init);
-      const UpdateUsersState.error(String message)
+  const UpdateUsersState.error(String message)
       : this(message: message, updateState: UpdateState.error);
-      const UpdateUsersState.success(String message)
+  const UpdateUsersState.success(String message)
       : this(message: message, updateState: UpdateState.success);
   @override
   List<Object> get props => [message, updateState];

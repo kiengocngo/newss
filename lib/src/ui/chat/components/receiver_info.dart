@@ -20,7 +20,7 @@ class ReceiverInfo extends StatelessWidget {
           children: [
             ClipOval(
               child: SizedBox.fromSize(
-                size: const Size(100, 100), // Image radius
+                size: const Size(100, 100), 
                 child: Image.memory(
                   base64.decode(
                     friendImage,

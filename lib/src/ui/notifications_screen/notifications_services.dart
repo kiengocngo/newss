@@ -97,8 +97,7 @@ class LocalNotificationService {
   }
 
   void onDidReceiveLocalNotification(
-      int id, String? title, String? body, String? payload) {
-  }
+      int id, String? title, String? body, String? payload) {}
 
   void onSelectNotification(String? payload) {
     if (payload != null && payload.isNotEmpty) {

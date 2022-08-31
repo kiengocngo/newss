@@ -2,30 +2,29 @@ import 'package:equatable/equatable.dart';
 
 enum SignUpStatus { init, loading, loaded, error }
 
-// ignore: must_be_immutable
 class SignUpState extends Equatable {
-  SignUpStatus signUpStatus;
-  String message;
-  SignUpState({
+  final SignUpStatus signUpStatus;
+  final String message;
+  const SignUpState({
     required this.signUpStatus,
     required this.message,
   });
-  SignUpState.init()
+  const SignUpState.init()
       : this(
           signUpStatus: SignUpStatus.init,
           message: "",
         );
-  SignUpState.loading()
+  const SignUpState.loading()
       : this(
           signUpStatus: SignUpStatus.loading,
           message: "loading",
         );
-  SignUpState.loaded(message)
+  const SignUpState.loaded(message)
       : this(
           signUpStatus: SignUpStatus.loaded,
           message: message,
         );
-  SignUpState.error(message)
+  const SignUpState.error(message)
       : this(
           signUpStatus: SignUpStatus.error,
           message: message,

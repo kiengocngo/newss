@@ -99,7 +99,6 @@ class _AddCategoryState extends State<AddCategory> {
                       children: [
                         Card(
                           child: Container(
-                            // color: contains.isEmpty ? Colors.green : Colors.red,
                             decoration: BoxDecoration(
                               gradient: NewsColor.kGradient,
                               borderRadius: BorderRadius.circular(12),

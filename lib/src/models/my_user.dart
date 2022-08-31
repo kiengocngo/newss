@@ -7,8 +7,6 @@ class MyUser {
   String address;
   String base64Image;
 
-
-
   MyUser({
     required this.uid,
     required this.name,
@@ -17,7 +15,6 @@ class MyUser {
     required this.phoneNumber,
     required this.address,
     required this.base64Image,
-
   });
 
   factory MyUser.defaultUser() {
@@ -38,7 +35,6 @@ class MyUser {
         password: json["password"],
         phoneNumber: json["phoneNumber"],
         address: json["address"],
-   
         base64Image: json["base64Image"]);
   }
   toJson() {
@@ -49,7 +45,6 @@ class MyUser {
       "password": password,
       "phoneNumber": phoneNumber,
       "address": address,
-
       "base64Image": base64Image
     };
   }

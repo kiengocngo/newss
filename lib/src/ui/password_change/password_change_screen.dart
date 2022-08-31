@@ -66,7 +66,7 @@ class PasswordScreen extends StatelessWidget {
                 confirmPasswordController.clear();
               },
               child: Padding(
-                padding: const EdgeInsets.only(top:8.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: Center(
                   child: Container(
                     height: size.height * 0.07,

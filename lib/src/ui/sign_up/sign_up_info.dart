@@ -11,9 +11,9 @@ import 'package:news_app/src/models/my_user.dart';
 
 import 'components/avatar_picker.dart';
 
-// ignore: must_be_immutable
+
 class SignUpScreen extends StatelessWidget {
-  late Map<String, String> args;
+  final Map<String, String> args;
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -90,7 +90,6 @@ class SignUpScreen extends StatelessWidget {
                                         phoneNumber: _phoneController.text,
                                         address: _addressController.text,
                                         base64Image: base64.encode(bytes))));
-                          
                           },
                           child: Container(
                               height: size.height * 0.05,

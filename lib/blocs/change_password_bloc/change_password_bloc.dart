@@ -20,22 +20,30 @@ class ChangePasswordBloc
   }
   void _onChangePassword(
       ChangePassword event, Emitter<ChangePasswordState> emit) async {
-    var data = await _instance
-        .collection("Users")
-        .where("uid", isEqualTo: _user.currentUser!.uid)
-        .get();
-    var usersData = MyUser.fromJson(data.docs[0].data());
-    if (event.currentPassword == usersData.password) {
-      if (event.newPassword == event.confirmPassword) {
-        _changePasswordServices.changePassword(event.newPassword);
-        emit( const ChangePasswordState.success( 'Success'));
+    try {
+      var data = await _instance
+          .collection("Users")
+          .where("uid", isEqualTo: _user.currentUser!.uid)
+          .get();
+      if (data.docs.isEmpty) {
+        emit(const ChangePasswordState.error("Some errors happend"));
       } else {
-        emit( const ChangePasswordState.error(
-             'New Pass and Confirm Pass is not matched'));
+        MyUser usersData = MyUser.fromJson(data.docs.first.data());
+        if (event.currentPassword == usersData.password) {
+          if (event.newPassword == event.confirmPassword) {
+            _changePasswordServices.changePassword(event.newPassword);
+            emit(const ChangePasswordState.success('Success'));
+          } else {
+            emit(const ChangePasswordState.error(
+                'New Pass and Confirm Pass is not matched'));
+          }
+        } else {
+          emit(const ChangePasswordState.error(
+              'Current Password is wrong, please try again'));
+        }
       }
-    } else {
-      emit(const ChangePasswordState.error(
-           'Current Password is wrong, please try again'));
+    } on FirebaseException catch (e) {
+      emit(ChangePasswordState.error(e.code));
     }
   }
 }

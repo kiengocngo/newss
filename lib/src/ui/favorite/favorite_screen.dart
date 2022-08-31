@@ -51,8 +51,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AddCategory()));
+              _navigator(context);
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -102,5 +101,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               ),
       ),
     );
+  }
+
+  Future<void> _navigator(BuildContext context) async {
+    final results = await Navigator.push(
+        context, MaterialPageRoute(builder: (contexxt) => const AddCategory()));
+    if (!mounted) return;
+    setState(() {
+      _categories = results;
+    });
   }
 }

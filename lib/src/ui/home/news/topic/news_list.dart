@@ -55,16 +55,11 @@ class _NewssListState extends State<NewsList> {
                 itemBuilder: (BuildContext context, int index) {
                   return index >= list.length
                       ? const BottomLoader()
-                      : Column(
-                          children: [
-                            Text(list.length.toString()),
-                            TopicItems(
-                              results: list[index],
-                              onTap: () {
-                                LoadUrl().loadUrl(list[index].link);
-                              },
-                            ),
-                          ],
+                      : TopicItems(
+                          results: list[index],
+                          onTap: () {
+                            LoadUrl().loadUrl(list[index].link);
+                          },
                         );
                 },
                 itemCount: state.hasReachedMax ? list.length : list.length + 1,

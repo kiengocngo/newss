@@ -64,7 +64,10 @@ class _TutorialScreenState extends State<TutorialScreen>
                       itemCount: listBoarding.length,
                       itemBuilder: (context, index) {
                         return ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
                           child: Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
@@ -98,7 +101,7 @@ class _TutorialScreenState extends State<TutorialScreen>
                         child: CustomButton(
                             title: 'Next',
                             onTap: () {
-                              Navigator.pushNamed(context, '/home');
+                              Navigator.pushNamed(context, '/log_in');
                             }),
                       ),
                     ),

@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         theme: ThemeData(),
-        initialRoute: '/splash',
+        initialRoute: '/bottom',
         routes: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
         translations: AppTranslation(),

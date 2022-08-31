@@ -64,8 +64,7 @@ class _AddCategoryState extends State<AddCategory> {
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => const FavoriteScreen()));
+            Navigator.pop(context, category);
           },
           child: const Icon(
             CupertinoIcons.back,

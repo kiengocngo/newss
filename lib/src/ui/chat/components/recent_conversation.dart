@@ -38,7 +38,9 @@ class RecentConversationScreen extends StatelessWidget {
             final SearchResponse tmp =
                 await FireStoreService().getUserByUid(senderId);
 
-            context
+            if(tmp.isSuccess)
+            {
+              context
                 .read<ChatsBloc>()
                 .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
             Navigator.push(
@@ -48,13 +50,14 @@ class RecentConversationScreen extends StatelessWidget {
                         detailsModel: DetailsModel(
                           userUid: senderId,
                           friendUid: receiverId,
-                          userName: tmp.data[0].name,
+                          userName: tmp.data.first.name,
                           friendName: conversationsUserName,
                           friendImage: userImage,
-                          userImage: tmp.data[0].base64Image,
+                          userImage: tmp.data.first.base64Image,
                         ),
                       )),
             );
+            }
           },
           child: Row(
             children: [

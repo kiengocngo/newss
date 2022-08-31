@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/services/firestore_services.dart';
 import 'package:news_app/src/models/auth_response.dart';
-import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
 part 'info_changes_event.dart';
 part 'info_changes_state.dart';
 

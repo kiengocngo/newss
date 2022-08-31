@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/services/change_password_services.dart';
-import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
 part 'change_password_event.dart';
 part 'change_password_state.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:news_app/blocs/update_users_bloc/update_users_bloc.dart';
-import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
 import 'package:news_app/src/ui/profile_settings/avatar_settings.dart';
 import '../../../cubit/image_cubit.dart';
 

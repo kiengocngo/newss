@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/auth_response.dart';
-import 'package:news_app/src/models/my_user.dart';
+import 'package:news_app/src/models/chats/my_user.dart';
+
 
 class FireStoreService {
   final FirebaseFirestore _fireStoreService = FirebaseFirestore.instance;

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
 import 'package:news_app/src/components/input_text/password_field.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
+import 'package:news_app/theme/news_theme_data.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -14,12 +16,18 @@ class LoginScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
+        title: Text(
           "Login",
-          style: TextStyle(fontSize: 30, color: Colors.black),
+          style: NewsThemeData.fromContext(context).textAppBar,
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         bottomOpacity: 0.0,
         elevation: 0.0,
       ),
@@ -27,35 +35,47 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset("assets/images/tom.jpg"),
-              ),
               TextInputField(
                 prefixIcon: const Icon(Icons.email),
                 type: TextInputType.emailAddress,
                 text: "Enter your email",
                 controller: _emailController,
               ),
+              const SizedBox(
+                height: 12,
+              ),
               PassWordField(
                 prefixIcon: const Icon(Icons.lock),
                 hintText: "Enter your password",
                 passwordController: _passwordController,
               ),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                      onPressed: () {},
-                      child: const Text("Forgot your password?"))),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/sign_up');
-                      },
-                      child: const Text("Dont have an account? Sign up here"))),
+              const SizedBox(
+                height: 12,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  "Forgot your password?",
+                  style: NewsThemeData.fromContext(context).textAuth,
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/sign_up');
+                },
+                child: Text(
+                  "Dont have an account? Sign up here",
+                  style: NewsThemeData.fromContext(context).textAuth,
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: BlocListener<LogInBloc, LogInState>(
@@ -84,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: Container(
                       width: size.width,
-                      height: size.height * 0.05,
+                      height: 56,
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         gradient: LinearGradient(
@@ -97,10 +117,10 @@ class LoginScreen extends StatelessWidget {
                             stops: [0.0, 1.0],
                             tileMode: TileMode.clamp),
                       ),
-                      child: const Center(
+                      child: Center(
                           child: Text(
                         "Login",
-                        style: TextStyle(fontSize: 23),
+                        style: NewsThemeData.fromContext(context).textButton,
                       )),
                     ),
                   ),

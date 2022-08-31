@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:news_app/blocs/conversations_bloc/conversations_bloc.dart';
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
 import 'package:news_app/src/models/chats/recent_conversation.dart';
@@ -19,7 +17,6 @@ class UserDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         title: Text(

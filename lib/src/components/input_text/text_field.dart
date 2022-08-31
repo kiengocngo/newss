@@ -16,26 +16,22 @@ class TextInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextFormField(
-        style: const TextStyle(color: Colors.white),
-        keyboardType: type,
-        controller: controller,
-        textAlignVertical: TextAlignVertical.center,
-        textAlign: TextAlign.start,
-        enableInteractiveSelection: false,
-        obscureText: false,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.grey,
-          prefixIcon: prefixIcon,
-          contentPadding: const EdgeInsets.only(left: 4),
-          hintText: text,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Colors.grey, width: 1),
-          ),
+    return TextFormField(
+      style: const TextStyle(color: Colors.black),
+      keyboardType: type,
+      textInputAction: TextInputAction.next,
+      controller: controller,
+      textAlignVertical: TextAlignVertical.center,
+      textAlign: TextAlign.start,
+      enableInteractiveSelection: false,
+      obscureText: false,
+      decoration: InputDecoration(
+        prefixIcon: prefixIcon,
+        contentPadding: const EdgeInsets.only(left: 4),
+        hintText: text,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.grey, width: 1),
         ),
       ),
     );

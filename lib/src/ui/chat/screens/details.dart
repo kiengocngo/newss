@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -31,92 +32,109 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0.25,
+      ),
       body: SingleChildScrollView(
         reverse: true,
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.75,
-              child: BlocBuilder<ChatsBloc, ChatsState>(
-                buildWhen: (previous, current) {
-                  return previous != current;
-                },
-                builder: (context, state) {
-                  switch (state.chatStatus) {
-                    case CustomStatus.loading:
-                      return const SpinKitFadingCircle(
-                        color: Colors.blue,
-                        size: 50.0,
-                      );
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.75,
+                child: BlocBuilder<ChatsBloc, ChatsState>(
+                  buildWhen: (previous, current) {
+                    return previous != current;
+                  },
+                  builder: (context, state) {
+                    switch (state.chatStatus) {
+                      case CustomStatus.loading:
+                        return const SpinKitFadingCircle(
+                          color: Colors.blue,
+                          size: 50.0,
+                        );
 
-                    case CustomStatus.loaded:
-                      return ListView.builder(
-                        reverse: false,
-                        controller: _scrollController,
-                        itemCount: state.chats.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index == 0) {
-                            // index  = 0 --> render ra avatar + ten user
-                            return ReceiverInfo(
-                                friendImage: widget.detailsModel.friendImage,
-                                friendName: widget.detailsModel.friendName);
-                          } else {
-                            if (state.chats[index - 1].senderId ==
-                                widget.detailsModel.userUid) {
-                              {
-                                //sender message
-                                return SenderMessage(
-                                    timeStamp: state.chats[index - 1].timeStamp,
-                                    sendMessage:
-                                        state.chats[index - 1].message);
-                              }
+                      case CustomStatus.loaded:
+                        return ListView.builder(
+                          reverse: false,
+                          controller: _scrollController,
+                          itemCount: state.chats.length + 1,
+                          itemBuilder: (context, index) {
+                            if (index == 0) {
+                              // index  = 0 --> render ra avatar + ten user
+                              return ReceiverInfo(
+                                  friendImage: widget.detailsModel.friendImage,
+                                  friendName: widget.detailsModel.friendName);
                             } else {
-                              //receiver message
-                              return ReceiverMessage(
-                                  timestamp: state.chats[index - 1].timeStamp,
-                                  sendMessage: state.chats[index - 1].message,
-                                  base64Image: Constant.base64Image);
+                              if (state.chats[index - 1].senderId ==
+                                  widget.detailsModel.userUid) {
+                                {
+                                  //sender message
+                                  return SenderMessage(
+                                      timeStamp:
+                                          state.chats[index - 1].timeStamp,
+                                      sendMessage:
+                                          state.chats[index - 1].message);
+                                }
+                              } else {
+                                //receiver message
+                                return ReceiverMessage(
+                                    timestamp: state.chats[index - 1].timeStamp,
+                                    sendMessage: state.chats[index - 1].message,
+                                    base64Image:
+                                        widget.detailsModel.friendImage);
+                              }
                             }
-                          }
-                        },
-                      );
-                    default:
-                      return const Icon(
-                        Icons.error,
-                        color: Colors.white,
-                      );
-                  }
-                },
+                          },
+                        );
+                      default:
+                        return const Icon(
+                          Icons.error,
+                          color: Colors.white,
+                        );
+                    }
+                  },
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                controller: _sendController,
-                textAlignVertical: TextAlignVertical.center,
-                textAlign: TextAlign.start,
-                enableInteractiveSelection: false,
-                obscureText: false,
-                decoration: InputDecoration(
-                  filled: true,
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        _addConversation(context);
-                      },
-                      icon: const Icon(Icons.send)),
-                  fillColor: Colors.grey,
-                  contentPadding: const EdgeInsets.only(left: 4),
-                  hintText: "type here",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  style: const TextStyle(color: Colors.white),
+                  controller: _sendController,
+                  textAlignVertical: TextAlignVertical.center,
+                  textAlign: TextAlign.start,
+                  enableInteractiveSelection: false,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    filled: true,
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          _addConversation(context);
+                        },
+                        icon: const Icon(Icons.send)),
+                    fillColor: Colors.grey,
+                    contentPadding: const EdgeInsets.only(left: 6),
+                    hintText: "type here",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

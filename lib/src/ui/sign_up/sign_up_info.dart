@@ -44,23 +44,34 @@ class SignUpScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      // ignore: prefer_const_constructors
                       AvatarPicker(),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       TextInputField(
                           text: "Enter your name",
-                          type: TextInputType.phone,
-                          prefixIcon: const Icon(Icons.text_fields),
+                          type: TextInputType.name,
+                          prefixIcon: const Icon(Icons.person),
                           controller: _nameController),
+                      const SizedBox(
+                        height: 6,
+                      ),
                       TextInputField(
                           text: "Enter your Address",
                           type: TextInputType.name,
-                          prefixIcon: const Icon(Icons.email),
+                          prefixIcon: const Icon(Icons.location_city),
                           controller: _addressController),
+                      const SizedBox(
+                        height: 6,
+                      ),
                       TextInputField(
                           text: "Enter your phone number",
                           type: TextInputType.phone,
                           prefixIcon: const Icon(Icons.phone),
                           controller: _phoneController),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       BlocListener<InfoChangesBloc, InfoChangesState>(
                         listener: (context, state) {
                           if (state.changesStage == ChangesStage.success) {

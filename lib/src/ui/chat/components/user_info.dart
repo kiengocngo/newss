@@ -26,6 +26,7 @@ class UserInfo extends StatelessWidget {
         _onChangeToUserDetails(context);
       },
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipOval(
             child: SizedBox.fromSize(
@@ -38,11 +39,14 @@ class UserInfo extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            width: 12,
+          ),
           BlocBuilder<FriendRequestBloc, FriendRequestState>(
             builder: (context, state) {
               return Text(
                 userName,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.black, fontSize: 20),
               );
             },
           ),

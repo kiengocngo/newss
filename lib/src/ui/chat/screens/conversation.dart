@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
@@ -17,54 +18,54 @@ class ConversationScreen extends StatelessWidget {
     String uid = context.read<LogInBloc>().state.message;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text(
           "Chat",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FriendSearch(uid: uid)));
-                  },
-                  child: Container(
-                    height: size.height * 0.08,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.red,
-                        ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20))),
-                    child: Row(children: const [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.grey,
-                        ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FriendSearch(uid: uid)));
+                },
+                child: Container(
+                  height: size.height * 0.08,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.red,
                       ),
-                      Text(
-                        "Find your friend",
-                        style: TextStyle(color: Colors.grey, fontSize: 20),
-                      )
-                    ]),
-                  ),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
+                  child: Row(children: const [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
+                      child: Icon(
+                        CupertinoIcons.search,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      "Find your friend",
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                    )
+                  ]),
                 ),
+              ),
+              const SizedBox(
+                height: 6,
               ),
               BlocBuilder<ConversationsBloc, ConversationsState>(
                 builder: (context, state) {

@@ -7,6 +7,7 @@ import 'package:news_app/blocs/friend_search_bloc/friend_search_bloc.dart';
 import 'package:news_app/src/components/constant.dart';
 import 'package:news_app/src/components/input_text/text_field.dart';
 import 'package:news_app/src/ui/chat/components/user_info.dart';
+import 'package:news_app/theme/news_theme_data.dart';
 
 class FriendSearch extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
@@ -20,73 +21,92 @@ class FriendSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
+        title: Text(
           "Search",
-          style: TextStyle(color: Colors.white),
+          style: NewsThemeData.fromContext(context).textAppBar,
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         bottomOpacity: 0.0,
-        elevation: 0.0,
+        elevation: 0.25,
         leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Icon(CupertinoIcons.back)),
+            child: const Icon(
+              CupertinoIcons.back,
+              color: Colors.black,
+            )),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TextInputField(
-                text: "Enter name here",
-                type: TextInputType.text,
-                prefixIcon: const Icon(Icons.search),
-                controller: _searchController),
-            ElevatedButton(
-                onPressed: () {
-                  context
-                      .read<FriendSearchBloc>()
-                      .add(FriendSearchSubmit(name: _searchController.text));
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 12,
+              ),
+              TextInputField(
+                  text: "Enter name here",
+                  type: TextInputType.text,
+                  prefixIcon: const Icon(Icons.search),
+                  controller: _searchController),
+              const SizedBox(
+                height: 12,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    context
+                        .read<FriendSearchBloc>()
+                        .add(FriendSearchSubmit(name: _searchController.text));
+                  },
+                  child: Text(
+                    "Submit",
+                    style: NewsThemeData.fromContext(context).textButton,
+                  )),
+              BlocBuilder<FriendSearchBloc, FriendSearchState>(
+                builder: (context, state) {
+                  switch (state.searchStatus) {
+                    case CustomStatus.init:
+                      return Container();
+                    case CustomStatus.loading:
+                      return const Center(
+                          child: SpinKitFadingCircle(
+                        color: Colors.blue,
+                        size: 50.0,
+                      ));
+                    case CustomStatus.loaded:
+                      return SizedBox(
+                        height: size.height * 0.7,
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 12,
+                            );
+                          },
+                          itemCount: state.users.length,
+                          itemBuilder: (context, index) {
+                            return UserInfo(
+                              userUid: uid,
+                              userName: state.users[index].name,
+                              userImage: state.users[index].base64Image,
+                              detailUserUid: state.users[index].uid,
+                            );
+                          },
+                        ),
+                      );
+                    default:
+                      return const Text(
+                        "error",
+                        style: TextStyle(color: Colors.white),
+                      );
+                  }
                 },
-                child: const Text("Submit")),
-            BlocBuilder<FriendSearchBloc, FriendSearchState>(
-              builder: (context, state) {
-                switch (state.searchStatus) {
-                  case CustomStatus.init:
-                    return Container();
-                  case CustomStatus.loading:
-                    return const Center(
-                        child: SpinKitFadingCircle(
-                      color: Colors.blue,
-                      size: 50.0,
-                    ));
-                  case CustomStatus.loaded:
-                    return SizedBox(
-                      height: size.height * 0.7,
-                      child: ListView.builder(
-                        itemCount: state.users.length,
-                        itemBuilder: (context, index) {
-                          return UserInfo(
-                            userUid: uid,
-                            userName: state.users[index].name,
-                            userImage: state.users[index].base64Image,
-                            detailUserUid: state.users[index].uid,
-                          );
-                        },
-                      ),
-                    );
-                  default:
-                    return const Text(
-                      "error",
-                      style: TextStyle(color: Colors.white),
-                    );
-                }
-              },
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

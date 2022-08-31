@@ -23,48 +23,44 @@ class ReceiverMessage extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               DateFormat.yMd().add_jm().format(timestamp.toDate()),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: ClipOval(
-                    child: SizedBox.fromSize(
-                      size: const Size(15, 15), // Image radius
-                      child: Image.memory(
-                        base64.decode(
-                          base64Image,
-                        ),
-                        fit: BoxFit.cover,
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size(30, 30), // Image radius
+                    child: Image.memory(
+                      base64.decode(
+                        base64Image,
                       ),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
-                            ),
-                            color: Colors.grey),
-                        constraints: BoxConstraints(maxWidth: size.width * 0.8),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            sendMessage,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 14),
-                          ),
-                        )),
-                  ],
+                const SizedBox(
+                  width: 6.0,
                 ),
+                Container(
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(16.0),
+                        ),
+                        color: Color.fromARGB(255, 66, 64, 64)),
+                    constraints: BoxConstraints(maxWidth: size.width * 0.8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        sendMessage,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    )),
               ],
             ),
           ],

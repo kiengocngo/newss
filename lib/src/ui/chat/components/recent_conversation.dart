@@ -75,13 +75,14 @@ class RecentConversationScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Align(
                           alignment: Alignment.topLeft,
                           child: Text(
                             conversationsUserName,
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 20),
+                                color: Colors.black, fontSize: 18),
                           )),
                       Text(
                         maxLines: 1,

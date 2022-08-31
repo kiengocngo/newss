@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:news_app/cubit/image_cubit.dart';
+import 'package:news_app/theme/news_theme_data.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 // ignore: must_be_immutable
@@ -81,10 +82,10 @@ class _AvatarPickerState extends State<AvatarPicker> {
           child: InkWell(
             onTap: _getFromGallery,
             child: Container(
-                height: size.height * 0.05,
+                height: 40,
                 width: size.width * 0.4,
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                   gradient: LinearGradient(
                       colors: [
                         Color(0xFF3366FF),
@@ -95,10 +96,10 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       stops: [0.0, 1.0],
                       tileMode: TileMode.clamp),
                 ),
-                child: const Center(
+                child: Center(
                     child: Text(
                   "Choose your image",
-                  style: TextStyle(fontSize: 16),
+                  style: NewsThemeData.fromContext(context).textButton,
                 ))),
           ),
         ),

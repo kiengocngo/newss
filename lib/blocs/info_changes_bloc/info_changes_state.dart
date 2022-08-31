@@ -1,4 +1,5 @@
 part of 'info_changes_bloc.dart';
+
 enum ChangesStage { init, loading, success, error }
 
 // ignore: must_be_immutable

@@ -1,4 +1,5 @@
 part of 'friend_request_bloc.dart';
+
 enum FriendState { noRequest, firstRequest, seccondRequest, accept, error }
 
 class FriendRequestState extends Equatable {

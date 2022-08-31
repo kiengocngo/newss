@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 enum SignUpStatus { init, loading, loaded, error }
 
 class SignUpState extends Equatable {

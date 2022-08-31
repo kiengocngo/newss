@@ -1,4 +1,5 @@
 part of 'log_in_bloc.dart';
+
 enum LogInStatus { init, loading, loaded, error }
 
 // ignore: must_be_immutable

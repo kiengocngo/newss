@@ -1,10 +1,6 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:news_app/blocs/friend_request_bloc/friend_request_bloc.dart';
 import 'package:news_app/services/firebase_services/firestore_services.dart';
 import 'package:news_app/src/models/chats/user_details_screen_model.dart';
@@ -56,11 +52,9 @@ class UserInfo extends StatelessWidget {
   }
 
   _onChangeToUserDetails(BuildContext context) async {
-    log(userUid);
     context.read<FriendRequestBloc>().add(FriendRequestEventInit(
         currentUserUid: userUid, targetUserUid: detailUserUid));
     final tmp = await FireStoreService().getUserByUid(userUid);
-    log(tmp.data.length.toString());
     final UserDetailsModel userDetailsModel = UserDetailsModel(
       currentUserName: tmp.data[0].name,
       currentUserUid: userUid,

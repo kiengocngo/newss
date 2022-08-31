@@ -38,25 +38,23 @@ class RecentConversationScreen extends StatelessWidget {
             final SearchResponse tmp =
                 await FireStoreService().getUserByUid(senderId);
 
-            if(tmp.isSuccess)
-            {
-              context
-                .read<ChatsBloc>()
-                .add(ChatInitEvent(senderId: senderId, receiverId: receiverId));
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DetailsScreen(
-                        detailsModel: DetailsModel(
-                          userUid: senderId,
-                          friendUid: receiverId,
-                          userName: tmp.data.first.name,
-                          friendName: conversationsUserName,
-                          friendImage: userImage,
-                          userImage: tmp.data.first.base64Image,
-                        ),
-                      )),
-            );
+            if (tmp.isSuccess) {
+              context.read<ChatsBloc>().add(
+                  ChatInitEvent(senderId: senderId, receiverId: receiverId));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetailsScreen(
+                          detailsModel: DetailsModel(
+                            userUid: senderId,
+                            friendUid: receiverId,
+                            userName: tmp.data.first.name,
+                            friendName: conversationsUserName,
+                            friendImage: userImage,
+                            userImage: tmp.data.first.base64Image,
+                          ),
+                        )),
+              );
             }
           },
           child: Row(

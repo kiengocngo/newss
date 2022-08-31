@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:news_app/src/models/auth_response.dart';
 
-
 class UpdateServices {
   final FirebaseFirestore _instance = FirebaseFirestore.instance;
 

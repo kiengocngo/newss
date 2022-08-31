@@ -31,17 +31,13 @@ class FireStoreService {
           .where("uid", isEqualTo: uid)
           .get();
       List<MyUser> tmp = [];
-      if(data.docs.isNotEmpty)
-      {
+      if (data.docs.isNotEmpty) {
         tmp.add(MyUser.fromJson(data.docs.first.data()));
-      tmp.first.uid = data.docs.first.id;
-      return SearchResponse(isSuccess: true, data: tmp);
+        tmp.first.uid = data.docs.first.id;
+        return SearchResponse(isSuccess: true, data: tmp);
+      } else {
+        return const SearchResponse(isSuccess: false, data: []);
       }
-      else 
-      {
-         return const SearchResponse(isSuccess: false, data: []);
-      }
-      
     } catch (e) {
       return const SearchResponse(isSuccess: false, data: []);
     }

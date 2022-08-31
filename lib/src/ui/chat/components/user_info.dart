@@ -55,25 +55,24 @@ class UserInfo extends StatelessWidget {
     context.read<FriendRequestBloc>().add(FriendRequestEventInit(
         currentUserUid: userUid, targetUserUid: detailUserUid));
     final tmp = await FireStoreService().getUserByUid(userUid);
-    if(tmp.isSuccess)
-    {
+    if (tmp.isSuccess) {
       final UserDetailsModel userDetailsModel = UserDetailsModel(
-      currentUserName: tmp.data.first.name,
-      currentUserUid: userUid,
-      detailsUserUid: detailUserUid,
-      detailsUserName: userName,
-      detailsUserImage: userImage,
-      image: tmp.data.first.base64Image,
-    );
+        currentUserName: tmp.data.first.name,
+        currentUserUid: userUid,
+        detailsUserUid: detailUserUid,
+        detailsUserName: userName,
+        detailsUserImage: userImage,
+        image: tmp.data.first.base64Image,
+      );
 
-    // ignore: use_build_context_synchronously
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => UserDetails(
-                userDetailsModel: userDetailsModel,
-              )),
-    );
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => UserDetails(
+                  userDetailsModel: userDetailsModel,
+                )),
+      );
     }
   }
 }

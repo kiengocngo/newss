@@ -123,33 +123,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   _addConversation(BuildContext context) {
-    final RecentConversation recentConversation = RecentConversation(
-      senderId: widget.detailsModel.userUid,
-      receiverId: widget.detailsModel.friendUid,
-      senderName: widget.detailsModel.userName,
-      receiverName: widget.detailsModel.friendName,
-      senderBase64Image: widget.detailsModel.userImage,
-      receiverBase64Image: widget.detailsModel.friendImage,
-      message: _sendController.text,
-      dateTime: Timestamp.now(),
-    );
-    //tin moi nhat se duoc add vao conversation
-    context.read<ConversationsBloc>().add(
-        ConversationsAddNewMessage(recentConversation: recentConversation));
-    final Chat chat = Chat(
+    if (_sendController.text != "") {
+      final RecentConversation recentConversation = RecentConversation(
         senderId: widget.detailsModel.userUid,
         receiverId: widget.detailsModel.friendUid,
+        senderName: widget.detailsModel.userName,
+        receiverName: widget.detailsModel.friendName,
+        senderBase64Image: widget.detailsModel.userImage,
+        receiverBase64Image: widget.detailsModel.friendImage,
         message: _sendController.text,
-        timeStamp: Timestamp.now());
-    context.read<ChatsBloc>().add(
-          ChatAddGetMessageEvent(chat: chat),
-        );
+        dateTime: Timestamp.now(),
+      );
+      //tin moi nhat se duoc add vao conversation
+      context.read<ConversationsBloc>().add(
+          ConversationsAddNewMessage(recentConversation: recentConversation));
+      final Chat chat = Chat(
+          senderId: widget.detailsModel.userUid,
+          receiverId: widget.detailsModel.friendUid,
+          message: _sendController.text,
+          timeStamp: Timestamp.now());
+      context.read<ChatsBloc>().add(
+            ChatAddGetMessageEvent(chat: chat),
+          );
 
-    _sendController.clear();
-    setState(() {
-      if (_scrollController.hasClients) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      }
-    });
+      _sendController.clear();
+      setState(() {
+        if (_scrollController.hasClients) {
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        }
+      });
+    }
   }
 }

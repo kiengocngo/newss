@@ -28,7 +28,7 @@ class _AvatarPickerState extends State<AvatarPicker> {
         setState(() {
           // thanh cong
           widget.file = File(imagePicker!.path);
-          // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+          // ignore: invalid_use_of_visible_for_testing_member
           context.read<ImageCubit>().emit(File(imagePicker.path));
         });
       } else if (permissions.isDenied) {

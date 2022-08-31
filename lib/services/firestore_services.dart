@@ -5,30 +5,6 @@ import 'package:news_app/src/models/my_user.dart';
 class FireStoreService {
   final FirebaseFirestore _fireStoreService = FirebaseFirestore.instance;
 
-  Future<bool> signOut(String uid) async {
-    try {
-      await _fireStoreService
-          .collection("UserStatus")
-          .doc(uid)
-          .update({"isLogin": false});
-      return false;
-    } on FirebaseException {
-      return true;
-    }
-  }
-
-  Future<bool> logIn(String uid) async {
-    try {
-      await _fireStoreService
-          .collection("UserStatus")
-          .doc(uid)
-          .update({"isLogin": true});
-      return true;
-    } on FirebaseException {
-      return false;
-    }
-  }
-
   Future<UpdateResponse> addNewUser(MyUser myUser) async {
     try {
       final DocumentReference<Map<String, dynamic>> docId =

@@ -31,11 +31,15 @@ class FireStoreService {
           .where("uid", isEqualTo: uid)
           .get();
       List<MyUser> tmp = [];
-      tmp.add(MyUser.fromJson(data.docs[0].data()));
-      tmp[0].uid = data.docs[0].id;
-      return SearchResponse(isSuccess: true, data: tmp);
+      if (data.docs.isNotEmpty) {
+        tmp.add(MyUser.fromJson(data.docs.first.data()));
+        tmp.first.uid = data.docs.first.id;
+        return SearchResponse(isSuccess: true, data: tmp);
+      } else {
+        return const SearchResponse(isSuccess: false, data: []);
+      }
     } catch (e) {
-      return SearchResponse(isSuccess: false, data: []);
+      return const SearchResponse(isSuccess: false, data: []);
     }
   }
 
@@ -56,7 +60,7 @@ class FireStoreService {
       }
       return SearchResponse(isSuccess: true, data: tmp);
     } catch (e) {
-      return SearchResponse(isSuccess: false, data: []);
+      return const SearchResponse(isSuccess: false, data: []);
     }
   }
 

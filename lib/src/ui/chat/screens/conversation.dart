@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:news_app/blocs/log_in_bloc/log_in_bloc.dart';
 import 'package:news_app/src/ui/chat/screens/friend_search.dart';
 import '../../../../blocs/conversations_bloc/conversations_bloc.dart';
 import '../components/recent_conversation.dart';
 
 class ConversationScreen extends StatelessWidget {
-  final String uid;
-  const ConversationScreen({Key? key, required this.uid}) : super(key: key);
+  const ConversationScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    context.read<ConversationsBloc>().add(ConversationSubmit(currentUser: uid));
+    context.read<ConversationsBloc>().add(ConversationSubmit(
+        currentUser: context.read<LogInBloc>().state.message));
+    String uid = context.read<LogInBloc>().state.message;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,

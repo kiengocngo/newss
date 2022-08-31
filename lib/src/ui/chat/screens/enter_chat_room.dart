@@ -26,9 +26,7 @@ class EnterChatRoom extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ConversationScreen(
-                              uid: _controller.text,
-                            )),
+                        builder: (context) => const ConversationScreen()),
                   );
                 },
                 child: const Text("Submit")),

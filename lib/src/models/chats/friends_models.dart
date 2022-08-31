@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class FriendModel {
   final String requestUid;
   final String acceptUid;

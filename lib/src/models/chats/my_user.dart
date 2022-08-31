@@ -7,8 +7,6 @@ class MyUser {
   String address;
   String base64Image;
 
-  List<dynamic> friends;
-
   MyUser({
     required this.uid,
     required this.name,
@@ -17,8 +15,17 @@ class MyUser {
     required this.phoneNumber,
     required this.address,
     required this.base64Image,
-    required this.friends,
   });
+  factory MyUser.defaultUser() {
+    return MyUser(
+        uid: "uid",
+        name: "name",
+        email: "email",
+        password: "password",
+        phoneNumber: "phoneNumber",
+        address: "address",
+        base64Image: "base64Image");
+  }
 
   factory MyUser.fromJson(Map<String, dynamic> json) {
     return MyUser(
@@ -26,9 +33,20 @@ class MyUser {
         name: json["name"] ?? "null",
         email: json["email"] ?? "null",
         password: "no",
-        friends: json["friends"] ?? "null",
         phoneNumber: json["phoneNumber"] ?? "null",
         address: json["address"] ?? "null",
         base64Image: json["base64Image"] ?? "null");
+  }
+
+  toJson() {
+    return {
+      "uid": uid,
+      "name": name,
+      "email": email,
+      "password": password,
+      "phoneNumber": phoneNumber,
+      "address": address,
+      "base64Image": base64Image
+    };
   }
 }

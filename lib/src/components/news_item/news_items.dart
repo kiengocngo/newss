@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/src/components/constant.dart';
-
 import 'package:news_app/src/models/news/results_model.dart';
 import 'package:news_app/theme/news_colors.dart';
 import 'package:news_app/theme/news_theme_data.dart';

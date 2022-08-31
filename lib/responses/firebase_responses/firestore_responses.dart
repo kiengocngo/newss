@@ -9,11 +9,16 @@ class FireStoreResponse {
       String firstUser, secondUser) {
     final CollectionReference<Map<String, dynamic>> database =
         _instance.collection("Chats");
-
     return database
         .where("senderId", whereIn: [firstUser, secondUser])
         .orderBy("dateTime", descending: false)
         .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getLogInStatus(String uid) {
+    final CollectionReference<Map<String, dynamic>> database =
+        _instance.collection("UserStatus");
+    return database.snapshots();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getConversations(

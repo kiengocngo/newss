@@ -127,7 +127,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               onPressed: () {
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
-                  final name = user.uid;
+                  //final name = user.uid;
                 } else {
                 }
                 service.showNotification(id: 0, title: 'Title', body: 'body');

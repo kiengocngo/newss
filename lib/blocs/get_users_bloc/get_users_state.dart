@@ -1,5 +1,4 @@
 part of 'get_users_bloc.dart';
-
 enum GetStatus { init, success, error }
 
 class GetUserState extends Equatable {

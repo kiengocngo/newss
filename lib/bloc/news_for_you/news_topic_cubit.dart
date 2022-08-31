@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/bloc/news/news_status.dart';
-
 import 'package:news_app/dio/config_dio.dart';
-
 import 'news_topic_state.dart';
 
 class NewsTopicsCubit extends Cubit<NewsTopicsState> {

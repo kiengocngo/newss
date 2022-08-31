@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class PassWordField extends StatefulWidget {
-  String hintText;
-  Icon prefixIcon;
+  final String hintText;
+  final Icon prefixIcon;
   // ignore: prefer_typing_uninitialized_variables
   final TextEditingController passwordController;
-  PassWordField({
+  const PassWordField({
     Key? key,
     required this.hintText,
     required this.prefixIcon,

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class TextInputField extends StatelessWidget {
-  String text;
-  TextInputType type;
-  Icon prefixIcon;
-  TextEditingController controller;
-  TextInputField({
+  final String text;
+  final TextInputType type;
+  final Icon prefixIcon;
+  final TextEditingController controller;
+  const TextInputField({
     Key? key,
     required this.text,
     required this.type,

@@ -15,24 +15,19 @@ import 'package:news_app/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:news_app/cubit/image_cubit.dart';
 import 'package:news_app/firebase_options.dart';
 import 'package:news_app/src/routes/app_routes.dart';
-
-
 import 'package:news_app/blocs/change_password_bloc/change_password_bloc.dart';
 import 'package:news_app/blocs/get_users_bloc/get_users_bloc.dart';
 import 'package:news_app/blocs/update_users_bloc/update_users_bloc.dart';
 import 'blocs/log_in_bloc/log_in_bloc.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(
     const MyApp(),
   );
-
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +38,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LogInBloc>(create: (context) => LogInBloc()),
-
         BlocProvider<SignUpBloc>(create: (context) => SignUpBloc()),
         BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
         BlocProvider<InfoChangesBloc>(create: (context) => InfoChangesBloc()),
@@ -57,7 +51,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => NewsSportsCubit(dio: Dio())),
         BlocProvider(
             create: (BuildContext context) => NewsTechnologyCubit(dio: Dio())),
-              BlocProvider(create: (context) => ImageCubit()),
+        BlocProvider(create: (context) => ImageCubit()),
         BlocProvider(create: (context) => UpdateUsersBloc()),
         BlocProvider(create: (context) => GetUserBloc()),
         BlocProvider(create: (context) => ChangePasswordBloc()),
@@ -69,9 +63,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         translations: AppTranslation(),
         locale: Get.deviceLocale,
-      
-
-
       ),
     );
   }

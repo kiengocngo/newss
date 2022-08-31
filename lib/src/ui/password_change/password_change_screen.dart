@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:news_app/blocs/change_password_bloc/change_password_bloc.dart';
 import 'package:news_app/src/components/input_text/password_field.dart';
-
-import '../../../blocs/change_password_bloc/change_password_bloc.dart';
 
 class PasswordScreen extends StatelessWidget {
   final TextEditingController currentPasswordController =

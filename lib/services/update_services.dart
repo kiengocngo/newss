@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../src/models/auth_response.dart';
 
 class UpdateServices {

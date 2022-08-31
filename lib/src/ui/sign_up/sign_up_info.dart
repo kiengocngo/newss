@@ -11,7 +11,6 @@ import 'package:news_app/src/models/my_user.dart';
 
 import 'components/avatar_picker.dart';
 
-
 class SignUpScreen extends StatelessWidget {
   final Map<String, String> args;
   final TextEditingController _phoneController = TextEditingController();

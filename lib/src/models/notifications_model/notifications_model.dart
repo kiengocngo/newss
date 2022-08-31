@@ -3,7 +3,7 @@ class PushNotifications {
   late final String body;
   //late final String type;
   late final DateTime time;
-  final String image;
+  // final String image;
   final String routeName;
 
   PushNotifications(
@@ -11,6 +11,6 @@ class PushNotifications {
       required this.body,
       //required this.type,
       required this.time,
-      required this.image,
+      // required this.image,
       required this.routeName});
 }
